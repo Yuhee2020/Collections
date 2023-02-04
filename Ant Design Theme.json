@@ -1,0 +1,9 @@
+{
+  "token": {
+    "colorPrimary": "#17b0b0",
+    "colorBgElevated": "#ffffff",
+    "fontSize": 14,
+    "borderRadius": 4,
+    "wireframe": false
+  }
+}

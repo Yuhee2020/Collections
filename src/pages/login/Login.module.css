@@ -1,0 +1,15 @@
+.loginCard {
+    width: 300px;
+
+}
+
+.loginFormButton {
+    width: 100%;
+}
+
+
+@media (max-width: 450px) {
+    .loginCard {
+        width: 280px;
+    }
+}

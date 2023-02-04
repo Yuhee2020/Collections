@@ -1,0 +1,22 @@
+.headerContainer{
+    padding: 0 20px;
+    margin-bottom: 10px;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    box-shadow: 0 4px 10px #17b0b0;
+
+}
+
+.buttonsGroup{
+    width: 220px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+.search{
+    max-width: 250px;
+}
