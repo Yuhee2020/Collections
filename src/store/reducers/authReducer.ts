@@ -1,5 +1,13 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {setAppError, setAuthInProgress, setLoading, setSuccessMessage, setTheme, ThemeType} from "./appReducer";
+import {
+    setAppError,
+    setAuthInProgress,
+    setIsRegistered,
+    setLoading,
+    setSuccessMessage,
+    setTheme,
+    ThemeType
+} from "./appReducer";
 import {authApi, AuthDataType, LoginResponseType, UserType} from "../../api/authApi";
 
 
@@ -11,6 +19,7 @@ export const registerTC = createAsyncThunk("auth/register", async (params: AuthD
         const res = await authApi.registration(params)
         dispatch(setRegistered(true))
         dispatch(setSuccessMessage(res.data.message))
+        dispatch(setIsRegistered(true))
     } catch (err:any) {
         dispatch(setAppError(err.response.data.message))
     } finally {

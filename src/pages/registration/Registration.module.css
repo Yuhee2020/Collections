@@ -1,18 +1,18 @@
-.loginContainer{
+.registrationContainer{
     display: flex;
     margin-top: 6%;
     justify-content: center;
     align-items: center;
 }
-.loginCard {
+.registrationCard {
     width: 300px;
 
 }
 
-.loginFormButton {
+.registrationFormButton {
     width: 100%;
 }
-.registrationBox{
+.loginBox{
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -21,7 +21,7 @@
 
 
 @media (max-width: 450px) {
-    .loginCard {
+    .registrationCard {
         width: 280px;
     }
 }

@@ -21,7 +21,7 @@ function App() {
     }
 
     return (
-        <ThemeProvider>
+        <ThemeProvider >
             <AppHeader/>
             <Routing/>
         </ThemeProvider>

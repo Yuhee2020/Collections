@@ -29,7 +29,7 @@ export const ThemeProvider = ({children}: any) => {
                 token: selectedTheme==="light" ? tokenLight : tokenDark
             }}
         >
-            <Layout>
+            <Layout className="layout">
                 {children}
             </Layout>
         </ConfigProvider>

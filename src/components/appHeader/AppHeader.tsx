@@ -6,17 +6,27 @@ import {Moon} from "./icons/Moon";
 import {Sun} from "./icons/Sun";
 import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {setThemeTC} from "../../store/reducers/appReducer";
-import {NavLink} from "react-router-dom";
-import {ADMIN_PAGE, BIGGEST_COLLECTIONS, ROOT, USER_PAGE} from "../../pages/rotes/Rotes";
+import {NavLink, useNavigate} from "react-router-dom";
+import {ADMIN_PAGE, BIGGEST_COLLECTIONS, LOGIN, ROOT, USER_PAGE} from "../../pages/rotes/Rotes";
+import {logoutTC} from "../../store/reducers/authReducer";
 
 
 export const AppHeader = () => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+
+    const isLoggedIn = useAppSelector(state => state.auth.isLogin)
 
     const theme = useAppSelector(state => state.app.theme)
 
     const handleSwitchChange = (e: boolean) => {
         dispatch(setThemeTC(e ? "dark" : "light"))
+    }
+    const handleLoginClick = () => {
+        navigate(LOGIN)
+    }
+    const handleLogoutClick = () => {
+        dispatch(logoutTC())
     }
 
 
@@ -54,7 +64,9 @@ export const AppHeader = () => {
                         {value: 'ru', label: 'Ру'},
                     ]}
                 />
-                <Button>Login</Button>
+                {isLoggedIn
+                    ? <Button onClick={handleLogoutClick}>Logout</Button>
+                    : <Button onClick={handleLoginClick}>Login</Button>}
             </div>
         </div>
     );

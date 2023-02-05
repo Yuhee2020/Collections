@@ -21,7 +21,6 @@ export const ERROR_404 = '/404'
 
 const Routing = () => {
     return (
-        <div>
             <Routes>
                 <Route path={ROOT} element={<LastAdded/>}/>
                 <Route path={LOGIN} element={<Login/>}/>
@@ -32,7 +31,6 @@ const Routing = () => {
                 <Route path={ERROR_404} element={<Error404/>}/>
                 <Route path="/*" element={<Navigate to={"/404"}/>}/>
             </Routes>
-        </div>
     )
 }
 
