@@ -1,7 +1,6 @@
 import React from 'react';
-import {ConfigProvider, Layout, theme} from "antd";
+import {ConfigProvider, Layout, Spin} from "antd";
 import {useAppSelector} from "../../store/reducers/Store";
-import {Content} from "antd/es/layout/layout";
 
 const tokenLight={
     "colorPrimary": "#11a7a7",
@@ -12,7 +11,7 @@ const tokenLight={
 }
 
 const tokenDark={
-    "colorPrimary": "#13C2C2",
+    "colorPrimary": "#11a7a7",
     "colorTextBase": "#f7f7f7",
     "colorBgBase": "#413f3f",
     "borderRadius": 4
@@ -22,6 +21,7 @@ const tokenDark={
 export const ThemeProvider = ({children}: any) => {
 
     const selectedTheme=useAppSelector(state => state.app.theme)
+    const isLoading=useAppSelector(state => state.app.isLoading)
 
     return (
         <ConfigProvider
@@ -29,9 +29,11 @@ export const ThemeProvider = ({children}: any) => {
                 token: selectedTheme==="light" ? tokenLight : tokenDark
             }}
         >
+            <Spin wrapperClassName="spin" spinning={isLoading} size={"large"}>
             <Layout className="layout">
                 {children}
             </Layout>
+            </Spin>
         </ConfigProvider>
     );
 };

@@ -3,11 +3,11 @@ import {useFormik} from 'formik';
 import {Button, Card, Form, Input} from "antd";
 import {LockOutlined, UserOutlined} from '@ant-design/icons';
 import s from "./Registration.module.css"
-import {Navigate, useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
+import {useNavigate} from "react-router-dom";
+import {useAppDispatch} from "../../store/reducers/Store";
 
 import {registerTC} from "../../store/reducers/authReducer";
-import {LOGIN, REGISTRATION, ROOT} from "../rotes/Rotes";
+import {LOGIN, REGISTRATION} from "../rotes/Rotes";
 import {validate} from "../../utils/validation";
 
 
@@ -15,7 +15,6 @@ export const Registration = () => {
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const isRegistered = useAppSelector(state => state.app.isRegistered)
     const handleLoginClick = () => {
         navigate(LOGIN)
     }
@@ -28,12 +27,11 @@ export const Registration = () => {
         validate,
         onSubmit: (values) => {
             dispatch(registerTC(values))
+            navigate(LOGIN)
+
         },
     });
 
-    if (isRegistered) {
-        return <Navigate to={LOGIN}/>
-    }
 
     return (
         <div className={s.registrationContainer}>

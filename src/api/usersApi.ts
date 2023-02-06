@@ -5,13 +5,16 @@ export const usersApi = {
     getUsers() {
         return instance.get<UserType[]>('/users/getUsers')
     },
-    deleteUsers(usersId: any) {
-        return instance.put('/delete', {usersId})
+    deleteUsers(usersId: string[]) {
+        return instance.put('/users/delete', usersId)
     },
-    blockUsers(usersId: any) {
-        return instance.put('/block', {usersId})
+    blockUsers(usersId: string[]) {
+        return instance.put('/users/block', usersId)
     },
-    unlockUsers(usersId: any) {
-        return instance.put('/unlock', {usersId})
+    unlockUsers(usersId: string[]) {
+        return instance.put('/users/unlock', usersId)
+    },
+    changeUsersRole(usersId: string[]) {
+        return instance.put('/users/changeRole', usersId)
     }
 }

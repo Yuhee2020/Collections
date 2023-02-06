@@ -1,14 +1,15 @@
 import React from 'react';
-import {Breadcrumb, Button, Input, Select, Switch} from "antd";
+import {Button, Input, Select, Switch} from "antd";
 import {SearchOutlined} from '@ant-design/icons';
 import s from "./AppHeader.module.css"
 import {Moon} from "./icons/Moon";
 import {Sun} from "./icons/Sun";
 import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {setThemeTC} from "../../store/reducers/appReducer";
-import {NavLink, useNavigate} from "react-router-dom";
-import {ADMIN_PAGE, BIGGEST_COLLECTIONS, LOGIN, ROOT, USER_PAGE} from "../../pages/rotes/Rotes";
+import {useNavigate} from "react-router-dom";
+import {LOGIN} from "../../pages/rotes/Rotes";
 import {logoutTC} from "../../store/reducers/authReducer";
+import {BreadCrumbs} from "./breadCrumbs/BreadCrumbs";
 
 
 export const AppHeader = () => {
@@ -32,20 +33,7 @@ export const AppHeader = () => {
 
     return (
         <div className={s.headerContainer}>
-            <Breadcrumb>
-                <Breadcrumb.Item>
-                    <NavLink to={ROOT}>Last added</NavLink>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item>
-                    <NavLink to={BIGGEST_COLLECTIONS}>The biggest collections</NavLink>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item>
-                    <NavLink to={USER_PAGE}>User page</NavLink>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item>
-                    <NavLink to={ADMIN_PAGE}>Admin page</NavLink>
-                </Breadcrumb.Item>
-            </Breadcrumb>
+            <BreadCrumbs/>
             <Input prefix={<SearchOutlined className="site-form-item-icon"/>} placeholder="Search..."
                    className={s.search}/>
             <div className={s.buttonsGroup}>

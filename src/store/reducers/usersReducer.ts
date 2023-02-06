@@ -1,63 +1,52 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {setAppError, setLoading, setSuccessMessage} from "./appReducer";
-import {StateType} from "./Store";
-import {logoutTC} from "./authReducer";
-import {authApi, UserType} from "../../api/authApi";
+import {UserType} from "../../api/authApi";
 import {usersApi} from "../../api/usersApi";
 
 
-export const getUsersTC = createAsyncThunk("users/get", async (params, {dispatch,rejectWithValue}) => {
+const mainAdminMail=process.env.REACT_APP_MAIN_ADMIN_MAIL
+
+
+export const getUsersTC = createAsyncThunk("users/get", async (params, {dispatch}) => {
+    console.log(mainAdminMail)
     dispatch(setLoading(true))
     try {
         const res = await usersApi.getUsers()
-        return res.data.reverse()
+        return res.data.reverse().filter(user=>user.email!==mainAdminMail)
     } catch (err:any) {
         dispatch(setAppError(err.response.data.message))
-        return rejectWithValue(null)
     } finally {
         dispatch(setLoading(false))
     }
 })
 
-export const deleteUsersTC = createAsyncThunk("users/delete", async (params:any, {dispatch,rejectWithValue, getState}) => {
+export const deleteUsersTC = createAsyncThunk("users/delete", async (params:string[], {dispatch}) => {
     dispatch(setLoading(true))
     try {
-        const state= getState() as StateType
-        const userId= state.auth.user?._id
         const res = await usersApi.deleteUsers(params)
         dispatch(getUsersTC())
         dispatch(setSuccessMessage(res.data.message))
-        if (params.find((id: string | undefined)=>id===userId)){
-            dispatch(logoutTC())
-        }
     } catch (err:any) {
         dispatch(setAppError(err.response.data.message))
-        return rejectWithValue(null)
     } finally {
         dispatch(setLoading(false))
     }
 })
 
-export const blockUsersTC = createAsyncThunk("users/block", async (params:any, {dispatch,rejectWithValue,getState}) => {
+export const blockUsersTC = createAsyncThunk("users/block", async (params:string[], {dispatch}) => {
     dispatch(setLoading(true))
     try {
-        const state= getState() as StateType
-        const userId= state.auth.user?._id
         const res = await usersApi.blockUsers(params)
         dispatch(getUsersTC())
         dispatch(setSuccessMessage(res.data.message))
-        if (params.find((id: string | undefined)=>id===userId)){
-            dispatch(logoutTC())
-        }
     } catch (err:any) {
         dispatch(setAppError(err.response.data.message))
-        return rejectWithValue(null)
     } finally {
         dispatch(setLoading(false))
     }
 })
 
-export const unlockUsersTC = createAsyncThunk("users/unlock", async (params:any, {dispatch,rejectWithValue}) => {
+export const unlockUsersTC = createAsyncThunk("users/unlock", async (params:string[], {dispatch}) => {
     dispatch(setLoading(true))
     try {
         const res = await usersApi.unlockUsers(params)
@@ -65,7 +54,19 @@ export const unlockUsersTC = createAsyncThunk("users/unlock", async (params:any,
         dispatch(setSuccessMessage(res.data.message))
     } catch (err:any) {
         dispatch(setAppError(err.response.data.message))
-        return rejectWithValue(null)
+    } finally {
+        dispatch(setLoading(false))
+    }
+})
+
+export const changeUsersRoleTC = createAsyncThunk("users/changeUsersRole", async (params:string[], {dispatch}) => {
+    dispatch(setLoading(true))
+    try {
+        const res = await usersApi.changeUsersRole(params)
+        dispatch(getUsersTC())
+        dispatch(setSuccessMessage(res.data.message))
+    } catch (err:any) {
+        dispatch(setAppError(err.response.data.message))
     } finally {
         dispatch(setLoading(false))
     }
@@ -82,7 +83,9 @@ export const slice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getUsersTC.fulfilled,(state, action)=>{
-               state.users = action.payload
+               if(action.payload) {
+                   state.users = action.payload
+               }
         })
     }
 })

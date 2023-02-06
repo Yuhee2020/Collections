@@ -1,16 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {
-    setAppError,
-    setAuthInProgress,
-    setIsRegistered,
-    setLoading,
-    setSuccessMessage,
-    setTheme,
-    ThemeType
-} from "./appReducer";
-import {authApi, AuthDataType, LoginResponseType, UserType} from "../../api/authApi";
-
-
+import {setAppError, setLoading, setSuccessMessage} from "./appReducer";
+import {authApi, AuthDataType, UserType} from "../../api/authApi";
 
 
 export const registerTC = createAsyncThunk("auth/register", async (params: AuthDataType, {dispatch}) => {
@@ -19,7 +9,6 @@ export const registerTC = createAsyncThunk("auth/register", async (params: AuthD
         const res = await authApi.registration(params)
         dispatch(setRegistered(true))
         dispatch(setSuccessMessage(res.data.message))
-        dispatch(setIsRegistered(true))
     } catch (err:any) {
         dispatch(setAppError(err.response.data.message))
     } finally {
@@ -57,17 +46,17 @@ export const logoutTC = createAsyncThunk("auth/logout", async (params, {dispatch
 })
 
 export const authTC = createAsyncThunk("auth/auth", async (params, {dispatch}) => {
-    dispatch(setAuthInProgress(true))
+    dispatch(setLoading(true))
+    // dispatch(setAuthInProgress(true))
     try {
-        const theme=localStorage.getItem('theme') as ThemeType
-        theme && dispatch(setTheme(theme))
         const res= await authApi.auth()
         localStorage.setItem("token", res.data.loggedUser.accessToken)
         dispatch(setIsLogin(true))
         return res.data.loggedUser
     } catch (err: any) {
     } finally {
-        dispatch(setAuthInProgress(false))
+        dispatch(setLoading(false))
+        // dispatch(setAuthInProgress(false))
     }
 })
 
@@ -77,6 +66,7 @@ export const slice = createSlice({
     initialState: {
         isRegistered: false,
         isLogin: false,
+        isAdmin:false,
         user:null as null | UserType
     },
     reducers: {
@@ -94,11 +84,18 @@ export const slice = createSlice({
         builder.addCase(loginTC.fulfilled, (state,action)=>{
             if(action.payload) {
                 state.user = action.payload
+                action.payload.role==="admin"
+                    ? state.isAdmin=true
+                    : state.isAdmin=false
             }
+
         })
         builder.addCase(authTC.fulfilled, (state,action)=>{
             if(action.payload) {
                 state.user = action.payload
+                action.payload.role==="admin"
+                    ? state.isAdmin=true
+                    : state.isAdmin=false
             }
         })
     }
