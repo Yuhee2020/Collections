@@ -4,6 +4,7 @@
 
 .itemContainer{
     padding: 0 0 10px 0 !important;
+    display: flex !important;
 }
 
 .checkbox{

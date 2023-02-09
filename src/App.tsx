@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {useAppDispatch} from "./store/reducers/Store";
+import {useAppDispatch, useAppSelector} from "./store/reducers/Store";
 import {ThemeProvider} from "./components/themeProvider/ThemeProvider";
 import {AppHeader} from "./components/appHeader/AppHeader";
 import {authTC} from "./store/reducers/authReducer";
@@ -12,16 +12,16 @@ import {AppMessagesBar} from "./components/appMessagesBar/AppMessagesBar";
 function App() {
 
     const dispatch = useAppDispatch()
-    // const authInProgress = useAppSelector(state => state.app.authInProgress)
+    const authInProgress = useAppSelector(state => state.app.authInProgress)
 
     useEffect(() => {
         dispatch(getThemeTC())
         localStorage.getItem('token') && dispatch(authTC())
     }, [])
 
-    // if (authInProgress) {
-    //     return <div>Loading</div>
-    // }
+    if (authInProgress) {
+        return <div>Loading</div>
+    }
 
     return (
         <ThemeProvider>

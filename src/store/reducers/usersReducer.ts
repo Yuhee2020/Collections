@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {setAppError, setLoading, setSuccessMessage} from "./appReducer";
 import {UserType} from "../../api/authApi";
 import {usersApi} from "../../api/usersApi";
@@ -8,7 +8,6 @@ const mainAdminMail=process.env.REACT_APP_MAIN_ADMIN_MAIL
 
 
 export const getUsersTC = createAsyncThunk("users/get", async (params, {dispatch}) => {
-    console.log(mainAdminMail)
     dispatch(setLoading(true))
     try {
         const res = await usersApi.getUsers()
@@ -76,10 +75,14 @@ export const changeUsersRoleTC = createAsyncThunk("users/changeUsersRole", async
 export const slice = createSlice({
     name: "users",
     initialState: {
-        users:[] as UserType[]
+        users:[] as UserType[],
+        userProfile:{} as UserType
     },
     reducers: {
-
+        setUserProfile(state, action: PayloadAction<string>) {
+            const index= state.users.findIndex(user=>user._id===action.payload)
+            state.userProfile = state.users[index]
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getUsersTC.fulfilled,(state, action)=>{
@@ -89,5 +92,5 @@ export const slice = createSlice({
         })
     }
 })
-
+export const {setUserProfile} = slice.actions
 export const usersReducer = slice.reducer
