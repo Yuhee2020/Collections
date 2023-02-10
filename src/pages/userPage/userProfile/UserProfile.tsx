@@ -1,27 +1,19 @@
 import React from 'react';
-import s from "../UserPage.module.css";
-import {Avatar, Button, Card} from "antd";
-import {AppstoreAddOutlined} from "@ant-design/icons";
+import s from "./UserProfile.module.css";
+import {Avatar, Card} from "antd";
 import Meta from "antd/es/card/Meta";
-import {ADD_COLLECTION} from "../../rotes/Rotes";
-import {useAppSelector} from "../../../store/reducers/Store";
-import {useNavigate, useParams} from "react-router-dom";
-import {AddCollectionModal} from "../../../components/modals/AddCollectionModal";
+import {AddCollectionModal} from "../addCollectionModal/AddCollectionModal";
+import {UserType} from "../../../api/authApi";
 
-export const UserProfile = () => {
+type PropsType = {
+    user: UserType | null
+}
 
-    const navigate=useNavigate()
-    const {userId} = useParams()
-
-    const user =useAppSelector(userId? state => state.users.userProfile : state=>state.auth.user)
-
-    const handleNewCollectionClick=()=>{
-        navigate(`${ADD_COLLECTION}/${userId?userId:user?._id}`)
-    }
+export const UserProfile = ({user}: PropsType) => {
 
     return (
         <Card
-            className={s.cardBox}
+            className={s.profileBox}
             cover={
                 <img
                     alt="example"
@@ -29,8 +21,7 @@ export const UserProfile = () => {
                 />
             }
             actions={[
-                <AddCollectionModal/>,
-                <Button onClick={handleNewCollectionClick} icon={<AppstoreAddOutlined/>}>add new collection</Button>
+                <AddCollectionModal userId={user?._id}/>,
             ]}
         >
             <Meta

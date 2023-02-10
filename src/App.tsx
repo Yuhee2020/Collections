@@ -26,7 +26,7 @@ function App() {
     return (
         <ThemeProvider>
             <AppHeader/>
-            <Routing/>
+            <div className="rotes"><Routing/></div>
             <AppMessagesBar/>
         </ThemeProvider>
     );

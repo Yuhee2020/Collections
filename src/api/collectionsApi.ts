@@ -7,10 +7,16 @@ export const collectionsApi = {
         ('/collections/createCollection', collection)
     },
     deleteCollection(collectionId: string) {
-        return instance.delete<DeleteCollectionResponseType>(`/collections/delete/${collectionId}`)
+        return instance.delete<DeleteCollectionResponseType>(`/collections/deleteCollection/${collectionId}`)
     },
     getUserCollections(usersId: string) {
         return instance.get<GetUserCollectionsResponseType>(`/collections/getUserCollections/${usersId}`)
+    },
+    getCollection(collectionId: string) {
+        return instance.get<CollectionType>(`/collections/getCollection/${collectionId}`)
+    },
+    editUserCollections(collection: CollectionType) {
+        return instance.put<CollectionType, AxiosResponse<EditCollectionResponseType>>(`/collections/editCollection`,collection)
     },
 }
 
@@ -19,7 +25,7 @@ export type CollectionType = {
     theme?: string
     title?: string;
     description?: string;
-    image?: FormData;
+    image?: string;
     itemsCount?: number
     creationDate?: Date
     itemsFields?: string[];
@@ -33,10 +39,15 @@ export type CreateCollectionResponseType = {
 
 export type GetUserCollectionsResponseType={
     message: string
-    newCollection: CollectionType[]
+    userCollections: CollectionType[]
 }
 
 export type DeleteCollectionResponseType={
     message: string
-    deletedCollection: CollectionType[]
+    deletedCollection: CollectionType
+}
+
+export type EditCollectionResponseType={
+    message: string
+    updatedCollection: CollectionType
 }

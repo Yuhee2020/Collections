@@ -5,12 +5,14 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {authReducer} from "./authReducer";
 import {appReducer} from "./appReducer";
 import {usersReducer} from "./usersReducer";
+import {collectionsReducer} from "./collectionReducer";
 
 
 export const rootReducer = combineReducers({
     auth:authReducer,
     app:appReducer,
-    users:usersReducer
+    users:usersReducer,
+    collections:collectionsReducer
 })
 
 export const store = configureStore({

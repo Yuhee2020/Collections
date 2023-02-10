@@ -1,9 +1,5 @@
 .userPageContainer{
     margin: 20px;
     display: flex;
-    /*justify-content: center;*/
 }
 
-.cardBox{
-width: 350px;
-}
