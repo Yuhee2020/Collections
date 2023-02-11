@@ -1,0 +1,14 @@
+.uploaderBox label{
+    height: 60px !important;
+    border: dashed 2px #17b0b0 !important;
+    max-width: 100% !important;
+    min-width: 10px !important;
+}
+
+.uploaderBox label > input{
+    display: none !important;
+}
+
+label > svg path {
+fill: #17b0b0;
+}

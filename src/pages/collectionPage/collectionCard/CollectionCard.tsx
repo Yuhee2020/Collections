@@ -9,6 +9,7 @@ import {useAppDispatch} from "../../../store/reducers/Store";
 import {useNavigate} from "react-router-dom";
 import {USER_PAGE} from "../../rotes/Rotes";
 import dayjs from "dayjs";
+import ReactMarkdown from "react-markdown";
 
 type PropsType = {
     collection: CollectionType
@@ -64,7 +65,7 @@ export const CollectionCard = ({collection}: PropsType) => {
                     />
                     <Collapse bordered={false}>
                         <Collapse.Panel header="Descriptions" key="1">
-                            <p>{collection.description}</p>
+                            {collection.description && <ReactMarkdown children={collection.description}/>}
                         </Collapse.Panel>
                     </Collapse>
                 </List.Item>

@@ -10,13 +10,3 @@ body{
     overflow-y: hidden ;
 }
 
-.lkjDVC  {
-    height: 60px !important;
-    border: dashed 2px #17b0b0 !important;
-    max-width: 100% !important;
-    min-width: 10px !important;
-
-}
-.lkjDVC > input {
-    display: none !important;
-}

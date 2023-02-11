@@ -3,6 +3,7 @@ import {storage} from "../../firebase";
 import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {FileUploader} from "react-drag-drop-files";
 import {Progress} from "antd";
+import s from "./imageUploader.module.css"
 
 
 type PropsType={
@@ -31,13 +32,13 @@ export function ImageUploader({setImageUrl}:PropsType) {
     };
 
     return (
-        <div>
-            <FileUploader
+        <div >
+            <div className={s.uploaderBox}><FileUploader
                 handleChange={handleUpload}
                 name="file"
                 types={fileTypes}
                 label="Upload or drop image right here"
-            />
+            /></div>
             <Progress percent={percent}/>
         </div>
     );
