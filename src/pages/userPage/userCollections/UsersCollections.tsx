@@ -5,10 +5,10 @@ import {NavLink} from "react-router-dom";
 import {COLLECTION} from "../../rotes/Rotes";
 import {noImage} from "../../../constants";
 import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
-import {deleteUserCollectionTC, getUserCollectionsTC} from "../../../store/reducers/collectionReducer";
 import ReactMarkdown from 'react-markdown'
 import s from "./UsersCollections.module.css"
 import {EditCollectionModal} from "../editCollectionModal/EditCollectionModal";
+import {deleteUserCollectionTC, getUserCollectionsTC} from "../../../store/reducers/collectionsReducer";
 
 
 type PropsType = {

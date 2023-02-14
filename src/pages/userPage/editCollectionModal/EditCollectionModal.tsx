@@ -7,7 +7,7 @@ import MDEditor from "@uiw/react-md-editor";
 import {useAppDispatch} from "../../../store/reducers/Store";
 import {validateAddCollectionForm} from "../../../utils/addCollectionFormValidation";
 import {COLLECTIONS_THEMES} from "../../../constants";
-import {editCollectionTC} from "../../../store/reducers/collectionReducer";
+import {editCollectionTC} from "../../../store/reducers/collectionsReducer";
 import {ImageUploader} from "../../../components/imageUploader/ImageUploader";
 import {TransferFields} from "../../../components/transferFields/TransferFields";
 import {CollectionType} from "../../../api/collectionsApi";
@@ -55,9 +55,6 @@ export const EditCollectionModal = ({collection, userId}: PropsType) => {
             showModal()
         },
     });
-
-    console.log(formik.values)
-
 
     useEffect(() => {
         formik.setValues({itemsFields, title, theme, image, description})

@@ -7,7 +7,7 @@ import MDEditor from "@uiw/react-md-editor";
 import {useAppDispatch} from "../../../store/reducers/Store";
 import {validateAddCollectionForm} from "../../../utils/addCollectionFormValidation";
 import {COLLECTIONS_THEMES} from "../../../constants";
-import {createCollectionTC} from "../../../store/reducers/collectionReducer";
+import {createCollectionTC} from "../../../store/reducers/collectionsReducer";
 import {ImageUploader} from "../../../components/imageUploader/ImageUploader";
 import {TransferFields} from "../../../components/transferFields/TransferFields";
 

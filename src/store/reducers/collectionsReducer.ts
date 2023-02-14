@@ -2,7 +2,6 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {setAppError, setLoading, setSuccessMessage} from "./appReducer";
 import {collectionsApi, CollectionType} from "../../api/collectionsApi";
 import {deleteObject, getStorage, ref} from "firebase/storage";
-import {log} from "util";
 
 
 export const createCollectionTC = createAsyncThunk("collection/createCollection",
@@ -19,7 +18,7 @@ export const createCollectionTC = createAsyncThunk("collection/createCollection"
         }
     })
 
-export const getUserCollectionsTC = createAsyncThunk("collection/getUserCollections",
+export const getUserCollectionsTC = createAsyncThunk("collections/getUserCollections",
     async (params: string, {dispatch}) => {
         dispatch(setLoading(true))
         try {
@@ -32,7 +31,7 @@ export const getUserCollectionsTC = createAsyncThunk("collection/getUserCollecti
         }
     })
 
-export const deleteUserCollectionTC = createAsyncThunk("collection/deleteCollection",
+export const deleteUserCollectionTC = createAsyncThunk("collections/deleteCollection",
     async (params: { collectionId: string, userId: string }, {dispatch}) => {
         dispatch(setLoading(true))
         try {
@@ -49,7 +48,7 @@ export const deleteUserCollectionTC = createAsyncThunk("collection/deleteCollect
         }
     })
 
-export const editCollectionTC = createAsyncThunk("collection/editCollection",
+export const editCollectionTC = createAsyncThunk("collections/editCollection",
     async (params: { collection:CollectionType, oldImage?:string }, {dispatch}) => {
         dispatch(setLoading(true))
         try {
@@ -68,7 +67,7 @@ export const editCollectionTC = createAsyncThunk("collection/editCollection",
         }
     })
 
-export const getCollectionTC = createAsyncThunk("collection/getCollection",
+export const getCollectionTC = createAsyncThunk("collections/getCollection",
     async (params: string, {dispatch}) => {
         dispatch(setLoading(true))
         try {

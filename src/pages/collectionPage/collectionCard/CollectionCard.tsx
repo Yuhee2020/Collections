@@ -4,12 +4,13 @@ import {CollectionType} from "../../../api/collectionsApi";
 import s from "./CollectionCard.module.css"
 import {EditCollectionModal} from "../../userPage/editCollectionModal/EditCollectionModal";
 import {DeleteOutlined} from "@ant-design/icons";
-import {deleteUserCollectionTC} from "../../../store/reducers/collectionReducer";
 import {useAppDispatch} from "../../../store/reducers/Store";
 import {useNavigate} from "react-router-dom";
 import {USER_PAGE} from "../../rotes/Rotes";
 import dayjs from "dayjs";
 import ReactMarkdown from "react-markdown";
+import {deleteUserCollectionTC} from "../../../store/reducers/collectionsReducer";
+import {AddItemModal} from "./addItemModal/AddItemModal";
 
 type PropsType = {
     collection: CollectionType
@@ -44,7 +45,8 @@ export const CollectionCard = ({collection}: PropsType) => {
                             cancelText="No"
                         >
                             <Button type="text" icon={<DeleteOutlined/>}>delete</Button>
-                        </Popconfirm>
+                        </Popconfirm>,
+                        <AddItemModal collection={collection}/>
                     ]}
                     extra={
                         <Image
