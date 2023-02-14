@@ -57,9 +57,9 @@ export const ItemPage = () => {
             {author && <Descriptions.Item label="Author:">{author}</Descriptions.Item>}
             {producer && <Descriptions.Item label="Producer:">{producer}</Descriptions.Item>}
             {countryOfOrigin && <Descriptions.Item label="Country of origin:">{countryOfOrigin}</Descriptions.Item>}
-            {dateOfCreation && <Descriptions.Item label="Date of creation:">{dateOfCreation}</Descriptions.Item>}
-            {dateOfWriting && <Descriptions.Item label="Date of writing:">{dateOfWriting}</Descriptions.Item>}
-            {productionDate && <Descriptions.Item label="Production date:">{productionDate}</Descriptions.Item>}
+            {dateOfCreation && <Descriptions.Item label="Date of creation:">{dateFormatter(dateOfCreation)}</Descriptions.Item>}
+            {dateOfWriting && <Descriptions.Item label="Date of writing:">{dateFormatter(dateOfWriting)}</Descriptions.Item>}
+            {productionDate && <Descriptions.Item label="Production date:">{dateFormatter(productionDate)}</Descriptions.Item>}
             {price && <Descriptions.Item label="Price:">{price}$</Descriptions.Item>}
             {weight && <Descriptions.Item label="Weight:">{weight}kg</Descriptions.Item>}
             {numberOfCopies && <Descriptions.Item label="Number of copies:">{numberOfCopies}</Descriptions.Item>}

@@ -7,7 +7,7 @@ import {useFormik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../../../../store/reducers/Store";
 import dayjs from "dayjs";
 import {getTagsTC} from "../../../../../store/reducers/tagsReducer";
-import {createItemTC, editItemTC} from "../../../../../store/reducers/itemsReducer";
+import {editItemTC} from "../../../../../store/reducers/itemsReducer";
 import {CollectionType} from "../../../../../api/collectionsApi";
 import {validateAddItemForm} from "../../../../../utils/addItemFormValidation";
 import {ItemType} from "../../../../../api/itemsApi";
@@ -55,9 +55,6 @@ const EditItemForm = ({showModal, collection,item}: PropsType) => {
             producer: '',
             countryOfOrigin: '',
             description: '',
-            isUniqueItem: false,
-            isAvailableForSale: false,
-            isAvailableForExchange: false
         },
         validate: validateAddItemForm,
         onSubmit: (values) => {
@@ -68,6 +65,7 @@ const EditItemForm = ({showModal, collection,item}: PropsType) => {
             showModal()
         },
     });
+
 
     useEffect(() => {
         formik.setValues(item)
@@ -161,19 +159,19 @@ const EditItemForm = ({showModal, collection,item}: PropsType) => {
                                  onChange={e => formik.setFieldValue("isAvailableForExchange", e.target.checked)}>
                         available for exchange
                     </Checkbox>}
-
             </Form.Item>
+
             {itemsFields?.includes("production date") &&
                 <Form.Item label={"Production date:"}>
-                    <DatePicker onChange={e => handleDateChange(e, "productionDate")}/>
+                    <DatePicker value={dayjs(formik.values.productionDate)} onChange={e => handleDateChange(e, "productionDate")}/>
                 </Form.Item>}
             {itemsFields?.includes("date of writing") &&
                 <Form.Item label={"Date of writing:"}>
-                    <DatePicker onChange={e => handleDateChange(e, "dateOfWriting")}/>
+                    <DatePicker value={dayjs(formik.values.dateOfWriting)} onChange={e => handleDateChange(e, "dateOfWriting")}/>
                 </Form.Item>}
             {itemsFields?.includes("date of creation") &&
                 <Form.Item label={"Date of creation:"}>
-                    <DatePicker onChange={e => handleDateChange(e, "dateOfCreation")}/>
+                    <DatePicker value={dayjs(formik.values.dateOfCreation)} onChange={e => handleDateChange(e, "dateOfCreation")}/>
                 </Form.Item>}
 
             {itemsFields?.includes("description") &&

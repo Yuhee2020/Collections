@@ -5,7 +5,7 @@ import MDEditor from "@uiw/react-md-editor";
 import {ImageUploader} from "../../../../../components/imageUploader/ImageUploader";
 import {useFormik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../../../../store/reducers/Store";
-import dayjs from "dayjs";
+import {Dayjs} from "dayjs";
 import {getTagsTC} from "../../../../../store/reducers/tagsReducer";
 import {createItemTC} from "../../../../../store/reducers/itemsReducer";
 import {CollectionType} from "../../../../../api/collectionsApi";
@@ -31,8 +31,8 @@ const AddItemForm = ({showModal, collection}: PropsType) => {
     const handleCharacteristicsChange = (e: string | undefined) => {
         formik.setFieldValue("uniqueCharacteristics", e)
     };
-    const handleDateChange = (e: dayjs.Dayjs | null, title: string) => {
-        e && formik.setFieldValue(title, e.format('DD/MM/YYYY'))
+    const handleDateChange = (e: Dayjs | null, title: string) => {
+        e && formik.setFieldValue(title, e)
     }
     const setImageUrl = (url: string) => {
         formik.setFieldValue("image", url)
@@ -52,9 +52,6 @@ const AddItemForm = ({showModal, collection}: PropsType) => {
             producer: '',
             countryOfOrigin: '',
             description: '',
-            // isUniqueItem: false,
-            // isAvailableForSale: false,
-            // isAvailableForExchange: false
         },
         validate: validateAddItemForm,
         onSubmit: (values) => {
@@ -157,19 +154,19 @@ const AddItemForm = ({showModal, collection}: PropsType) => {
                                  onChange={e => formik.setFieldValue("isAvailableForExchange", e.target.checked)}>
                         available for exchange
                     </Checkbox>}
-
             </Form.Item>
+
             {itemsFields?.includes("production date") &&
                 <Form.Item label={"Production date:"}>
-                    <DatePicker onChange={e => handleDateChange(e, "productionDate")}/>
+                    <DatePicker value={formik.values.productionDate} onChange={e => handleDateChange(e, "productionDate")}/>
                 </Form.Item>}
             {itemsFields?.includes("date of writing") &&
                 <Form.Item label={"Date of writing:"}>
-                    <DatePicker onChange={e => handleDateChange(e, "dateOfWriting")}/>
+                    <DatePicker value={formik.values.dateOfWriting} onChange={e => handleDateChange(e, "dateOfWriting")}/>
                 </Form.Item>}
             {itemsFields?.includes("date of creation") &&
                 <Form.Item label={"Date of creation:"}>
-                    <DatePicker onChange={e => handleDateChange(e, "dateOfCreation")}/>
+                    <DatePicker value={formik.values.dateOfCreation} onChange={e => handleDateChange(e, "dateOfCreation")}/>
                 </Form.Item>}
 
             {itemsFields?.includes("description") &&

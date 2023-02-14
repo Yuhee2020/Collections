@@ -1,21 +1,31 @@
-type FormikValuesType = {
-    title?: string
-    tags?: string[]
-    image?: string
-    author?: string
-    producer?: string
-    countryOfOrigin?: string
-    historyOfCreation?: string
-    description?: string
-    uniqueCharacteristics?: string
-    price?: number
-    weight?: number
-    numberOfCopies?: number
-    isUniqueItem?: boolean
-    isAvailableForSale?: boolean
-    isAvailableForExchange?: boolean
-    productionDate?: string
+import {Dayjs} from "dayjs";
 
+type FormikValuesType = {
+    author?: string
+    collectionId?: string
+    countryOfOrigin?: string
+    dateOfCreation?: Dayjs
+    dateOfWriting?: Dayjs
+    description?: string
+    historyOfCreation?: string
+    image?: string
+    isAvailableForExchange?: boolean
+    isAvailableForSale?: boolean
+    isUniqueItem?: boolean
+    itemCreationDate?: Date
+    likesCount?: number
+    numberOfCopies?: number
+    price?: number
+    producer?: string
+    productionDate?: Dayjs
+    tags?: string[]
+    title?: string
+    uniqueCharacteristics?: string
+    userId?: string
+    usersIdWhoLiked?: string[]
+    weight?: number
+    __v?: string
+    _id?: string
 }
 
 export const validateAddItemForm = (values: FormikValuesType) => {

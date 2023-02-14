@@ -1,5 +1,6 @@
 import {instance} from "./instance";
 import {AxiosResponse} from "axios";
+import {Dayjs} from "dayjs";
 
 
 export const itemsApi = {
@@ -52,9 +53,9 @@ export type ItemType = {
     tags?: string[]
     image?: string
     itemCreationDate?: Date
-    productionDate?: string,
-    dateOfCreation?: string,
-    dateOfWriting?: string,
+    productionDate?: Dayjs,
+    dateOfCreation?: Dayjs,
+    dateOfWriting?: Dayjs,
     author?: string,
     producer?: string,
     countryOfOrigin?: string,
