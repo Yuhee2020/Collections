@@ -11,7 +11,11 @@ export const createTagsTC = createAsyncThunk("tags/createTags",
             const tags=state.tags.tags.map(tag=>tag.title)
             const uniqueTags=params.filter(tag=>tags.indexOf(tag)<0)
             const uniqueTagsForBack=uniqueTags.map(tag=>({title:tag}))
-            uniqueTagsForBack && await tagsApi.createTags(uniqueTagsForBack)
+            if (uniqueTagsForBack.length) {
+                const res = await tagsApi.createTags(uniqueTagsForBack)
+                return res.data.tags
+            }
+            return
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
         }
@@ -21,7 +25,7 @@ export const getTagsTC = createAsyncThunk("tags/getTags",
     async (params, {dispatch}) => {
         try {
             const res = await tagsApi.getTags()
-            return(res.data.tags)
+            return res.data.tags
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
         }
@@ -36,6 +40,9 @@ export const slice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getTagsTC.fulfilled, (state, action) => {
+            if (action.payload) state.tags = action.payload
+        })
+        builder.addCase(createTagsTC.fulfilled, (state, action) => {
             if (action.payload) state.tags = action.payload
         })
     }

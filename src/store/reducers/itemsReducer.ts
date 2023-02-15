@@ -2,6 +2,8 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {setAppError, setLoading, setSuccessMessage} from "./appReducer";
 import {itemsApi, ItemType} from "../../api/itemsApi";
 import {createTagsTC} from "./tagsReducer";
+import {DataType} from "../../pages/collectionPage/itemsTable/ItemsTable";
+import {deleteObject, getStorage, ref} from "firebase/storage";
 
 
 export const createItemTC = createAsyncThunk("items/createItem",
@@ -46,10 +48,17 @@ export const getItemTC = createAsyncThunk("items/getItem",
     })
 
 export const deleteItemsTC = createAsyncThunk("items/deleteItems",
-        async (params:{ itemsId: string[], collectionId: string }, {dispatch}) => {
+        async (params:{ items: DataType[], collectionId: string }, {dispatch}) => {
         dispatch(setLoading(true))
         try {
-            const res = await itemsApi.deleteItems(params.itemsId,params.collectionId)
+            const res = await itemsApi.deleteItems(params.items.map(item=>item.itemId),params.collectionId)
+            const storage = getStorage();
+            await params.items.forEach((item)=>{
+                if(item.image) {
+                    const desertRef = ref(storage, item.image);
+                    deleteObject(desertRef)
+                }
+            })
             return res.data.collectionItems
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
@@ -59,11 +68,16 @@ export const deleteItemsTC = createAsyncThunk("items/deleteItems",
     })
 
 export const editItemTC = createAsyncThunk("items/editItem",
-    async (params:ItemType, {dispatch}) => {
+    async (params: { newItem:ItemType, oldImage:string | undefined }, {dispatch}) => {
         dispatch(setLoading(true))
         try {
-            const res = await itemsApi.editItem(params)
-            dispatch(getCollectionItemsTC(params.collectionId))
+            const res = await itemsApi.editItem(params.newItem)
+            dispatch(getCollectionItemsTC(params.newItem.collectionId))
+            if(params.oldImage && params.oldImage !== params.newItem.image){
+                const storage = getStorage();
+                const desertRef = ref(storage, params.oldImage);
+                await deleteObject(desertRef)
+            }
             return res.data.updatedItem
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))

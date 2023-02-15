@@ -13,13 +13,14 @@ import {DeleteOutlined} from "@ant-design/icons";
 import {dateFormatter} from "../../../utils/dateFormatter";
 import {ItemModal} from "../collectionCard/addItemModal/ItemModal";
 
-interface DataType {
+export interface DataType {
     key: React.Key;
     title: string;
     itemId: string;
     itemCreationDate: string;
     tags: string;
     likesCount: number
+    image:string
 }
 
 type PropsType = {
@@ -30,8 +31,8 @@ export const ItemsTable = ({collection}: PropsType) => {
 
     const dispatch = useAppDispatch()
     const collectionItems = useAppSelector(state => state.items.collectionItems)
-    const [selectedItemsId, setSelectedItemsId] = useState<string[]>([])
-    const editableItem = collectionItems.filter(item => item._id === selectedItemsId[0])[0]
+    const [selectedItems, setSelectedItems] = useState<DataType[]>([])
+    const editableItem = collectionItems.filter(item => item._id === selectedItems[0]?.itemId)[0]
     const tags = useAppSelector(state => state.tags.tags)
     const columns: ColumnsType<DataType> = [
         {
@@ -61,8 +62,9 @@ export const ItemsTable = ({collection}: PropsType) => {
         },
     ];
     const rowSelection = {
-        onChange: (selectedRowKeys: React.Key[],) => {
-            setSelectedItemsId(selectedRowKeys.map(key => key.toString()));
+        onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+           setSelectedItems(selectedRows)
+
         },
     };
 
@@ -72,13 +74,14 @@ export const ItemsTable = ({collection}: PropsType) => {
         title: item.title,
         itemCreationDate: dateFormatter(item.itemCreationDate),
         tags: item.tags?.join(", "),
-        likesCount: item.likesCount
+        likesCount: item.likesCount,
+        image:item.image
     }))
 
 
     const handleDeleteClick = () => {
         collection._id &&
-        dispatch(deleteItemsTC({itemsId: selectedItemsId, collectionId: collection._id}))
+        dispatch(deleteItemsTC({items: selectedItems, collectionId: collection._id}))
     }
 
 
@@ -94,18 +97,15 @@ export const ItemsTable = ({collection}: PropsType) => {
                     <Button type="primary" onClick={handleDeleteClick}
                             icon={<DeleteOutlined/>}
                             size="small"
-                            disabled={!selectedItemsId.length}>
+                            disabled={!selectedItems.length}>
                         Delete
                     </Button>
                     <ItemModal
                         collection={collection}
                         item={editableItem}
-                        disabled={selectedItemsId.length !== 1}
+                        disabled={selectedItems.length !== 1}
                         edit
                     />
-                    {/*<EditItemModal disabled={selectedItemsId.length !== 1}*/}
-                    {/*               collection={collection}*/}
-                    {/*               item={editableItem}/>*/}
                 </div>
             </Card>
             <Table

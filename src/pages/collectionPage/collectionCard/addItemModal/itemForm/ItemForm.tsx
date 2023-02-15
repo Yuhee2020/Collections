@@ -61,7 +61,8 @@ export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
         validate: validateAddItemForm,
         onSubmit: (values) => {
             if (edit) {
-                if (item) dispatch(editItemTC({...item, ...values,}))
+                if (item)
+                    dispatch(editItemTC({newItem:{...item, ...values}, oldImage:item.image}))
             } else if (_id && userId) {
                 dispatch(createItemTC({...values, collectionId: _id, userId}))
             }

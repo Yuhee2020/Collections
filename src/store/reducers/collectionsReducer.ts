@@ -37,8 +37,10 @@ export const deleteUserCollectionTC = createAsyncThunk("collections/deleteCollec
         try {
             const res = await collectionsApi.deleteCollection(params.collectionId)
             const storage = getStorage();
-            const desertRef = ref(storage, res.data.deletedCollection.image);
-            await deleteObject(desertRef)
+            if(res.data.deletedCollection.image) {
+                const desertRef = ref(storage, res.data.deletedCollection.image);
+                await deleteObject(desertRef)
+            }
             dispatch(getUserCollectionsTC(params.userId))
             dispatch(setCollection({}))
         } catch (err: any) {

@@ -4,7 +4,7 @@ import {AxiosResponse} from "axios";
 
 export const tagsApi = {
     createTags(tags: TagType[]) {
-        return instance.post<TagType, AxiosResponse<{ message: string }>>
+        return instance.post<TagType, AxiosResponse<getTagsResponseType>>
         ('/tags/createTags', tags)
     },
     getTags() {
