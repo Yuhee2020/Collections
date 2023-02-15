@@ -19,6 +19,7 @@ type PropsType = {
     edit?: boolean
 }
 
+
 export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
 
     const dispatch = useAppDispatch()
@@ -94,6 +95,7 @@ export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
             <Form.Item>
                 <Select mode="tags"
                         style={{width: '100%'}}
+                        // @ts-ignore
                         value={formik.values.tags}
                         onChange={handleTagsChange}
                         tokenSeparators={[',']}
