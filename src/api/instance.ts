@@ -2,7 +2,7 @@ import axios from "axios";
 import {authApi} from "./authApi";
 
 export const instance = axios.create({
-    baseURL: "http://localhost:7000",
+    baseURL: "http://localhost:7000" || "https://course-project-back.vercel.app",
     // baseURL: "https://course-project-back.vercel.app",
     // baseURL: "https://course-project-back.onrender.com",
     withCredentials: true

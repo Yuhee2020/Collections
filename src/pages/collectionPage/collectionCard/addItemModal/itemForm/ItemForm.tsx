@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
-import s from "../EditItemModal.module.css";
+import s from "../ItemModal.module.css";
 import {Button, Checkbox, DatePicker, Form, Input, InputNumber, Select} from "antd";
 import MDEditor from "@uiw/react-md-editor";
 import {ImageUploader} from "../../../../../components/imageUploader/ImageUploader";
 import {useFormik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../../../../store/reducers/Store";
-import dayjs from "dayjs";
+import dayjs, {Dayjs} from "dayjs";
 import {getTagsTC} from "../../../../../store/reducers/tagsReducer";
-import {editItemTC} from "../../../../../store/reducers/itemsReducer";
+import {createItemTC, editItemTC} from "../../../../../store/reducers/itemsReducer";
 import {CollectionType} from "../../../../../api/collectionsApi";
 import {validateAddItemForm} from "../../../../../utils/addItemFormValidation";
 import {ItemType} from "../../../../../api/itemsApi";
@@ -15,14 +15,14 @@ import {ItemType} from "../../../../../api/itemsApi";
 type PropsType = {
     showModal: () => void
     collection: CollectionType
-    item:ItemType
+    item?: ItemType
+    edit?: boolean
 }
 
-const EditItemForm = ({showModal, collection,item}: PropsType) => {
+export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
 
     const dispatch = useAppDispatch()
     const tags = useAppSelector(state => state.tags.tags)
-
     const {_id, userId, itemsFields} = collection
 
     const handleDescriptionChange = (e: string | undefined) => {
@@ -34,8 +34,8 @@ const EditItemForm = ({showModal, collection,item}: PropsType) => {
     const handleCharacteristicsChange = (e: string | undefined) => {
         formik.setFieldValue("uniqueCharacteristics", e)
     };
-    const handleDateChange = (e: dayjs.Dayjs | null, title: string) => {
-        e && formik.setFieldValue(title, e.format('DD/MM/YYYY'))
+    const handleDateChange = (e: Dayjs | null, title: string) => {
+        e && formik.setFieldValue(title, e)
     }
     const setImageUrl = (url: string) => {
         formik.setFieldValue("image", url)
@@ -44,6 +44,7 @@ const EditItemForm = ({showModal, collection,item}: PropsType) => {
     const options = tags.map(tag => ({value: tag.title, label: tag.title}));
 
     const handleTagsChange = (value: string) => {
+        console.log(value)
         formik.setFieldValue('tags', value)
     };
 
@@ -58,19 +59,21 @@ const EditItemForm = ({showModal, collection,item}: PropsType) => {
         },
         validate: validateAddItemForm,
         onSubmit: (values) => {
-            if (_id && userId) {
-                dispatch(editItemTC({...item,...values,}))
+            if (edit) {
+                if (item) dispatch(editItemTC({...item, ...values,}))
+            } else if (_id && userId) {
+                dispatch(createItemTC({...values, collectionId: _id, userId}))
             }
             formik.resetForm()
             showModal()
         },
     });
 
-
     useEffect(() => {
-        formik.setValues(item)
         dispatch(getTagsTC())
+        if (edit && item) formik.setValues(item)
     }, [item])
+
 
     return (
         <Form
@@ -91,6 +94,7 @@ const EditItemForm = ({showModal, collection,item}: PropsType) => {
             <Form.Item>
                 <Select mode="tags"
                         style={{width: '100%'}}
+                        value={formik.values.tags}
                         onChange={handleTagsChange}
                         tokenSeparators={[',']}
                         options={options}/>
@@ -151,27 +155,30 @@ const EditItemForm = ({showModal, collection,item}: PropsType) => {
                     </Checkbox>}
                 {itemsFields?.includes("is available for sale") &&
                     <Checkbox checked={formik.values.isAvailableForSale}
-                                 onChange={e => formik.setFieldValue("isAvailableForSale", e.target.checked)}>
+                              onChange={e => formik.setFieldValue("isAvailableForSale", e.target.checked)}>
                         available for sale
                     </Checkbox>}
                 {itemsFields?.includes("is available for exchange") &&
                     <Checkbox checked={formik.values.isAvailableForExchange}
-                                 onChange={e => formik.setFieldValue("isAvailableForExchange", e.target.checked)}>
+                              onChange={e => formik.setFieldValue("isAvailableForExchange", e.target.checked)}>
                         available for exchange
                     </Checkbox>}
             </Form.Item>
 
             {itemsFields?.includes("production date") &&
                 <Form.Item label={"Production date:"}>
-                    <DatePicker value={dayjs(formik.values.productionDate)} onChange={e => handleDateChange(e, "productionDate")}/>
+                    <DatePicker value={dayjs(formik.values.productionDate)}
+                                onChange={e => handleDateChange(e, "productionDate")}/>
                 </Form.Item>}
             {itemsFields?.includes("date of writing") &&
                 <Form.Item label={"Date of writing:"}>
-                    <DatePicker value={dayjs(formik.values.dateOfWriting)} onChange={e => handleDateChange(e, "dateOfWriting")}/>
+                    <DatePicker value={dayjs(formik.values.dateOfWriting)}
+                                onChange={e => handleDateChange(e, "dateOfWriting")}/>
                 </Form.Item>}
             {itemsFields?.includes("date of creation") &&
                 <Form.Item label={"Date of creation:"}>
-                    <DatePicker value={dayjs(formik.values.dateOfCreation)} onChange={e => handleDateChange(e, "dateOfCreation")}/>
+                    <DatePicker value={dayjs(formik.values.dateOfCreation)}
+                                onChange={e => handleDateChange(e, "dateOfCreation")}/>
                 </Form.Item>}
 
             {itemsFields?.includes("description") &&
@@ -201,11 +208,10 @@ const EditItemForm = ({showModal, collection,item}: PropsType) => {
             <ImageUploader setImageUrl={setImageUrl}/>
             <Form.Item>
                 <Button type="primary" htmlType="submit" className={s.loginFormButton}>
-                    Edit item
+                    {edit ? "Edit item" : "Add Item"}
                 </Button>
             </Form.Item>
         </Form>
     );
 };
 
-export default EditItemForm;

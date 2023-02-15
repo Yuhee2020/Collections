@@ -11,7 +11,7 @@ import {getTagsTC} from "../../../store/reducers/tagsReducer";
 import s from "./Toolbar.module.css";
 import {DeleteOutlined} from "@ant-design/icons";
 import {dateFormatter} from "../../../utils/dateFormatter";
-import {EditItemModal} from "./editItemModal/EditItemModal";
+import {ItemModal} from "../collectionCard/addItemModal/ItemModal";
 
 interface DataType {
     key: React.Key;
@@ -61,7 +61,7 @@ export const ItemsTable = ({collection}: PropsType) => {
         },
     ];
     const rowSelection = {
-        onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+        onChange: (selectedRowKeys: React.Key[],) => {
             setSelectedItemsId(selectedRowKeys.map(key => key.toString()));
         },
     };
@@ -97,9 +97,15 @@ export const ItemsTable = ({collection}: PropsType) => {
                             disabled={!selectedItemsId.length}>
                         Delete
                     </Button>
-                    <EditItemModal disabled={selectedItemsId.length !== 1}
-                                   collection={collection}
-                                   item={editableItem}/>
+                    <ItemModal
+                        collection={collection}
+                        item={editableItem}
+                        disabled={selectedItemsId.length !== 1}
+                        edit
+                    />
+                    {/*<EditItemModal disabled={selectedItemsId.length !== 1}*/}
+                    {/*               collection={collection}*/}
+                    {/*               item={editableItem}/>*/}
                 </div>
             </Card>
             <Table
