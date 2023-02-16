@@ -13,7 +13,7 @@ export const createItemTC = createAsyncThunk("items/createItem",
             const res = await itemsApi.createItem(params)
             params.tags && dispatch(createTagsTC(params.tags))
             dispatch(setSuccessMessage(res.data.message))
-            return res.data.collectionItems
+            return res.data.items
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
         } finally {
@@ -26,7 +26,7 @@ export const getCollectionItemsTC = createAsyncThunk("items/getCollectionItems",
         dispatch(setLoading(true))
         try {
             const res = await itemsApi.getCollectionItems(params)
-            return res.data.collectionItems
+            return res.data.items
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
         } finally {
@@ -47,6 +47,19 @@ export const getItemTC = createAsyncThunk("items/getItem",
         }
     })
 
+export const getLastItemsTC = createAsyncThunk("items/getLastItems",
+    async (params, {dispatch}) => {
+        dispatch(setLoading(true))
+        try {
+            const res = await itemsApi.getLastItems()
+            return res.data.items
+        } catch (err: any) {
+            dispatch(setAppError(err.response.data.message))
+        } finally {
+            dispatch(setLoading(false))
+        }
+    })
+
 export const deleteItemsTC = createAsyncThunk("items/deleteItems",
         async (params:{ items: DataType[], collectionId: string }, {dispatch}) => {
         dispatch(setLoading(true))
@@ -59,7 +72,7 @@ export const deleteItemsTC = createAsyncThunk("items/deleteItems",
                     deleteObject(desertRef)
                 }
             })
-            return res.data.collectionItems
+            return res.data.items
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
         } finally {
@@ -89,11 +102,14 @@ export const editItemTC = createAsyncThunk("items/editItem",
 export const slice = createSlice({
     name: "items",
     initialState: {
+        searchText:'',
         collectionItems:[] as ItemType[],
+        lastItems:[] as ItemType[],
         item:{} as ItemType,
     },
     reducers: {
-        setCollectionImageUrl(state, action: PayloadAction<string>) {
+        setSearch(state, action: PayloadAction<string>) {
+            state.searchText=action.payload
         },
     },
     extraReducers: (builder) => {
@@ -111,6 +127,9 @@ export const slice = createSlice({
         })
         builder.addCase(editItemTC.fulfilled, (state, action) => {
             if (action.payload) state.item = action.payload
+        })
+        builder.addCase(getLastItemsTC.fulfilled, (state, action) => {
+            if (action.payload) state.lastItems = action.payload
         })
 
     }

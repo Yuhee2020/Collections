@@ -5,18 +5,21 @@ import {Dayjs} from "dayjs";
 
 export const itemsApi = {
     createItem(item: ItemType) {
-        return instance.post<ItemType, AxiosResponse<CollectionItemsResponseType>>
+        return instance.post<ItemType, AxiosResponse<GetItemsResponseType>>
         ('/items/createItem', item)
     },
     getCollectionItems(collectionId: string) {
-        return instance.get<CollectionItemsResponseType>(`/items/getCollectionItems/${collectionId}`)
+        return instance.get<GetItemsResponseType>(`/items/getCollectionItems/${collectionId}`)
     },
     getItem(itemId: string) {
         return instance.get<GetItemResponseType>(`/items/getItem/${itemId}`)
     },
+    getLastItems() {
+        return instance.get<GetItemsResponseType>(`/items/getLastItems`)
+    },
     deleteItems(itemsId: string[], collectionId: string) {
         return instance.put<{ itemsId: string[], collectionId: string },
-            AxiosResponse<CollectionItemsResponseType>>(`/items/deleteItems`, {
+            AxiosResponse<GetItemsResponseType>>(`/items/deleteItems`, {
             itemsId,
             collectionId
         })
@@ -28,9 +31,9 @@ export const itemsApi = {
 }
 
 
-type CollectionItemsResponseType = {
+type GetItemsResponseType = {
     message: string
-    collectionItems: ItemType[]
+    items: ItemType[]
 }
 
 type GetItemResponseType = {

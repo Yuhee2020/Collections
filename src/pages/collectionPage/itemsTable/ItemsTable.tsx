@@ -110,7 +110,6 @@ export const ItemsTable = ({collection}: PropsType) => {
             </Card>
             <Table
                 bordered
-                style={{margin: "20px"}}
                 rowSelection={{
                     type: "checkbox",
                     ...rowSelection,

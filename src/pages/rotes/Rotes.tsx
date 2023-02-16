@@ -1,6 +1,5 @@
 import React from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
-import {LastAdded} from "../lastAdded/LastAdded";
 import {Registration} from "../registration/Registration";
 import {BiggestCollections} from "../biggestCollections/BiggestCollections";
 import {AdminPage} from "../adminPage/AdminPage";
@@ -9,6 +8,7 @@ import {Error404} from "../error404/Error404";
 import {UserPage} from "../userPage/UserPage";
 import {CollectionPage} from "../collectionPage/CollectionPage";
 import {ItemPage} from "../itemPage/ItemPage";
+import {LastAddedItemsPage} from "../lastAddedItemsPage/LastAddedItemsPage";
 
 
 export const ROOT = '/'
@@ -29,7 +29,7 @@ export const ERROR_404 = '/404'
 const Routing = () => {
     return (
         <Routes>
-            <Route path={ROOT} element={<LastAdded/>}/>
+            <Route path={ROOT} element={<LastAddedItemsPage/>}/>
             <Route path={LOGIN} element={<Login/>}/>
             <Route path={REGISTRATION} element={<Registration/>}/>
             <Route path={BIGGEST_COLLECTIONS} element={<BiggestCollections/>}/>

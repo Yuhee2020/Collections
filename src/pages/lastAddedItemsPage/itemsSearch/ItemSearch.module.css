@@ -1,0 +1,15 @@
+.searchContainer {
+    width: 25%;
+    height: 300px;
+    position: sticky;
+    right: 0;
+    top:0;
+}
+
+.tagsContainer {
+    margin-top: 10px;
+}
+
+.tag {
+    margin: 4px;
+}

@@ -1,11 +1,11 @@
 
-.cardBox{
-    margin: 20px;
+.cardBox {
+    margin-bottom: 10px;
     max-width: 200px;
 
 }
 
-.toolbarContainer{
+.toolbarContainer {
     display: flex;
     justify-content: space-between;
 }

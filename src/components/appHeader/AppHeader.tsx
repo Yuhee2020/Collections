@@ -1,6 +1,5 @@
 import React from 'react';
-import {Button, Input, Select, Switch} from "antd";
-import {SearchOutlined} from '@ant-design/icons';
+import {Button, Select, Switch} from "antd";
 import s from "./AppHeader.module.css"
 import {Moon} from "./icons/Moon";
 import {Sun} from "./icons/Sun";
@@ -34,8 +33,6 @@ export const AppHeader = () => {
     return (
         <div className={s.headerContainer}>
             <BreadCrumbs/>
-            <Input prefix={<SearchOutlined className="site-form-item-icon"/>} placeholder="Search..."
-                   className={s.search}/>
             <div className={s.buttonsGroup}>
                 <Switch
                     onChange={handleSwitchChange}
