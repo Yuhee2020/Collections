@@ -18,10 +18,10 @@ export const UserPage = () => {
     }, [])
 
     return (
-        <div className={s.userPageContainer}>
-            <UserProfile user={user}/>
-            <UsersCollections userId={user?._id}/>
-        </div>
+            <div className={s.userPageContainer}>
+                <UserProfile user={user}/>
+                <UsersCollections userId={user?._id}/>
+            </div>
     );
 };
 

@@ -1,6 +1,6 @@
 import {Dayjs} from "dayjs";
 
-type FormikValuesType = {
+export type FormikValuesType = {
     author?: string
     collectionId?: string
     countryOfOrigin?: string
@@ -13,7 +13,6 @@ type FormikValuesType = {
     isAvailableForSale?: boolean
     isUniqueItem?: boolean
     itemCreationDate?: Date
-    likesCount?: number
     numberOfCopies?: number
     price?: number
     producer?: string

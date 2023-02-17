@@ -4,10 +4,12 @@ import {itemsApi, ItemType} from "../../api/itemsApi";
 import {createTagsTC} from "./tagsReducer";
 import {DataType} from "../../pages/collectionPage/itemsTable/ItemsTable";
 import {deleteObject, getStorage, ref} from "firebase/storage";
+import {StateType} from "./Store";
+import {FormikValuesType} from "../../utils/addItemFormValidation";
 
 
 export const createItemTC = createAsyncThunk("items/createItem",
-    async (params: ItemType, {dispatch}) => {
+    async (params: FormikValuesType, {dispatch}) => {
         dispatch(setLoading(true))
         try {
             const res = await itemsApi.createItem(params)
@@ -22,7 +24,7 @@ export const createItemTC = createAsyncThunk("items/createItem",
     })
 
 export const getCollectionItemsTC = createAsyncThunk("items/getCollectionItems",
-    async (params:string, {dispatch}) => {
+    async (params: string, {dispatch}) => {
         dispatch(setLoading(true))
         try {
             const res = await itemsApi.getCollectionItems(params)
@@ -35,7 +37,7 @@ export const getCollectionItemsTC = createAsyncThunk("items/getCollectionItems",
     })
 
 export const getItemTC = createAsyncThunk("items/getItem",
-    async (params:string, {dispatch}) => {
+    async (params: string, {dispatch}) => {
         dispatch(setLoading(true))
         try {
             const res = await itemsApi.getItem(params)
@@ -47,27 +49,28 @@ export const getItemTC = createAsyncThunk("items/getItem",
         }
     })
 
-export const getLastItemsTC = createAsyncThunk("items/getLastItems",
-    async (params, {dispatch}) => {
-        dispatch(setLoading(true))
+export const getItemsTC = createAsyncThunk("items/getItems",
+    async (params, {dispatch, getState}) => {
         try {
-            const res = await itemsApi.getLastItems()
+            const state = getState() as StateType
+            const searchText = state.items.searchText
+            const res = await itemsApi.getItems(searchText)
             return res.data.items
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
         } finally {
-            dispatch(setLoading(false))
+            dispatch(setItemsIsLoading(false))
         }
     })
 
 export const deleteItemsTC = createAsyncThunk("items/deleteItems",
-        async (params:{ items: DataType[], collectionId: string }, {dispatch}) => {
+    async (params: { items: DataType[], collectionId: string }, {dispatch}) => {
         dispatch(setLoading(true))
         try {
-            const res = await itemsApi.deleteItems(params.items.map(item=>item.itemId),params.collectionId)
+            const res = await itemsApi.deleteItems(params.items.map(item => item.itemId), params.collectionId)
             const storage = getStorage();
-            await params.items.forEach((item)=>{
-                if(item.image) {
+            await params.items.forEach((item) => {
+                if (item.image) {
                     const desertRef = ref(storage, item.image);
                     deleteObject(desertRef)
                 }
@@ -81,12 +84,12 @@ export const deleteItemsTC = createAsyncThunk("items/deleteItems",
     })
 
 export const editItemTC = createAsyncThunk("items/editItem",
-    async (params: { newItem:ItemType, oldImage:string | undefined }, {dispatch}) => {
+    async (params: { newItem: ItemType, oldImage: string | undefined }, {dispatch}) => {
         dispatch(setLoading(true))
         try {
             const res = await itemsApi.editItem(params.newItem)
             dispatch(getCollectionItemsTC(params.newItem.collectionId))
-            if(params.oldImage && params.oldImage !== params.newItem.image){
+            if (params.oldImage && params.oldImage !== params.newItem.image) {
                 const storage = getStorage();
                 const desertRef = ref(storage, params.oldImage);
                 await deleteObject(desertRef)
@@ -99,18 +102,49 @@ export const editItemTC = createAsyncThunk("items/editItem",
         }
     })
 
+
+export const likeItemTC = createAsyncThunk("items/likeItem",
+    async (params: ItemType, {dispatch, getState}) => {
+        try {
+            const state = getState() as StateType
+            const userId = state.auth.user?._id
+            if (userId && !params.usersIdWhoLiked.includes(userId)) {
+                const likedItem = {
+                    ...params, likesCount: params.likesCount + 1,
+                    usersIdWhoLiked: [...params.usersIdWhoLiked, userId]
+                }
+                const res = await itemsApi.editItem(likedItem)
+                return res.data.updatedItem
+            }
+            if (userId && params.usersIdWhoLiked?.includes(userId)) {
+                const likedItem = {
+                    ...params, likesCount: params.likesCount - 1,
+                    usersIdWhoLiked: params.usersIdWhoLiked.filter(id => id !== userId)
+                }
+                const res = await itemsApi.editItem(likedItem)
+                return res.data.updatedItem
+            }
+        } catch (err: any) {
+            dispatch(setAppError(err.response.data.message))
+        }
+    })
+
 export const slice = createSlice({
     name: "items",
     initialState: {
-        searchText:'',
-        collectionItems:[] as ItemType[],
-        lastItems:[] as ItemType[],
-        item:{} as ItemType,
+        itemsIsLoading: false,
+        searchText: '',
+        collectionItems: [] as ItemType[],
+        lastItems: [] as ItemType[],
+        item: {} as ItemType,
     },
     reducers: {
         setSearch(state, action: PayloadAction<string>) {
-            state.searchText=action.payload
+            state.searchText = action.payload
         },
+        setItemsIsLoading(state, action: PayloadAction<boolean>) {
+            state.itemsIsLoading = action.payload
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getCollectionItemsTC.fulfilled, (state, action) => {
@@ -128,12 +162,19 @@ export const slice = createSlice({
         builder.addCase(editItemTC.fulfilled, (state, action) => {
             if (action.payload) state.item = action.payload
         })
-        builder.addCase(getLastItemsTC.fulfilled, (state, action) => {
+        builder.addCase(getItemsTC.fulfilled, (state, action) => {
             if (action.payload) state.lastItems = action.payload
         })
+        builder.addCase(likeItemTC.fulfilled, (state, action) => {
+            if (action.payload) {
+                const index = state.lastItems.findIndex(item => item._id === action.payload?._id)
+                state.lastItems[index] = action.payload
+            }
+        })
+
 
     }
 })
 
 export const itemsReducer = slice.reducer
-export const {} = slice.actions
+export const {setSearch, setItemsIsLoading} = slice.actions

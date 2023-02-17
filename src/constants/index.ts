@@ -1,5 +1,8 @@
 export const DATE_FORMAT="DD-MMM-YYYY HH:mm:ss"
 
+export const MAX_COMMENT_LENGTH=1000
+export const COMMENT_AREA_ROWS=4
+
 export const COLLECTIONS_THEMES = [
     'Books', 'Alcohol', 'Coins', 'Paintings',
     'Stamps', 'Cars', 'Figurines', 'Watches',

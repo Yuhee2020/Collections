@@ -1,3 +1,10 @@
-.descriptions {
-    margin-top: 10px;
+.pageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.pageBox{
+    max-width:900px;
 }

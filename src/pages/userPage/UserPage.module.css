@@ -1,4 +1,5 @@
 .userPageContainer{
     display: flex;
+    position: relative;
 }
 

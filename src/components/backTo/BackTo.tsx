@@ -1,20 +1,18 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {Button} from "antd";
 import {ArrowLeftOutlined} from '@ant-design/icons';
 import s from "./BackTo.module.css"
 
-type PropsType = {
-    path: string
-    title: string
-}
-
-export const BackTo = ({path, title}: PropsType) => {
+export const BackTo = () => {
+    const navigate = useNavigate();
     return (
-        <Button className={s.backTo} icon={<ArrowLeftOutlined/>} type="text" size="small" >
-            <NavLink to={path}>
-                Back to {title}
-            </NavLink>
+        <Button className={s.backTo}
+                onClick={()=>navigate(-1)}
+                icon={<ArrowLeftOutlined/>}
+                type="text"
+                size="small" >
+                Back
         </Button>
     );
 };

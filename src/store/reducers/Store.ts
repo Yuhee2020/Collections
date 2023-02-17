@@ -8,6 +8,7 @@ import {usersReducer} from "./usersReducer";
 import {collectionsReducer} from "./collectionsReducer";
 import {itemsReducer} from "./itemsReducer";
 import {tagsReducer} from "./tagsReducer";
+import {commentsReducer} from "./commentsReducer";
 
 
 
@@ -18,6 +19,7 @@ export const rootReducer = combineReducers({
     collections:collectionsReducer,
     items:itemsReducer,
     tags:tagsReducer,
+    comments:commentsReducer,
 })
 
 export const store = configureStore({

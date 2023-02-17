@@ -1,0 +1,19 @@
+.listContainer {
+    width: 75%;
+    margin:0 10px 20px 0;
+}
+
+.itemContainer{
+    margin-bottom: 10px;
+}
+.itemContainer >div{
+    padding: 10px !important;
+}
+
+.descriptionContainer{
+    max-height: 70px;
+    overflow: hidden;
+}
+
+
+

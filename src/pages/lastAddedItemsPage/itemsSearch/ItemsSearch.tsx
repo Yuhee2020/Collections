@@ -1,25 +1,23 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
 import {Card, Tag} from "antd";
 import {getTagsTC} from "../../../store/reducers/tagsReducer";
 import Search from "antd/es/input/Search";
 import s from "./ItemSearch.module.css"
-import {useAppDebounce} from "../../../hooks";
-
-
+import {setItemsIsLoading, setSearch} from "../../../store/reducers/itemsReducer";
 
 
 export const ItemsSearch = () => {
     const dispatch = useAppDispatch()
     const tags = useAppSelector(state => state.tags.tags)
-    const [searchText, setSearchText]=useState<string>('')
-    const debouncedSearchText=useAppDebounce(searchText, 1000)
+    const {searchText,itemsIsLoading }=useAppSelector(state =>state.items)
     const handleTagClick = (tag:string) => {
-        setSearchText(tag)
-
+        dispatch(setSearch(tag))
+        dispatch(setItemsIsLoading(true))
     }
     const handleSearchChange=(e:ChangeEvent<HTMLInputElement>)=>{
-        setSearchText(e.currentTarget.value)
+        dispatch(setSearch(e.currentTarget.value))
+        dispatch(setItemsIsLoading(true))
     }
     useEffect(() => {
         dispatch(getTagsTC())
@@ -28,6 +26,7 @@ export const ItemsSearch = () => {
     return (
         <Card title="Items search" className={s.searchContainer}>
             <Search
+                loading={itemsIsLoading}
                 placeholder="search items"
                 value={searchText}
                 onChange={handleSearchChange}

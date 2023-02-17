@@ -1,10 +1,11 @@
 import {instance} from "./instance";
 import {AxiosResponse} from "axios";
 import {Dayjs} from "dayjs";
+import {FormikValuesType} from "../utils/addItemFormValidation";
 
 
 export const itemsApi = {
-    createItem(item: ItemType) {
+    createItem(item: FormikValuesType) {
         return instance.post<ItemType, AxiosResponse<GetItemsResponseType>>
         ('/items/createItem', item)
     },
@@ -14,8 +15,8 @@ export const itemsApi = {
     getItem(itemId: string) {
         return instance.get<GetItemResponseType>(`/items/getItem/${itemId}`)
     },
-    getLastItems() {
-        return instance.get<GetItemsResponseType>(`/items/getLastItems`)
+    getItems(text:string) {
+        return instance.get<GetItemsResponseType>(`/items/getLastItems?text=${text}`)
     },
     deleteItems(itemsId: string[], collectionId: string) {
         return instance.put<{ itemsId: string[], collectionId: string },
@@ -51,8 +52,8 @@ export type ItemType = {
     collectionId: string
     userId: string
     title?: string
-    likesCount?: number
-    usersIdWhoLiked?: string[]
+    likesCount: number
+    usersIdWhoLiked: string[]
     tags?: string[]
     image?: string
     itemCreationDate?: Date
