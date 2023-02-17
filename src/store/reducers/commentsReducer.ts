@@ -41,7 +41,6 @@ export const slice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(addCommentTC.fulfilled, (state, action) => {
-            debugger
             if (action.payload) state.comments = action.payload
         })
         builder.addCase(getCommentsTC.fulfilled, (state, action) => {

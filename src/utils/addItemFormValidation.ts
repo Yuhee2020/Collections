@@ -21,6 +21,7 @@ export type FormikValuesType = {
     title?: string
     uniqueCharacteristics?: string
     userId?: string
+    collectionName?:string
     usersIdWhoLiked?: string[]
     weight?: number
     __v?: string

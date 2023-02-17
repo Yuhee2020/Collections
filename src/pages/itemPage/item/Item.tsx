@@ -38,6 +38,7 @@ const Item = () => {
         <Card>
             <div className={s.cardHeader}>
                 <Image
+                    width={250}
                     className={s.image}
                     src={image ? image : noImage}/>
                 <div>

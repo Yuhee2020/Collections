@@ -24,7 +24,7 @@ export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
 
     const dispatch = useAppDispatch()
     const tags = useAppSelector(state => state.tags.tags)
-    const {_id, userId, itemsFields} = collection
+    const {_id, userId, itemsFields, title} = collection
 
     const handleDescriptionChange = (e: string | undefined) => {
         formik.setFieldValue("description", e)
@@ -64,7 +64,7 @@ export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
                 if (item)
                     dispatch(editItemTC({newItem:{...item, ...values}, oldImage:item.image}))
             } else if (_id && userId) {
-                dispatch(createItemTC({...values, collectionId: _id, userId}))
+                dispatch(createItemTC({...values, collectionId: _id, userId, collectionName:title }))
             }
             formik.resetForm()
             showModal()

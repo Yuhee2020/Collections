@@ -49,10 +49,12 @@ type EditItemResponseType = {
 
 export type ItemType = {
     _id?: string
+    collectionName:string
     collectionId: string
     userId: string
     title?: string
     likesCount: number
+    commentsCount:number
     usersIdWhoLiked: string[]
     tags?: string[]
     image?: string

@@ -23,8 +23,8 @@ export const deleteUsersTC = createAsyncThunk("users/delete", async (params:stri
     dispatch(setLoading(true))
     try {
         const res = await usersApi.deleteUsers(params)
-        dispatch(getUsersTC())
         dispatch(setSuccessMessage(res.data.message))
+        return res.data.users.reverse().filter(user=>user.email!==mainAdminMail)
     } catch (err:any) {
         dispatch(setAppError(err.response.data.message))
     } finally {
@@ -36,8 +36,8 @@ export const blockUsersTC = createAsyncThunk("users/block", async (params:string
     dispatch(setLoading(true))
     try {
         const res = await usersApi.blockUsers(params)
-        dispatch(getUsersTC())
         dispatch(setSuccessMessage(res.data.message))
+        return res.data.users.reverse().filter(user=>user.email!==mainAdminMail)
     } catch (err:any) {
         dispatch(setAppError(err.response.data.message))
     } finally {
@@ -89,6 +89,11 @@ export const slice = createSlice({
                if(action.payload) {
                    state.users = action.payload
                }
+        })
+        builder.addCase(deleteUsersTC.fulfilled,(state, action)=>{
+            if(action.payload) {
+                state.users = action.payload
+            }
         })
     }
 })

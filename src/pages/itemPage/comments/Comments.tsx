@@ -21,7 +21,7 @@ export const Comments = ({itemId}:PropsType) => {
     return (
         <div className={s.comments}>
             {comments.map(comment =>
-               <Comment comment={comment}/>
+               <Comment key={comment._id}comment={comment}/>
             )}
         </div>
 

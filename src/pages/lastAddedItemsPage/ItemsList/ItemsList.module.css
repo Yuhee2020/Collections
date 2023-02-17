@@ -15,5 +15,14 @@
     overflow: hidden;
 }
 
+.tagsBox{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.collection{
+    font-size: 12px;
+}
+
 
 
