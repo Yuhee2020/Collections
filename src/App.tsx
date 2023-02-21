@@ -12,6 +12,7 @@ import {AppMessagesBar} from "./components/appMessagesBar/AppMessagesBar";
 function App() {
 
     const dispatch = useAppDispatch()
+
     const authInProgress = useAppSelector(state => state.app.authInProgress)
     console.log("app")
     useEffect(() => {
