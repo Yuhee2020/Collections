@@ -3,11 +3,13 @@ import {useFormik} from 'formik';
 import {Button, Card, Form, Input} from "antd";
 import {LockOutlined, UserOutlined} from '@ant-design/icons';
 import s from "./Login.module.css"
-import {Navigate, useNavigate} from "react-router-dom";
+import {Navigate, useLocation, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {validate} from "../../utils/validation";
 import {loginTC} from "../../store/reducers/authReducer";
 import {REGISTRATION, ROOT} from "../rotes/Rotes";
+import {getGoogleUrl} from "../../utils/getGoogleUrl";
+import { GoogleOutlined } from '@ant-design/icons';
 
 
 export const Login = () => {
@@ -18,6 +20,8 @@ export const Login = () => {
     const handleRegistrationClick = () => {
         navigate(REGISTRATION)
     }
+    const location = useLocation();
+    let from = ((location.state as any)?.from?.pathname as string) || '/';
 
     const formik = useFormik({
         initialValues: {
@@ -69,8 +73,11 @@ export const Login = () => {
                     </Form.Item>
                     <div className={s.registrationBox}>
                         <h6 style={{color: "gray"}}>If you don't have an account, please register</h6>
-                        <Button size="middle" onClick={handleRegistrationClick}>Registration</Button></div>
+                        <Button size="middle" onClick={handleRegistrationClick}>Registration</Button>
+                        <Button size="middle" style={{marginTop:"10px"}} href={getGoogleUrl(from)}><GoogleOutlined />google login</Button></div>
+
                 </Form>
+
             </Card>
         </div>
     )

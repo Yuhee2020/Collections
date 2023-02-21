@@ -2,6 +2,7 @@ import {instance} from "./instance";
 import {UserType} from "./authApi";
 import {AxiosResponse} from "axios";
 
+
 export const usersApi = {
     getUsers() {
         return instance.get<UserType[]>('/users/getUsers')
@@ -9,18 +10,21 @@ export const usersApi = {
     deleteUsers(usersId: string[]) {
         return instance.put <{usersId: string[]}, AxiosResponse<UserResponseType>>('/users/delete', usersId)
     },
-    blockUsers(usersId: string[]) {
-        return instance.put<{usersId: string[]}, AxiosResponse<UserResponseType>>('/users/block', usersId)
+    updateUsers(updatedUsers:UpdatedUserType[]) {
+        return instance.put<UpdatedUserType[], AxiosResponse<UserResponseType>>('/users/update', updatedUsers)
     },
-    unlockUsers(usersId: string[]) {
-        return instance.put<{usersId: string[]}, AxiosResponse<UserResponseType>>('/users/unlock', usersId)
-    },
-    changeUsersRole(usersId: string[]) {
-        return instance.put<{usersId: string[]}, AxiosResponse<UserResponseType>>('/users/changeRole', usersId)
-    }
+}
+
+
+
+export  type UpdatedUserType={
+    id:string
+    isBlocked?:boolean
+    role?:string
 }
 
 type UserResponseType = {
     message: string
     users: UserType[]
 }
+

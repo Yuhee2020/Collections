@@ -8,7 +8,7 @@ import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
 import ReactMarkdown from 'react-markdown'
 import s from "./UsersCollections.module.css"
 import {EditCollectionModal} from "../editCollectionModal/EditCollectionModal";
-import {deleteUserCollectionTC, getUserCollectionsTC} from "../../../store/reducers/collectionsReducer";
+import {deleteCollectionTC, getCollectionsTC} from "../../../store/reducers/collectionsReducer";
 
 
 type PropsType = {
@@ -18,13 +18,13 @@ type PropsType = {
 export const UsersCollections = ({userId}: PropsType) => {
 
     const dispatch = useAppDispatch()
-    const collections = useAppSelector(state => state.collections.userCollections)
+    const collections = useAppSelector(state => state.collections.collections)
     const deleteCollection = (collectionId: string) => {
-        userId && dispatch(deleteUserCollectionTC({collectionId, userId}))
+        userId && dispatch(deleteCollectionTC({collectionId, userId}))
     }
 
     useEffect(() => {
-        userId && dispatch(getUserCollectionsTC(userId))
+        dispatch(getCollectionsTC(userId))
     }, [userId])
 
     return (

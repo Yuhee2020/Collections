@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Card, Tooltip} from "antd";
 import {DeleteOutlined, LockOutlined, UnlockOutlined, UserOutlined} from "@ant-design/icons";
-import {blockUsersTC, changeUsersRoleTC, deleteUsersTC, unlockUsersTC} from "../../../store/reducers/usersReducer";
+import {changeUsersRoleTC, deleteUsersTC, updateUsersTC} from "../../../store/reducers/usersReducer";
 import {useAppDispatch} from "../../../store/reducers/Store";
 import s from "./Toolbar.module.css"
 
@@ -17,10 +17,10 @@ export const Toolbar = ({usersId}: PropsType) => {
         dispatch(deleteUsersTC(usersId))
     }
     const handleBlockClick = () => {
-        dispatch(blockUsersTC(usersId))
+        dispatch(updateUsersTC(usersId.map(id=>({id,isBlocked:true}))))
     }
     const handleUnlockClick = () => {
-        dispatch(unlockUsersTC(usersId))
+        dispatch(updateUsersTC(usersId.map(id=>({id,isBlocked:false}))))
     }
     const handleChangeRoleClick = () => {
         dispatch(changeUsersRoleTC(usersId))

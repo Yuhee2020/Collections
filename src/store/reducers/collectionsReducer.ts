@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {setAppError, setLoading, setSuccessMessage} from "./appReducer";
 import {collectionsApi, CollectionType} from "../../api/collectionsApi";
 import {deleteObject, getStorage, ref} from "firebase/storage";
+import {StateType} from "./Store";
 
 
 export const createCollectionTC = createAsyncThunk("collection/createCollection",
@@ -9,8 +10,8 @@ export const createCollectionTC = createAsyncThunk("collection/createCollection"
         dispatch(setLoading(true))
         try {
             const res = await collectionsApi.createCollection(params)
-            params.userId && dispatch(getUserCollectionsTC(params.userId))
             dispatch(setSuccessMessage(res.data.message))
+            return res.data.collections.reverse()
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
         } finally {
@@ -18,30 +19,34 @@ export const createCollectionTC = createAsyncThunk("collection/createCollection"
         }
     })
 
-export const getUserCollectionsTC = createAsyncThunk("collections/getUserCollections",
-    async (params: string, {dispatch}) => {
-        dispatch(setLoading(true))
+export const getCollectionsTC = createAsyncThunk("collections/getUserCollections",
+    async (params: string | undefined, {dispatch}) => {
+        dispatch(setCollectionsIsLoading(true))
         try {
-            const res = await collectionsApi.getUserCollections(params)
-            return res.data.userCollections
+            const res =await collectionsApi.getCollections(params)
+           if ( params) {
+               return res.data.collections.reverse()
+           }
+           // @ts-ignore
+            return res.data.collections.sort((a,b)=>b.itemsCount-a.itemsCount)
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
         } finally {
-            dispatch(setLoading(false))
+            dispatch(setCollectionsIsLoading(false))
         }
     })
 
-export const deleteUserCollectionTC = createAsyncThunk("collections/deleteCollection",
+export const deleteCollectionTC = createAsyncThunk("collections/deleteCollection",
     async (params: { collectionId: string, userId: string }, {dispatch}) => {
         dispatch(setLoading(true))
         try {
             const res = await collectionsApi.deleteCollection(params.collectionId)
             const storage = getStorage();
-            if(res.data.deletedCollection.image) {
+            if (res.data.deletedCollection.image) {
                 const desertRef = ref(storage, res.data.deletedCollection.image);
                 await deleteObject(desertRef)
             }
-            dispatch(getUserCollectionsTC(params.userId))
+            dispatch(getCollectionsTC(params.userId))
             dispatch(setCollection({}))
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
@@ -51,17 +56,21 @@ export const deleteUserCollectionTC = createAsyncThunk("collections/deleteCollec
     })
 
 export const editCollectionTC = createAsyncThunk("collections/editCollection",
-    async (params: { collection:CollectionType, oldImage?:string }, {dispatch}) => {
+    async (params: { collection: CollectionType, oldImage?: string }, {dispatch, getState}) => {
         dispatch(setLoading(true))
         try {
-            if(params.oldImage && params.oldImage !== params.collection.image){
+            const state = getState() as StateType
+            const collections = state.collections.collections
+
+            if (params.oldImage && params.oldImage !== params.collection.image) {
                 const storage = getStorage();
                 const desertRef = ref(storage, params.oldImage);
                 await deleteObject(desertRef)
             }
             const res = await collectionsApi.editUserCollections(params.collection)
             dispatch(setCollection(res.data.updatedCollection))
-            params.collection.userId && dispatch(getUserCollectionsTC(params.collection.userId))
+            dispatch(setCollections(collections.map(coll=>coll._id===params.collection._id?
+                {...coll,...res.data.updatedCollection} :coll)))
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
         } finally {
@@ -85,27 +94,34 @@ export const getCollectionTC = createAsyncThunk("collections/getCollection",
 export const slice = createSlice({
     name: "collections",
     initialState: {
+        collectionsIsLoading:false,
         collectionImageUrl: "",
-        userCollections: [] as CollectionType[],
-        collection:{} as CollectionType
+        collections: [] as CollectionType[],
+        collection: {} as CollectionType
     },
     reducers: {
-        setCollectionImageUrl(state, action: PayloadAction<string>) {
-            state.collectionImageUrl = action.payload
-        },
         setCollection(state, action: PayloadAction<CollectionType>) {
             state.collection = action.payload
+        },
+        setCollections(state, action: PayloadAction<CollectionType[]>) {
+            state.collections = action.payload
+        },
+        setCollectionsIsLoading(state, action: PayloadAction<boolean>) {
+            state.collectionsIsLoading = action.payload
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getUserCollectionsTC.fulfilled, (state, action) => {
-            if (action.payload) state.userCollections = action.payload
+        builder.addCase(getCollectionsTC.fulfilled, (state, action) => {
+            if (action.payload) state.collections = action.payload
         })
         builder.addCase(getCollectionTC.fulfilled, (state, action) => {
             if (action.payload) state.collection = action.payload
+        })
+        builder.addCase(createCollectionTC.fulfilled, (state, action) => {
+            if (action.payload) state.collections = action.payload
         })
     }
 })
 
 export const collectionsReducer = slice.reducer
-export const {setCollection} = slice.actions
+export const {setCollection, setCollections,setCollectionsIsLoading} = slice.actions

@@ -9,6 +9,8 @@ import {UserPage} from "../userPage/UserPage";
 import {CollectionPage} from "../collectionPage/CollectionPage";
 import {ItemPage} from "../itemPage/ItemPage";
 import {LastAddedItemsPage} from "../lastAddedItemsPage/LastAddedItemsPage";
+import {CollectionItems} from "../collectionItems/CollectionItems";
+import {GoogleAuth} from "../googleAuth/googleAuth";
 
 
 export const ROOT = '/'
@@ -22,11 +24,15 @@ export const COLLECTION_PAGE = '/collection_page/:collectionId'
 export const COLLECTION = '/collection_page'
 export const ITEM_PAGE = '/item_page/:itemId'
 export const ITEM = '/item_page'
+export const COLLECTION_ITEMS = '/collection_items'
+export const COLLECTION_ITEMS_PAGE = '/collection_items/:collectionId'
 export const ADMIN_PAGE = '/admin_page'
+export const GOOGLE_AUTH = '/googleAuth'
 export const ERROR_404 = '/404'
 
 
 const Routing = () => {
+
     return (
         <Routes>
             <Route path={ROOT} element={<LastAddedItemsPage/>}/>
@@ -37,7 +43,9 @@ const Routing = () => {
             <Route path={USER_PROFILE_PAGE} element={<UserPage/>}/>
             <Route path={ADMIN_PAGE} element={<AdminPage/>}/>
             <Route path={COLLECTION_PAGE} element={<CollectionPage/>}/>
+            <Route path={COLLECTION_ITEMS_PAGE} element={<CollectionItems/>}/>
             <Route path={ITEM_PAGE} element={<ItemPage/>}/>
+            <Route path={GOOGLE_AUTH} element={<GoogleAuth/>}/>
             <Route path={ERROR_404} element={<Error404/>}/>
             <Route path="/*" element={<Navigate to={"/404"}/>}/>
         </Routes>

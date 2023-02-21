@@ -18,17 +18,19 @@ export const ItemPage = () => {
     }, [])
 
     return (
-        <div className={s.pageContainer}>
-            <div className={s.pageBox}>
-                <BackTo/>
-                <Item/>
-                {isLogin &&
-                    <>
-                        <CommentsCreator itemId={itemId}/>
-                        <Comments itemId={itemId}/>
-                    </>}
+        <>
+            <BackTo/>
+            <div className={s.pageContainer}>
+                <div className={s.pageBox}>
+                    <Item/>
+                    {isLogin &&
+                        <>
+                            <CommentsCreator itemId={itemId}/>
+                            <Comments itemId={itemId}/>
+                        </>}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

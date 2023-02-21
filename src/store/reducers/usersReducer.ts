@@ -1,7 +1,8 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {setAppError, setLoading, setSuccessMessage} from "./appReducer";
 import {UserType} from "../../api/authApi";
-import {usersApi} from "../../api/usersApi";
+import {UpdatedUserType, usersApi} from "../../api/usersApi";
+import {StateType} from "./Store";
 
 
 const mainAdminMail=process.env.REACT_APP_MAIN_ADMIN_MAIL
@@ -32,10 +33,10 @@ export const deleteUsersTC = createAsyncThunk("users/delete", async (params:stri
     }
 })
 
-export const blockUsersTC = createAsyncThunk("users/block", async (params:string[], {dispatch}) => {
+export const updateUsersTC = createAsyncThunk("users/update", async (params:UpdatedUserType[], {dispatch}) => {
     dispatch(setLoading(true))
     try {
-        const res = await usersApi.blockUsers(params)
+        const res = await usersApi.updateUsers(params)
         dispatch(setSuccessMessage(res.data.message))
         return res.data.users.reverse().filter(user=>user.email!==mainAdminMail)
     } catch (err:any) {
@@ -45,25 +46,16 @@ export const blockUsersTC = createAsyncThunk("users/block", async (params:string
     }
 })
 
-export const unlockUsersTC = createAsyncThunk("users/unlock", async (params:string[], {dispatch}) => {
+export const changeUsersRoleTC = createAsyncThunk("users/changeUsersRole", async (params:string[], {dispatch,getState}) => {
     dispatch(setLoading(true))
     try {
-        const res = await usersApi.unlockUsers(params)
-        dispatch(getUsersTC())
+        const state = getState() as StateType
+        const users=state.users.users
+        const updatedUsers=users.filter(user=>params.includes(user._id))
+        const updatedProperties=updatedUsers.map(user=>({id:user._id,role:user.role==="admin"? "user" : "admin"}))
+        const res = await usersApi.updateUsers(updatedProperties)
         dispatch(setSuccessMessage(res.data.message))
-    } catch (err:any) {
-        dispatch(setAppError(err.response.data.message))
-    } finally {
-        dispatch(setLoading(false))
-    }
-})
-
-export const changeUsersRoleTC = createAsyncThunk("users/changeUsersRole", async (params:string[], {dispatch}) => {
-    dispatch(setLoading(true))
-    try {
-        const res = await usersApi.changeUsersRole(params)
-        dispatch(getUsersTC())
-        dispatch(setSuccessMessage(res.data.message))
+        return res.data.users.reverse().filter(user=>user.email!==mainAdminMail)
     } catch (err:any) {
         dispatch(setAppError(err.response.data.message))
     } finally {
@@ -91,6 +83,16 @@ export const slice = createSlice({
                }
         })
         builder.addCase(deleteUsersTC.fulfilled,(state, action)=>{
+            if(action.payload) {
+                state.users = action.payload
+            }
+        })
+        builder.addCase(updateUsersTC.fulfilled,(state, action)=>{
+            if(action.payload) {
+                state.users = action.payload
+            }
+        })
+        builder.addCase(changeUsersRoleTC.fulfilled,(state, action)=>{
             if(action.payload) {
                 state.users = action.payload
             }

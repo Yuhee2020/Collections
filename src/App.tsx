@@ -13,11 +13,13 @@ function App() {
 
     const dispatch = useAppDispatch()
     const authInProgress = useAppSelector(state => state.app.authInProgress)
-
+    console.log("app")
     useEffect(() => {
         dispatch(getThemeTC())
         localStorage.getItem('token') && dispatch(authTC())
     }, [])
+
+
 
     if (authInProgress) {
         return <div>Loading</div>

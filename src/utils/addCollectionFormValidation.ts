@@ -1,4 +1,4 @@
-type FormikValuesType = {
+export type FormikValuesType = {
     theme?: string
     title?: string
     description?: string

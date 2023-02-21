@@ -9,6 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {LOGIN} from "../../pages/rotes/Rotes";
 import {logoutTC} from "../../store/reducers/authReducer";
 import {BreadCrumbs} from "./breadCrumbs/BreadCrumbs";
+import {AppSearch} from "./appSearch/AppSearch";
 
 
 export const AppHeader = () => {
@@ -33,6 +34,7 @@ export const AppHeader = () => {
     return (
         <div className={s.headerContainer}>
             <BreadCrumbs/>
+            <div className={s.search}><AppSearch/></div>
             <div className={s.buttonsGroup}>
                 <Switch
                     onChange={handleSwitchChange}

@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {USER_PAGE} from "../../rotes/Rotes";
 import dayjs from "dayjs";
 import ReactMarkdown from "react-markdown";
-import {deleteUserCollectionTC} from "../../../store/reducers/collectionsReducer";
+import {deleteCollectionTC} from "../../../store/reducers/collectionsReducer";
 import {ItemModal} from "./addItemModal/ItemModal";
 
 type PropsType = {
@@ -22,7 +22,7 @@ export const CollectionCard = ({collection}: PropsType) => {
     const navigate = useNavigate()
     const deleteCollection = (collectionId: string) => {
         navigate(USER_PAGE)
-        collection.userId && dispatch(deleteUserCollectionTC({collectionId, userId: collection.userId}))
+        collection.userId && dispatch(deleteCollectionTC({collectionId, userId: collection.userId}))
     }
 
     return (

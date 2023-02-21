@@ -9,8 +9,8 @@ export const collectionsApi = {
     deleteCollection(collectionId: string) {
         return instance.delete<DeleteCollectionResponseType>(`/collections/deleteCollection/${collectionId}`)
     },
-    getUserCollections(usersId: string) {
-        return instance.get<GetUserCollectionsResponseType>(`/collections/getUserCollections/${usersId}`)
+    getCollections(userId?: string) {
+        return instance.get<GetCollectionsResponseType>(`/collections/getCollections?userId=${userId}`)
     },
     getCollection(collectionId: string) {
         return instance.get<CollectionType>(`/collections/getCollection/${collectionId}`)
@@ -34,12 +34,12 @@ export type CollectionType = {
 
 export type CreateCollectionResponseType = {
     message: string
-    newCollection: CollectionType
+    collections: CollectionType[]
 }
 
-export type GetUserCollectionsResponseType={
+export type GetCollectionsResponseType={
     message: string
-    userCollections: CollectionType[]
+    collections: CollectionType[]
 }
 
 export type DeleteCollectionResponseType={
