@@ -21,7 +21,6 @@ function App() {
     }, [])
 
 
-
     if (authInProgress) {
         return <div>Loading</div>
     }
