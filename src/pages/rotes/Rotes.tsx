@@ -10,7 +10,8 @@ import {CollectionPage} from "../collectionPage/CollectionPage";
 import {ItemPage} from "../itemPage/ItemPage";
 import {LastAddedItemsPage} from "../lastAddedItemsPage/LastAddedItemsPage";
 import {CollectionItems} from "../collectionItems/CollectionItems";
-import {GoogleAuth} from "../googleAuth/googleAuth";
+import {SocialAuth} from "../socialAuth/socialAuth";
+
 
 
 export const ROOT = '/'
@@ -27,7 +28,7 @@ export const ITEM = '/item_page'
 export const COLLECTION_ITEMS = '/collection_items'
 export const COLLECTION_ITEMS_PAGE = '/collection_items/:collectionId'
 export const ADMIN_PAGE = '/admin_page'
-export const GOOGLE_AUTH = '/googleAuth'
+export const SOCIAL_AUTH = '/socialAuth'
 export const ERROR_404 = '/404'
 
 
@@ -45,7 +46,7 @@ const Routing = () => {
             <Route path={COLLECTION_PAGE} element={<CollectionPage/>}/>
             <Route path={COLLECTION_ITEMS_PAGE} element={<CollectionItems/>}/>
             <Route path={ITEM_PAGE} element={<ItemPage/>}/>
-            <Route path={GOOGLE_AUTH} element={<GoogleAuth/>}/>
+            <Route path={SOCIAL_AUTH} element={<SocialAuth/>}/>
             <Route path={ERROR_404} element={<Error404/>}/>
             <Route path="/*" element={<Navigate to={"/404"}/>}/>
         </Routes>

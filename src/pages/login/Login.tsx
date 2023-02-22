@@ -9,7 +9,8 @@ import {validate} from "../../utils/validation";
 import {loginTC} from "../../store/reducers/authReducer";
 import {REGISTRATION, ROOT} from "../rotes/Rotes";
 import {getGoogleUrl} from "../../utils/getGoogleUrl";
-import { GoogleOutlined } from '@ant-design/icons';
+import { GoogleOutlined, GithubOutlined } from '@ant-design/icons';
+import {getGitHubUrl} from "../../utils/getGithubUrl";
 
 
 export const Login = () => {
@@ -70,14 +71,18 @@ export const Login = () => {
                         <Button type="primary"  htmlType="submit" className={s.loginFormButton}>
                             Login
                         </Button>
+                        <div className={s.registrationBox}>
+                            <div><Button size="middle" type="text" style={{marginTop: "10px"}}
+                                         href={getGoogleUrl(from)}><GoogleOutlined/>Google</Button>
+                                <Button size="middle" type="text" style={{marginTop: "10px"}}
+                                        href={getGitHubUrl(from)}><GithubOutlined/>GitHub</Button>
+                            </div>
+                            <h6 style={{color: "gray"}}>If you don't have an account, please register</h6>
+                            <Button size="middle" onClick={handleRegistrationClick}>Registration</Button>
+                        </div>
                     </Form.Item>
-                    <div className={s.registrationBox}>
-                        <h6 style={{color: "gray"}}>If you don't have an account, please register</h6>
-                        <Button size="middle" onClick={handleRegistrationClick}>Registration</Button>
-                        <Button size="middle" style={{marginTop:"10px"}} href={getGoogleUrl(from)}><GoogleOutlined />google login</Button></div>
 
                 </Form>
-
             </Card>
         </div>
     )

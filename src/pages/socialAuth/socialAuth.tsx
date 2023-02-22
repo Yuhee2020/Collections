@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {ROOT} from "../rotes/Rotes";
 import {Navigate} from "react-router-dom";
 
-export const GoogleAuth = () => {
+export const SocialAuth = () => {
     const dispatch =useAppDispatch()
     const isLogin=useAppSelector(state=>state.auth.isLogin)
     useEffect(()=>{
