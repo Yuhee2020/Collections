@@ -6,20 +6,22 @@ import {COMMENT_AREA_ROWS, MAX_COMMENT_LENGTH} from "../../../constants";
 import {CommentOutlined} from "@ant-design/icons";
 import {useAppDispatch} from "../../../store/reducers/Store";
 import {addCommentTC} from "../../../store/reducers/commentsReducer";
+import {useTranslation} from "react-i18next";
 
-type PropType={
-    itemId?:string
+type PropType = {
+    itemId?: string
 }
 
-export const CommentsCreator = ({itemId}:PropType) => {
+export const CommentsCreator = ({itemId}: PropType) => {
 
-    const dispatch=useAppDispatch()
-    const[text, setText]=useState('')
-    const handleTextareaChange=(e:ChangeEvent<HTMLTextAreaElement>)=>{
+    const dispatch = useAppDispatch()
+    const {t} = useTranslation();
+    const [text, setText] = useState('')
+    const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.currentTarget.value)
     }
-    const  handleSendClick=()=>{
-        text.trim() && itemId && dispatch(addCommentTC({text,itemId}))
+    const handleSendClick = () => {
+        text.trim() && itemId && dispatch(addCommentTC({text, itemId}))
         setText("")
     }
 
@@ -27,11 +29,12 @@ export const CommentsCreator = ({itemId}:PropType) => {
     return (
         <div className={s.commentsContainer}>
             <Card
-                title={<div><CommentOutlined/> add your comment</div>}
+                title={<div><CommentOutlined/> {t("addComment")}</div>}
                 className={s.addCommentCard}>
                 <TextArea className={s.textArea}
                           onChange={handleTextareaChange}
-                          placeholder="add your comment"
+                    // @ts-ignore
+                          placeholder={t("addComment")}
                           allowClear
                           showCount
                           value={text}
@@ -39,7 +42,7 @@ export const CommentsCreator = ({itemId}:PropType) => {
                           maxLength={MAX_COMMENT_LENGTH}
 
                 />
-                <Button disabled={!text} onClick={handleSendClick}>Send</Button>
+                <Button disabled={!text} onClick={handleSendClick}>{t("send")}</Button>
             </Card>
         </div>
     );

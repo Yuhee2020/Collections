@@ -4,11 +4,13 @@ import {Card, Tag} from "antd";
 import {getTagsTC} from "../../../store/reducers/tagsReducer";
 import s from "./ItemSearch.module.css"
 import {setItemsIsLoading, setSearch} from "../../../store/reducers/itemsReducer";
-import {AppSearch} from "../../../components/appHeader/appSearch/AppSearch";
+import {AppSearch} from "../../../components/appSearch/AppSearch";
+import {useTranslation} from "react-i18next";
 
 
 export const ItemsSearch = () => {
     const dispatch = useAppDispatch()
+    const {t} = useTranslation();
     const tags = useAppSelector(state => state.tags.tags)
 
     const handleTagClick = (tag: string) => {
@@ -21,7 +23,7 @@ export const ItemsSearch = () => {
     }, [])
 
     return (
-        <Card title="Items search" className={s.searchContainer}>
+        <Card title={t("itemsSearch")} className={s.searchContainer}>
             <AppSearch/>
             <div className={s.tagsContainer}>
                 {tags.map(tag => {
@@ -36,8 +38,6 @@ export const ItemsSearch = () => {
                 })}
             </div>
         </Card>
-
-
     );
 };
 

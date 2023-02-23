@@ -1,4 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import i18n from "../../i18n";
 
 
 export const setThemeTC = createAsyncThunk("app/setTheme", (params: ThemeType, {dispatch}) => {
@@ -7,14 +8,28 @@ export const setThemeTC = createAsyncThunk("app/setTheme", (params: ThemeType, {
 })
 
 export const getThemeTC = createAsyncThunk("app/getTheme", (params, {dispatch}) => {
-    const theme=localStorage.getItem("theme") as ThemeType
-    dispatch(setTheme(theme))
+    const theme = localStorage.getItem("theme") as ThemeType
+    theme && dispatch(setTheme(theme))
+})
+
+export const getLanguageTC = createAsyncThunk("app/getLanguage", async (params, {dispatch}) => {
+    const language = localStorage.getItem("language") as LanguageType
+    language && dispatch(setLanguage(language))
+    await i18n.changeLanguage(language)
+})
+
+export const setLanguageTC = createAsyncThunk("app/setLanguage", async (params:LanguageType, {dispatch}) => {
+    localStorage.setItem("language", params)
+    console.log(params)
+    await i18n.changeLanguage(params)
+    dispatch(setLanguage(params))
 })
 
 
 export const slice = createSlice({
     name: "app",
     initialState: {
+        language: "eng" as LanguageType,
         theme: "light" as ThemeType,
         isLoading: false,
         authInProgress: false,
@@ -37,10 +52,21 @@ export const slice = createSlice({
         setTheme(state, action: PayloadAction<ThemeType>) {
             state.theme = action.payload
         },
+        setLanguage(state, action: PayloadAction<LanguageType>) {
+            state.language = action.payload
+        },
     }
 })
 
 export const appReducer = slice.reducer
-export const {setLoading, setAppError, setSuccessMessage, setAuthInProgress, setTheme} = slice.actions
+export const {
+    setLoading,
+    setAppError,
+    setSuccessMessage,
+    setAuthInProgress,
+    setTheme,
+    setLanguage
+} = slice.actions
 
 export type ThemeType = "light" | "dark"
+export type LanguageType = "eng" | "ru"

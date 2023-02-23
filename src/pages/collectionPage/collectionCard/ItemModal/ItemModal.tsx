@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import {Button, Modal} from "antd";
 import {AppstoreAddOutlined, EditOutlined} from "@ant-design/icons";
 import {CollectionType} from "../../../../api/collectionsApi";
-import {ItemForm} from "./itemForm/ItemForm"
 import {ItemType} from "../../../../api/itemsApi";
+import {useTranslation} from "react-i18next";
+import {ItemForm} from "./itemForm/ItemForm";
+
 
 
 type PropsType = {
@@ -16,6 +18,7 @@ type PropsType = {
 export const ItemModal = ({collection, edit, disabled, item}: PropsType) => {
 
     const [open, setOpen] = useState(false);
+    const {t} = useTranslation();
     const showModal = () => {
         setOpen(!open)
     }
@@ -24,12 +27,12 @@ export const ItemModal = ({collection, edit, disabled, item}: PropsType) => {
         <>
             {edit
                 ?<Button onClick={showModal} disabled={disabled} type="primary" size="small"
-                     icon={<EditOutlined/>}>Edit</Button>
-                :<Button onClick={showModal} type="text" icon={<AppstoreAddOutlined/>}>add item</Button>}
+                     icon={<EditOutlined/>}>{t("edit")}</Button>
+                :<Button onClick={showModal} type="text" icon={<AppstoreAddOutlined/>}>{t("addItem")}</Button>}
             <Modal
                 centered
                 open={open}
-                title="New Item"
+                title={edit? t("editItem"): t("addItem")}
                 onOk={showModal}
                 onCancel={showModal}
                 footer={[

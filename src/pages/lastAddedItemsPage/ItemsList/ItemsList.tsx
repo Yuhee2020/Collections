@@ -10,6 +10,7 @@ import {ItemType} from "../../../api/itemsApi";
 import {NavLink} from "react-router-dom";
 import {ITEM} from "../../rotes/Rotes";
 import {dateFormatter} from "../../../utils/dateFormatter";
+import {useTranslation} from "react-i18next";
 
 
 type PropsType = {
@@ -21,6 +22,7 @@ type PropsType = {
 export const ItemsList = ({items, searchText, isLoading}: PropsType) => {
 
     const dispatch = useAppDispatch()
+    const {t} = useTranslation();
     const isLogin = useAppSelector(state => state.auth.isLogin)
 
     const handleLikeClick = (item: ItemType) => {
@@ -74,7 +76,7 @@ export const ItemsList = ({items, searchText, isLoading}: PropsType) => {
                                         {tag}
                                     </Highlight>
                                 </Tag>)}
-                                <div className={s.collection}>collection: {item.collectionName}</div>
+                                <div className={s.collection}>{t("collection")}: {item.collectionName}</div>
                             </div>}
                         />
                         <div>

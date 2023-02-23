@@ -7,14 +7,17 @@ import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../store/reducers/Store";
 
 import {registerTC} from "../../store/reducers/authReducer";
-import {LOGIN, REGISTRATION} from "../rotes/Rotes";
+import {LOGIN} from "../rotes/Rotes";
 import {validate} from "../../utils/validation";
+import {useTranslation} from "react-i18next";
 
 
 export const Registration = () => {
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    const {t} = useTranslation()
+
     const handleLoginClick = () => {
         navigate(LOGIN)
     }
@@ -35,7 +38,7 @@ export const Registration = () => {
 
     return (
         <div className={s.registrationContainer}>
-            <Card title={"REGISTRATION"} className={s.registrationCard}>
+            <Card title={t("registration")} className={s.registrationCard}>
                 <Form
                     size={"large"}
                     onSubmitCapture={formik.handleSubmit}
@@ -47,7 +50,8 @@ export const Registration = () => {
                         validateStatus={formik.touched.email && !!formik.errors.email ? "error" : "success"}
                     >
                         <Input {...formik.getFieldProps('email')} prefix={<UserOutlined/>}
-                               placeholder="email"/>
+                            // @ts-ignore
+                               placeholder={t("email")}/>
                     </Form.Item>
 
                     <Form.Item
@@ -58,17 +62,20 @@ export const Registration = () => {
                             {...formik.getFieldProps('password')}
                             prefix={<LockOutlined/>}
                             type="password"
-                            placeholder="Password"
+                            // @ts-ignore
+                            placeholder={t("password")}
                         />
                     </Form.Item>
                     <Form.Item>
-                        <Button type="primary"  htmlType="submit" className={s.registrationFormButton}>
-                            Registration
+                        <Button type="primary" htmlType="submit"
+                                className={s.registrationFormButton}>
+                            {t("registration")}
                         </Button>
                     </Form.Item>
                     <div className={s.loginBox}>
-                        <h6 style={{color: "gray"}}>If you have an account, please login</h6>
-                        <Button size="middle" onClick={handleLoginClick}>Login</Button></div>
+                        <h6 style={{color: "gray"}}>{t("pleaseLogin")}</h6>
+                        <Button size="middle" onClick={handleLoginClick}>Login</Button>
+                    </div>
                 </Form>
             </Card>
         </div>

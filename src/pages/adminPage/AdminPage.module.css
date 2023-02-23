@@ -11,3 +11,9 @@
     margin-right: 15px;
 }
 
+.userFields{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 12px;
+}
+

@@ -1,14 +1,16 @@
 import React, {ChangeEvent, useEffect} from 'react';
 import Search from "antd/es/input/Search";
-import {setItemsIsLoading, setSearch} from "../../../store/reducers/itemsReducer";
-import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
+import {setItemsIsLoading, setSearch} from "../../store/reducers/itemsReducer";
+import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {useLocation, useNavigate} from "react-router-dom";
-import {ROOT} from "../../../pages/rotes/Rotes";
+import {ROOT} from "../../pages/rotes/Rotes";
+import {useTranslation} from "react-i18next";
 
 export const AppSearch = () => {
     const {pathname}=useLocation()
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    const {t} = useTranslation();
     const {searchText, itemsIsLoading} = useAppSelector(state => state.items)
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(setSearch(e.currentTarget.value))
@@ -22,10 +24,12 @@ export const AppSearch = () => {
     },[searchText])
 
 
+
     return (
         <Search
             loading={itemsIsLoading}
-            placeholder="search items"
+            // @ts-ignore
+            placeholder={t("itemsSearch")}
             value={searchText}
             onChange={handleSearchChange}
         />

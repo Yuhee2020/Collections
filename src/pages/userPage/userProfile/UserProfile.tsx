@@ -2,14 +2,16 @@ import React from 'react';
 import s from "./UserProfile.module.css";
 import {Avatar, Card} from "antd";
 import Meta from "antd/es/card/Meta";
-import {AddCollectionModal} from "../addCollectionModal/AddCollectionModal";
 import {UserType} from "../../../api/authApi";
+import {useTranslation} from "react-i18next";
+import {CollectionModal} from "../collectionModal/CollectionModal";
 
 type PropsType = {
     user: UserType | null
 }
 
 export const UserProfile = ({user}: PropsType) => {
+    const {t} = useTranslation();
 
     return (
         <Card
@@ -21,15 +23,14 @@ export const UserProfile = ({user}: PropsType) => {
                 />
             }
             actions={[
-                <AddCollectionModal userId={user?._id}/>,
+                <CollectionModal userId={user?._id}/>,
             ]}
         >
             <Meta
                 avatar={<Avatar/>}
                 title={user?.email}
                 description={<>
-                    <div>{`role: ${user?.role}`}</div>
-                    <div>{`collections count: ${user?.reviewsCount}`}</div>
+                    <div>{`${t("role")}: ${user?.role}`}</div>
                 </>}
             />
         </Card>

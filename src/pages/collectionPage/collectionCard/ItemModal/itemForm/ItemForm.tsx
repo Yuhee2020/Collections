@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import s from "../ItemModal.module.css";
+import s from "../ItemModal.module.css"
 import {Button, Checkbox, DatePicker, Form, Input, InputNumber, Select} from "antd";
 import MDEditor from "@uiw/react-md-editor";
 import {ImageUploader} from "../../../../../components/imageUploader/ImageUploader";
@@ -11,6 +11,7 @@ import {createItemTC, editItemTC} from "../../../../../store/reducers/itemsReduc
 import {CollectionType} from "../../../../../api/collectionsApi";
 import {validateAddItemForm} from "../../../../../utils/addItemFormValidation";
 import {ItemType} from "../../../../../api/itemsApi";
+import {useTranslation} from "react-i18next";
 
 type PropsType = {
     showModal: () => void
@@ -23,6 +24,7 @@ type PropsType = {
 export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
 
     const dispatch = useAppDispatch()
+    const {t} = useTranslation();
     const tags = useAppSelector(state => state.tags.tags)
     const {_id, userId, itemsFields, title} = collection
 
@@ -84,15 +86,14 @@ export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
             key='form'
             onSubmitCapture={formik.handleSubmit}
         >
-            Title:
+            {t("title")}:
             <Form.Item
                 className={s.formItemBox}
                 help={formik.touched.title && !!formik.errors.title ? formik.errors.title : " "}
                 validateStatus={formik.touched.title && !!formik.errors.title ? "error" : "success"}>
                 <Input {...formik.getFieldProps('title')} placeholder="title"/>
             </Form.Item>
-
-            Tags:
+            {t("tags")}:
             <Form.Item>
                 <Select mode="tags"
                         style={{width: '100%'}}
@@ -105,29 +106,29 @@ export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
 
             {itemsFields?.includes("author") &&
                 <Form.Item className={s.formItemBox}>
-                    Author:
+                    {t("author")}:
                     <Input {...formik.getFieldProps('author')} placeholder="author"/>
                 </Form.Item>}
 
             {itemsFields?.includes("producer") &&
                 <Form.Item className={s.formItemBox}>
-                    Producer:
+                    {t("producer")}:
                     <Input {...formik.getFieldProps('producer')} placeholder="producer"/>
                 </Form.Item>}
 
             {itemsFields?.includes("country of origin") &&
                 <Form.Item className={s.formItemBox}>
-                    Country of origin:
+                    {t("countryOfOrigin")}:
                     <Input {...formik.getFieldProps('countryOfOrigin')} placeholder="country of origin"/>
                 </Form.Item>}
 
             <div className={s.numberItemsBox}>
-                {itemsFields?.includes("country of origin") &&
+                {itemsFields?.includes("price") &&
                     <Form.Item>
                         <InputNumber
                             value={formik.values.price}
                             onChange={e => formik.setFieldValue("price", e)}
-                            addonBefore={"Price:"}
+                            addonBefore={t("price")}
                             addonAfter="$"/>
                     </Form.Item>}
 
@@ -136,7 +137,7 @@ export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
                         <InputNumber
                             value={formik.values.weight}
                             onChange={e => formik.setFieldValue("weight", e)}
-                            addonBefore={"Weight:"}
+                            addonBefore={t("weight")}
                             addonAfter="Kg"/>
                     </Form.Item>}
 
@@ -145,7 +146,7 @@ export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
                         <InputNumber
                             value={formik.values.numberOfCopies}
                             onChange={e => formik.setFieldValue("numberOfCopies", e)}
-                            addonBefore={"Number of copies:"}
+                            addonBefore={t("numberOfCopies")}
                         />
                     </Form.Item>}
             </div>
@@ -154,39 +155,39 @@ export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
                 {itemsFields?.includes("is unique item") &&
                     <Checkbox checked={formik.values.isUniqueItem}
                               onChange={(e) => formik.setFieldValue("isUniqueItem", e.target.checked)}>
-                        unique item
+                        {t("uniqueItem")}
                     </Checkbox>}
                 {itemsFields?.includes("is available for sale") &&
                     <Checkbox checked={formik.values.isAvailableForSale}
                               onChange={e => formik.setFieldValue("isAvailableForSale", e.target.checked)}>
-                        available for sale
+                        {t("availableForSale")}
                     </Checkbox>}
                 {itemsFields?.includes("is available for exchange") &&
                     <Checkbox checked={formik.values.isAvailableForExchange}
                               onChange={e => formik.setFieldValue("isAvailableForExchange", e.target.checked)}>
-                        available for exchange
+                        {t("availableForExchange")}
                     </Checkbox>}
             </Form.Item>
 
             {itemsFields?.includes("production date") &&
-                <Form.Item label={"Production date:"}>
+                <Form.Item label={t("productionDate")}>
                     <DatePicker value={dayjs(formik.values.productionDate)}
                                 onChange={e => handleDateChange(e, "productionDate")}/>
                 </Form.Item>}
             {itemsFields?.includes("date of writing") &&
-                <Form.Item label={"Date of writing:"}>
+                <Form.Item label={t("dateOfWriting")}>
                     <DatePicker value={dayjs(formik.values.dateOfWriting)}
                                 onChange={e => handleDateChange(e, "dateOfWriting")}/>
                 </Form.Item>}
             {itemsFields?.includes("date of creation") &&
-                <Form.Item label={"Date of creation:"}>
+                <Form.Item label={t("dateOfCreation")}>
                     <DatePicker value={dayjs(formik.values.dateOfCreation)}
                                 onChange={e => handleDateChange(e, "dateOfCreation")}/>
                 </Form.Item>}
 
             {itemsFields?.includes("description") &&
                 <Form.Item>
-                    Description:
+                    {t("descriptions")}:
                     <MDEditor
                         value={formik.values.description}
                         onChange={handleDescriptionChange}/>
@@ -194,7 +195,7 @@ export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
 
             {itemsFields?.includes("history of creation") &&
                 <Form.Item>
-                    History of creation:
+                    {t("historyOfCreation")}:
                     <MDEditor
                         value={formik.values.historyOfCreation}
                         onChange={handleHistoryChange}/>
@@ -202,7 +203,7 @@ export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
 
             {itemsFields?.includes("unique characteristics") &&
                 <Form.Item>
-                    Unique characteristics:
+                    {t("uniqueCharacteristics")}:
                     <MDEditor
                         value={formik.values.uniqueCharacteristics}
                         onChange={handleCharacteristicsChange}/>
@@ -211,7 +212,7 @@ export const ItemForm = ({showModal, collection, edit, item}: PropsType) => {
             <ImageUploader setImageUrl={setImageUrl}/>
             <Form.Item>
                 <Button type="primary" htmlType="submit" className={s.loginFormButton}>
-                    {edit ? "Edit item" : "Add Item"}
+                    {edit ? t("editItem") : t("addItem")}
                 </Button>
             </Form.Item>
         </Form>

@@ -7,8 +7,10 @@ import {noImage} from "../../../constants";
 import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
 import ReactMarkdown from 'react-markdown'
 import s from "./UsersCollections.module.css"
-import {EditCollectionModal} from "../editCollectionModal/EditCollectionModal";
 import {deleteCollectionTC, getCollectionsTC} from "../../../store/reducers/collectionsReducer";
+import {useTranslation} from "react-i18next";
+import {CollectionModal} from "../collectionModal/CollectionModal";
+
 
 
 type PropsType = {
@@ -18,6 +20,7 @@ type PropsType = {
 export const UsersCollections = ({userId}: PropsType) => {
 
     const dispatch = useAppDispatch()
+    const {t} = useTranslation();
     const collections = useAppSelector(state => state.collections.collections)
     const deleteCollection = (collectionId: string) => {
         userId && dispatch(deleteCollectionTC({collectionId, userId}))
@@ -39,17 +42,17 @@ export const UsersCollections = ({userId}: PropsType) => {
                     <List.Item
                         key={item.title}
                         actions={[
-                            <EditCollectionModal userId={userId} collection={item}/>,
+                            <CollectionModal edit userId={userId} collection={item}/>,
                             <Popconfirm
                                 placement="topLeft"
-                                title={"Are you sure to delete this collection?"}
+                                title={t("sureDelete")}
                                 onConfirm={() => {
                                     item._id && deleteCollection(item._id)
                                 }}
-                                okText="Yes"
-                                cancelText="No"
+                                okText={t("yes")}
+                                cancelText={t("no")}
                             >
-                                <Button type="text" icon={<DeleteOutlined/>}>delete</Button>
+                                <Button type="text" icon={<DeleteOutlined/>}>{t("delete")}</Button>
                             </Popconfirm>
                         ]}
                         extra={

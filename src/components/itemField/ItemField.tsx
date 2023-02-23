@@ -2,7 +2,7 @@ import React from 'react';
 import s from "./ItemField.module.css"
 
 type PropsType={
-    fieldTitle?:string
+    fieldTitle?:string | null
     children?:React.ReactNode
 }
 

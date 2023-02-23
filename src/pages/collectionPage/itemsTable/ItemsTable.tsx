@@ -11,7 +11,8 @@ import {getTagsTC} from "../../../store/reducers/tagsReducer";
 import s from "./Toolbar.module.css";
 import {DeleteOutlined} from "@ant-design/icons";
 import {dateFormatter} from "../../../utils/dateFormatter";
-import {ItemModal} from "../collectionCard/addItemModal/ItemModal";
+import {useTranslation} from "react-i18next";
+import {ItemModal} from "../collectionCard/ItemModal/ItemModal";
 
 export interface DataType {
     key: React.Key;
@@ -30,32 +31,33 @@ type PropsType = {
 export const ItemsTable = ({collection}: PropsType) => {
 
     const dispatch = useAppDispatch()
+    const {t} = useTranslation();
     const collectionItems = useAppSelector(state => state.items.collectionItems)
     const [selectedItems, setSelectedItems] = useState<DataType[]>([])
     const editableItem = collectionItems.filter(item => item._id === selectedItems[0]?.itemId)[0]
     const tags = useAppSelector(state => state.tags.tags)
     const columns: ColumnsType<DataType> = [
         {
-            title: 'Title',
+            title: t("title"),
             dataIndex: 'title',
             render: (text: string, item) => <NavLink to={`${ITEM}/${item.itemId}`}>{text}</NavLink>,
         },
         {
-            title: 'ItemId',
+            title: t("itemId"),
             dataIndex: 'itemId',
         },
         {
-            title: 'Creation Date',
+            title: t("dateOfCreation"),
             dataIndex: 'itemCreationDate',
             sorter: (a, b) => dayjs(a.itemCreationDate).unix() - dayjs(b.itemCreationDate).unix()
         },
         {
-            title: 'Likes count',
+            title: t("likesCount"),
             dataIndex: 'likesCount',
             sorter: (a, b) => a.likesCount - b.likesCount
         },
         {
-            title: 'Tags',
+            title: t("tags"),
             dataIndex: 'tags',
             filters: tags.map(tag => ({text: tag.title, value: tag.title})),
             onFilter: (value: any, record) => record.tags.indexOf(value) === 0,
@@ -98,7 +100,7 @@ export const ItemsTable = ({collection}: PropsType) => {
                             icon={<DeleteOutlined/>}
                             size="small"
                             disabled={!selectedItems.length}>
-                        Delete
+                        {t("delete")}
                     </Button>
                     <ItemModal
                         collection={collection}

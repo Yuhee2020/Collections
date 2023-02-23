@@ -6,6 +6,8 @@ import {Navigate, NavLink} from "react-router-dom";
 import {ROOT, USER_PROFILE} from "../rotes/Rotes";
 import s from "./AdminPage.module.css"
 import {Toolbar} from "./toolbar/Toolbar";
+import {ItemField} from "../../components/itemField/ItemField";
+import {useTranslation} from "react-i18next";
 
 
 export const AdminPage = () => {
@@ -14,7 +16,7 @@ export const AdminPage = () => {
 
     const users = useAppSelector(state => state.users.users)
     const isLoggedIn = useAppSelector(state => state.auth.isLogin)
-
+    const {t} = useTranslation();
     const [usersId, setUsersId] = useState<string[]>([])
 
     const handleCheckboxClick = (e: boolean, id: string) => {
@@ -35,6 +37,7 @@ export const AdminPage = () => {
         return <Navigate to={ROOT}/>
     }
 
+
     return (
         <div>
             <Toolbar usersId={usersId}/>
@@ -51,7 +54,12 @@ export const AdminPage = () => {
                             }}/>
                             <List.Item.Meta
                                 title={<NavLink to={`${USER_PROFILE}/${item._id}`}>{item.email}</NavLink>}
-                                description={`role: ${item.role} / status: ${item.isBlocked ? "blocked" : "unlocked"} / registration date: ${item.registrationDate} / last login date: ${item.lastLoginDate}`}
+                                description={ <div className={s.userFields}>
+                                    <ItemField fieldTitle={t("role")}>{item.role}</ItemField>
+                                    <ItemField fieldTitle={t("status")}>{item.isBlocked ? "blocked" : "unlocked"}</ItemField>
+                                    <ItemField fieldTitle={t("registrationDate")}>{item.registrationDate}</ItemField>
+                                    <ItemField fieldTitle={t("lastLoginDate")}>{item.lastLoginDate}</ItemField>
+                                </div>}
                             />
                         </List.Item>
                     )}

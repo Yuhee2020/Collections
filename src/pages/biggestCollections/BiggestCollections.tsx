@@ -7,10 +7,12 @@ import {dateFormatter} from "../../utils/dateFormatter";
 import s from "./BiggestCollections.module.css"
 import {useNavigate} from "react-router-dom";
 import {COLLECTION_ITEMS} from "../rotes/Rotes";
+import {useTranslation} from "react-i18next";
 
 export function BiggestCollections() {
     const navigate=useNavigate()
     const dispatch = useAppDispatch()
+    const {t} = useTranslation();
     const {collections, collectionsIsLoading} = useAppSelector(state => state.collections)
 
 
@@ -41,10 +43,9 @@ export function BiggestCollections() {
                             <div className={s.fieldsBox}>
                                 <div className={s.title}>{item.title}</div>
 
-                                <div className={s.field}>Theme: {item.theme}</div>
-                                <div className={s.field}>Date of
-                                    creation: {dateFormatter(item.creationDate)}</div>
-                                <div className={s.field}>Items count: {item.itemsCount}</div>
+                                <div className={s.field}>{t("theme")}: {item.theme}</div>
+                                <div className={s.field}>{t("dateOfCreation")}: {dateFormatter(item.creationDate)}</div>
+                                <div className={s.field}>{t("itemsCount")}: {item.itemsCount}</div>
                                 <div className={s.descriptionContainer}>
                                     {item.description}
                                 </div>

@@ -22,7 +22,6 @@ export const ThemeProvider = ({children}: any) => {
 
     const selectedTheme=useAppSelector(state => state.app.theme)
     const isLoading=useAppSelector(state => state.app.isLoading)
-
     return (
         <ConfigProvider
             theme={{

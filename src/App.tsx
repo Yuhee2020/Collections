@@ -5,8 +5,9 @@ import {ThemeProvider} from "./components/themeProvider/ThemeProvider";
 import {AppHeader} from "./components/appHeader/AppHeader";
 import {authTC} from "./store/reducers/authReducer";
 import Routing from "./pages/rotes/Rotes";
-import {getThemeTC} from "./store/reducers/appReducer";
+import {getLanguageTC, getThemeTC} from "./store/reducers/appReducer";
 import {AppMessagesBar} from "./components/appMessagesBar/AppMessagesBar";
+import {useTranslation} from 'react-i18next';
 
 
 function App() {
@@ -14,11 +15,14 @@ function App() {
     const dispatch = useAppDispatch()
 
     const authInProgress = useAppSelector(state => state.app.authInProgress)
-    console.log("app")
+
     useEffect(() => {
         dispatch(getThemeTC())
+        dispatch(getLanguageTC())
         localStorage.getItem('token') && dispatch(authTC())
     }, [])
+    const { t, i18n } = useTranslation();
+
 
 
     if (authInProgress) {
@@ -26,11 +30,14 @@ function App() {
     }
 
     return (
+
+
         <ThemeProvider>
             <AppHeader/>
             <div className="rotes"><Routing/></div>
             <AppMessagesBar/>
         </ThemeProvider>
+
     );
 }
 
