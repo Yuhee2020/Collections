@@ -62,6 +62,7 @@ const resources = {
             editCollection: "Edit collection",
             selectFields:"Select additional fields in collection instances:",
             createCollection:"Create collection",
+            userCollections:"User collections"
         }
     },
     ru: {
@@ -97,7 +98,7 @@ const resources = {
             send: "Отправить",
             itemsSearch: "Поиск экземпляров",
             from: "от",
-            lastAdded: "Последние добавленные экземпляры",
+            lastAdded: "Последние экземпляры",
             largestCollection: "Самые большие коллекции",
             userPage: "Страница пользователя",
             adminPage: "Страница администратора",
@@ -123,7 +124,8 @@ const resources = {
             newCollection:"Новая коллекция",
             createCollection:"Создать коллекцию",
             editCollection: "Редактировать коллекцию",
-            selectFields:"Дополнительные поля для экземпляров коллекции:"
+            selectFields:"Дополнительные поля для экземпляров коллекции:",
+            userCollections:"Коллекции пользователя"
         }
     }
 };

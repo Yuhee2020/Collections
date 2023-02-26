@@ -1,0 +1,7 @@
+.container{
+  margin-bottom: 30px;
+  @media (max-width: 800px) {
+    flex-wrap: wrap;
+    margin-right: 10px;
+  }
+}

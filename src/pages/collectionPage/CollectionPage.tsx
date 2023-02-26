@@ -5,6 +5,7 @@ import CollectionCard from "./collectionCard/CollectionCard";
 import {getCollectionTC} from "../../store/reducers/collectionsReducer";
 import {ItemsTable} from "./itemsTable/ItemsTable";
 import {BackTo} from "../../components/backTo/BackTo";
+import s from "./CollectionPage.module.scss"
 
 
 export const CollectionPage = () => {
@@ -20,7 +21,7 @@ export const CollectionPage = () => {
 
 
     return (
-        <div>
+        <div className={s.container}>
             <BackTo/>
             <CollectionCard collection={collection}/>
             <ItemsTable collection={collection}/>

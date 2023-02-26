@@ -3,7 +3,7 @@ import * as React from "react";
 export function Sun(props: React.SVGProps<SVGSVGElement>) {
     return (
         <svg
-            viewBox="0 -0.5 16 16"
+            viewBox="0 0 16 14"
             fill="currentColor"
             height="1.5em"
             width="1.5em"

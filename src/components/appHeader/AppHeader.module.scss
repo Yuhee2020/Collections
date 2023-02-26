@@ -1,0 +1,31 @@
+.headerContainer {
+  padding: 0 40px 0 20px;
+  margin-bottom: 10px;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  box-shadow: 0 4px 10px #17b0b0;
+  @media (max-width: 800px){
+    padding: 0 10px;
+  }
+
+  .search {
+    max-width: 300px;
+  }
+
+  .select {
+    max-width: 300px;
+  }
+
+  .buttonsGroup {
+    margin-left: 10px;
+    width: 220px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  }
+}
+
+

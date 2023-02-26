@@ -4,16 +4,16 @@ import {AppstoreAddOutlined, EditOutlined} from "@ant-design/icons";
 import {useFormik} from "formik";
 import s from "./CollectionModal.module.css"
 import MDEditor from "@uiw/react-md-editor";
-import {useAppDispatch} from "../../../store/reducers/Store";
-import {validateAddCollectionForm} from "../../../utils/addCollectionFormValidation";
-import {COLLECTIONS_THEMES} from "../../../constants";
+import {useAppDispatch} from "../../store/reducers/Store";
+import {validateAddCollectionForm} from "../../utils/addCollectionFormValidation";
+import {COLLECTIONS_THEMES} from "../../constants";
 import {
     createCollectionTC,
     editCollectionTC
-} from "../../../store/reducers/collectionsReducer";
-import {ImageUploader} from "../../../components/imageUploader/ImageUploader";
-import {TransferFields} from "../../../components/transferFields/TransferFields";
-import {CollectionType} from "../../../api/collectionsApi";
+} from "../../store/reducers/collectionsReducer";
+import {ImageUploader} from "../imageUploader/ImageUploader";
+import {TransferFields} from "../transferFields/TransferFields";
+import {CollectionType} from "../../api/collectionsApi";
 import {useTranslation} from "react-i18next";
 
 

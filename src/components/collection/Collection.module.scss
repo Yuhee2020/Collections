@@ -1,0 +1,76 @@
+.collectionContainer {
+  max-width: 980px;
+  margin: 0 10px 10px  0 ;
+  height: 300px;
+  transition: transform .2s;
+  cursor: pointer;
+  @media (max-width: 800px) {
+    height: 100%;
+    margin: 0 5px 10px  -4px ;
+  }
+
+  &:hover {
+    opacity: 0.8;
+    transform: scale(1.01);
+
+  }
+
+  .collection {
+    display: flex;
+    @media (max-width: 800px) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .fieldsBox {
+      margin-left: 15px;
+      @media (max-width: 500px) {
+        margin-left: 0;
+      }
+
+      .title {
+        font-size: 25px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .field {
+        font-weight: bolder;
+      }
+
+      .descriptionContainer {
+        margin-top: 10px;
+        font-size: 12px;
+        max-height: 100px;
+        overflow: hidden;
+      }
+
+      .descriptionContainerFull {
+        margin-top: 10px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.itemContainer > div {
+  padding: 10px !important;
+}
+
+.fullContainer{
+  height: 100%;
+  transition: transform .2s;
+  cursor: auto;
+
+  &:hover {
+    opacity: unset;
+    transform:none;
+
+  }
+}
+
+.collectionContainer > div {
+  @media (max-width: 400px) {
+    padding: 4px !important;
+  }
+}

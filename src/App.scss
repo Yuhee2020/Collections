@@ -1,0 +1,28 @@
+body {
+  overflow-y: hidden;
+
+  div, a, span {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .layout {
+    min-height: 100vh;
+
+    .rotes {
+      padding: 10px 20px;
+      height: 90vh;
+      overflow-y: scroll;
+      @media (max-width: 800px){
+        padding: 10px 0 50px 10px;
+      }
+    }
+    .search{
+      margin: 10px 10px 0 10px;
+    }
+  }
+}
+
+
+
+
+

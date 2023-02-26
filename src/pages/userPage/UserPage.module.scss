@@ -1,0 +1,9 @@
+.userPageContainer{
+    display: flex;
+    position: relative;
+    @media (max-width: 800px) {
+        flex-wrap: wrap;
+        margin-right: 10px;
+    }
+}
+

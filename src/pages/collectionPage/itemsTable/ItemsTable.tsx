@@ -8,11 +8,11 @@ import {deleteItemsTC, getCollectionItemsTC} from "../../../store/reducers/items
 import {CollectionType} from "../../../api/collectionsApi";
 import dayjs from "dayjs";
 import {getTagsTC} from "../../../store/reducers/tagsReducer";
-import s from "./Toolbar.module.css";
+import s from "./ItemsTable.module.scss";
 import {DeleteOutlined} from "@ant-design/icons";
 import {dateFormatter} from "../../../utils/dateFormatter";
 import {useTranslation} from "react-i18next";
-import {ItemModal} from "../collectionCard/ItemModal/ItemModal";
+import {ItemModal} from "../../../components/ItemModal/ItemModal";
 
 export interface DataType {
     key: React.Key;
@@ -111,6 +111,7 @@ export const ItemsTable = ({collection}: PropsType) => {
                 </div>
             </Card>
             <Table
+                scroll={{x:800}}
                 bordered
                 rowSelection={{
                     type: "checkbox",

@@ -1,0 +1,13 @@
+.cardBox {
+  margin-bottom: 10px;
+  max-width: 300px;
+  div{
+    padding: 5px !important;
+  }
+
+  .toolbarContainer {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+

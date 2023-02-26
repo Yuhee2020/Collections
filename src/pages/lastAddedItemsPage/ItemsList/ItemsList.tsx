@@ -1,16 +1,17 @@
 import React from 'react';
 import {LikeOutlined, MessageOutlined} from '@ant-design/icons';
-import {Avatar, Button, Card, Image, List, Tag} from 'antd';
+import {Button, Card, Image, List, Tag} from 'antd';
 import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
 import {likeItemTC} from "../../../store/reducers/itemsReducer";
 import {noImage} from "../../../constants";
-import s from "./ItemsList.module.css"
+import s from "./ItemsList.module.scss"
 import Highlight from 'react-highlighter';
 import {ItemType} from "../../../api/itemsApi";
 import {NavLink} from "react-router-dom";
-import {ITEM} from "../../rotes/Rotes";
+import {COLLECTION_ITEMS, ITEM} from "../../rotes/Rotes";
 import {dateFormatter} from "../../../utils/dateFormatter";
 import {useTranslation} from "react-i18next";
+import {useMediaQuery} from "react-responsive";
 
 
 type PropsType = {
@@ -24,6 +25,7 @@ export const ItemsList = ({items, searchText, isLoading}: PropsType) => {
     const dispatch = useAppDispatch()
     const {t} = useTranslation();
     const isLogin = useAppSelector(state => state.auth.isLogin)
+    const isBigScreen = useMediaQuery({query: '(min-width: 800px)'})
 
     const handleLikeClick = (item: ItemType) => {
         dispatch(likeItemTC(item))
@@ -46,22 +48,25 @@ export const ItemsList = ({items, searchText, isLoading}: PropsType) => {
                                 handleLikeClick(item)
                             }} icon={<LikeOutlined/>}> {item.likesCount}</Button>,
                             <NavLink to={`${ITEM}/${item._id}`}>
-                                <Button type={"text"} icon={<MessageOutlined/>}> {item.commentsCount}
+                                <Button type={"text"}
+                                        icon={<MessageOutlined/>}> {item.commentsCount}
                                 </Button>
                             </NavLink>,
                         ]}
-                        extra={
+                        extra={isBigScreen &&
                             <Image
-                                height={100}
+                                height={160}
                                 alt="logo"
                                 src={item.image ? item.image : noImage}
                             />
                         }
                     >
                         <List.Item.Meta
-                            avatar={<Avatar src={item.image ? item.image : noImage}/>}
+                            avatar={!isBigScreen && <Image width={120}
+                                                           src={item.image ? item.image : noImage}/>}
                             title={
                                 <NavLink
+                                    className={s.title}
                                     to={`${ITEM}/${item._id}`}>
                                     <Highlight search={searchText}>
                                         {item.title}
@@ -69,24 +74,23 @@ export const ItemsList = ({items, searchText, isLoading}: PropsType) => {
                                 </NavLink>
                             }
                             description={
-                            <div className={s.tagsBox}>
-                                {item.tags?.map(tag =>
-                                <Tag key={tag} color="cyan">
-                                    <Highlight search={searchText}>
-                                        {tag}
-                                    </Highlight>
-                                </Tag>)}
-                                <div className={s.collection}>{t("collection")}: {item.collectionName}</div>
-                            </div>}
+                                <div className={s.tagsBox}>
+                                    {item.tags?.map(tag =>
+                                        <Tag key={tag} color="cyan">
+                                            <Highlight search={searchText}>
+                                                {tag}
+                                            </Highlight>
+                                        </Tag>)}
+                                    <NavLink className={s.collection} to={`${COLLECTION_ITEMS}/${item.collectionId}`}>{t("collection")}: {item.collectionName}</NavLink>
+                                </div>}
                         />
-                        <div>
-                            <div className={s.descriptionContainer}>
-                                <Highlight search={searchText}>
-                                    {item.description}
-                                </Highlight>
-                            </div>
-                            <div className={s.collection}>{dateFormatter(item.itemCreationDate)}</div>
+                        <div className={s.descriptionContainer}>
+                            <Highlight search={searchText}>
+                                {item.description}
+                            </Highlight>
                         </div>
+                        <div
+                            className={s.date}>{dateFormatter(item.itemCreationDate)}</div>
                     </List.Item>
                 </Card>
             )}

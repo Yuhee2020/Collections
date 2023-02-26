@@ -1,0 +1,33 @@
+.userCollectionsBox {
+  width: 76%;
+  margin-bottom: 20px;
+  @media (max-width: 800px) {
+    width: 100%;
+    div {
+      padding: 8px 2px !important;
+    }
+    li {
+      padding: 0 !important;
+    }
+  }
+
+  .mainTitle {
+    font-size: 35px;
+    text-align: center;
+    border-bottom: 1px solid gray;
+    margin-bottom: 10px;
+    @media (max-width: 800px) {
+      font-size: 25px;
+    }
+  }
+
+  .itemsCount {
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+
+  .title {
+    font-size: 20px;
+  }
+}

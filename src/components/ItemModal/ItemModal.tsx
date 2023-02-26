@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Button, Modal} from "antd";
 import {AppstoreAddOutlined, EditOutlined} from "@ant-design/icons";
-import {CollectionType} from "../../../../api/collectionsApi";
-import {ItemType} from "../../../../api/itemsApi";
+import {CollectionType} from "../../api/collectionsApi";
+import {ItemType} from "../../api/itemsApi";
 import {useTranslation} from "react-i18next";
 import {ItemForm} from "./itemForm/ItemForm";
 

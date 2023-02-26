@@ -12,8 +12,9 @@ import {
     updateUsersTC
 } from "../../../store/reducers/usersReducer";
 import {useAppDispatch} from "../../../store/reducers/Store";
-import s from "./Toolbar.module.css"
+import s from "./Toolbar.module.scss"
 import {useTranslation} from "react-i18next";
+import {useMediaQuery} from "react-responsive";
 
 type PropsType = {
     usersId: string[]
@@ -23,6 +24,7 @@ export const Toolbar = ({usersId}: PropsType) => {
 
     const dispatch = useAppDispatch()
     const {t} = useTranslation();
+    const isBigScreen = useMediaQuery({ query: '(min-width: 380px)' })
 
     const handleDeleteClick = () => {
         dispatch(deleteUsersTC(usersId))
@@ -57,7 +59,7 @@ export const Toolbar = ({usersId}: PropsType) => {
                 <Button onClick={handleChangeRoleClick} type="primary"
                         icon={<UserOutlined/>}
                         size="large">
-                    {t("changeRole")}
+                    {isBigScreen && t("changeRole")}
                 </Button>
             </div>
         </Card>

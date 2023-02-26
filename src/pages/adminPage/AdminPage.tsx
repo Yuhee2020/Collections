@@ -4,7 +4,7 @@ import {getUsersTC} from "../../store/reducers/usersReducer";
 import {Card, Checkbox, List} from "antd";
 import {Navigate, NavLink} from "react-router-dom";
 import {ROOT, USER_PROFILE} from "../rotes/Rotes";
-import s from "./AdminPage.module.css"
+import s from "./AdminPage.module.scss"
 import {Toolbar} from "./toolbar/Toolbar";
 import {ItemField} from "../../components/itemField/ItemField";
 import {useTranslation} from "react-i18next";
@@ -39,9 +39,9 @@ export const AdminPage = () => {
 
 
     return (
-        <div>
+        <div className={s.pageContainer}>
             <Toolbar usersId={usersId}/>
-            <Card className={s.listContainer}>
+            <Card className={s.card}>
                 <List
                     dataSource={users}
                     pagination={{

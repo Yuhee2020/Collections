@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
-import s from "./UserPage.module.css"
+import s from "./UserPage.module.scss"
 import {useParams} from "react-router-dom";
 import {setUserProfile} from "../../store/reducers/usersReducer";
 import {UserProfile} from "./userProfile/UserProfile";
 import {UsersCollections} from "./userCollections/UsersCollections";
+import {BackTo} from "../../components/backTo/BackTo";
 
 
 export const UserPage = () => {
@@ -17,11 +18,13 @@ export const UserPage = () => {
         userId && dispatch(setUserProfile(userId))
     }, [])
 
-    return (
+    return (<>
+            <BackTo/>
             <div className={s.userPageContainer}>
                 <UserProfile user={user}/>
                 <UsersCollections userId={user?._id}/>
             </div>
+        </>
     );
 };
 

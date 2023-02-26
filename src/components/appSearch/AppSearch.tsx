@@ -27,6 +27,7 @@ export const AppSearch = () => {
 
     return (
         <Search
+            size={"large"}
             loading={itemsIsLoading}
             // @ts-ignore
             placeholder={t("itemsSearch")}

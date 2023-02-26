@@ -2,15 +2,15 @@ import React, {useEffect} from 'react';
 import s from "../ItemModal.module.css"
 import {Button, Checkbox, DatePicker, Form, Input, InputNumber, Select} from "antd";
 import MDEditor from "@uiw/react-md-editor";
-import {ImageUploader} from "../../../../../components/imageUploader/ImageUploader";
+import {ImageUploader} from "../../imageUploader/ImageUploader";
 import {useFormik} from "formik";
-import {useAppDispatch, useAppSelector} from "../../../../../store/reducers/Store";
+import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
 import dayjs, {Dayjs} from "dayjs";
-import {getTagsTC} from "../../../../../store/reducers/tagsReducer";
-import {createItemTC, editItemTC} from "../../../../../store/reducers/itemsReducer";
-import {CollectionType} from "../../../../../api/collectionsApi";
-import {validateAddItemForm} from "../../../../../utils/addItemFormValidation";
-import {ItemType} from "../../../../../api/itemsApi";
+import {getTagsTC} from "../../../store/reducers/tagsReducer";
+import {createItemTC, editItemTC} from "../../../store/reducers/itemsReducer";
+import {CollectionType} from "../../../api/collectionsApi";
+import {validateAddItemForm} from "../../../utils/addItemFormValidation";
+import {ItemType} from "../../../api/itemsApi";
 import {useTranslation} from "react-i18next";
 
 type PropsType = {

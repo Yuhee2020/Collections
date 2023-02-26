@@ -1,0 +1,30 @@
+.pageContainer {
+  @media (max-width: 800px) {
+    margin: 0 10px 10px 0;
+
+  }
+
+  .card {
+    @media (max-width: 400px) {
+      div {
+        padding: 2px !important;
+      }
+    }
+  }
+}
+
+.itemContainer {
+  padding: 0 0 10px 0 !important;
+  display: flex !important;
+}
+
+.checkbox {
+  margin-right: 15px;
+}
+
+.userFields {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+

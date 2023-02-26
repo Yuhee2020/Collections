@@ -1,5 +1,5 @@
 import React from 'react';
-import s from "./Item.module.css";
+import s from "./Item.module.scss";
 import {Badge, Card, Image, Tag} from "antd";
 import {noImage} from "../../../constants";
 import Meta from "antd/es/card/Meta";
@@ -36,7 +36,7 @@ const Item = () => {
 
 
     return (
-        <Card>
+        <Card className={s.container}>
             <div className={s.cardHeader}>
                 <Image
                     width={250}

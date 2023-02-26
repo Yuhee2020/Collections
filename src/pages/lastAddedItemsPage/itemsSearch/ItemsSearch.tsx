@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
 import {Card, Tag} from "antd";
 import {getTagsTC} from "../../../store/reducers/tagsReducer";
-import s from "./ItemSearch.module.css"
+import s from "./ItemSearch.module.scss"
 import {setItemsIsLoading, setSearch} from "../../../store/reducers/itemsReducer";
 import {AppSearch} from "../../../components/appSearch/AppSearch";
 import {useTranslation} from "react-i18next";

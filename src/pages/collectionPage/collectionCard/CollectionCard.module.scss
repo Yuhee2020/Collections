@@ -1,0 +1,27 @@
+.collectionCard {
+  margin: 10px 0;
+  @media (max-width: 800px) {
+    div {
+      word-break: break-word;
+      padding: 0 !important;
+    }
+  }
+
+  .title {
+    font-size: 25px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  .cardBody {
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .buttons {
+    margin-top: 10px;
+  }
+}
+

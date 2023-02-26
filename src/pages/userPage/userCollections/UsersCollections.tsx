@@ -1,16 +1,18 @@
 import React, {useEffect} from 'react';
-import {Button, Card, Image, List, Popconfirm} from "antd";
+import {Avatar, Button, Card, Image, List, Popconfirm} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import {NavLink} from "react-router-dom";
 import {COLLECTION} from "../../rotes/Rotes";
 import {noImage} from "../../../constants";
 import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
-import ReactMarkdown from 'react-markdown'
-import s from "./UsersCollections.module.css"
-import {deleteCollectionTC, getCollectionsTC} from "../../../store/reducers/collectionsReducer";
+import s from "./UsersCollections.module.scss"
+import {
+    deleteCollectionTC,
+    getCollectionsTC
+} from "../../../store/reducers/collectionsReducer";
 import {useTranslation} from "react-i18next";
-import {CollectionModal} from "../collectionModal/CollectionModal";
-
+import {CollectionModal} from "../../../components/collectionModal/CollectionModal";
+import {useMediaQuery} from "react-responsive";
 
 
 type PropsType = {
@@ -21,10 +23,12 @@ export const UsersCollections = ({userId}: PropsType) => {
 
     const dispatch = useAppDispatch()
     const {t} = useTranslation();
+    const isMobileScreen = useMediaQuery({query: '(max-width: 530px)'})
     const collections = useAppSelector(state => state.collections.collections)
     const deleteCollection = (collectionId: string) => {
         userId && dispatch(deleteCollectionTC({collectionId, userId}))
     }
+
 
     useEffect(() => {
         dispatch(getCollectionsTC(userId))
@@ -32,10 +36,11 @@ export const UsersCollections = ({userId}: PropsType) => {
 
     return (
         <Card className={s.userCollectionsBox}>
+            <div className={s.mainTitle}>{t("userCollections")}</div>
             <List
                 itemLayout="vertical"
                 pagination={{
-                    pageSize: 5,
+                    pageSize: 10,
                 }}
                 dataSource={collections}
                 renderItem={(item) => (
@@ -52,23 +57,29 @@ export const UsersCollections = ({userId}: PropsType) => {
                                 okText={t("yes")}
                                 cancelText={t("no")}
                             >
-                                <Button type="text" icon={<DeleteOutlined/>}>{t("delete")}</Button>
+                                <Button type="text"
+                                        icon={<DeleteOutlined/>}>{t("delete")}</Button>
                             </Popconfirm>
                         ]}
-                        extra={
-                            <Image
-                                height={150}
+                        extra={!isMobileScreen
+                            && <Image
+                                width={185}
                                 src={item.image ? item.image : noImage}
                                 fallback={noImage}
-                            />
-                        }
+                            />}
                     >
                         <List.Item.Meta
-                            title={<NavLink to={`${COLLECTION}/${item._id}`}>{item.title}</NavLink>}
-                            description={item.theme}
+                            avatar={isMobileScreen && <Avatar
+                                shape="square"
+                                size={100}
+                                src={item.image} />}
+                            title={<NavLink className={s.title}
+                                            to={`${COLLECTION}/${item._id}`}>{item.title}</NavLink>}
+                            description={`${t('theme')}: ${item.theme}`}
                         />
-                        {item.description && <ReactMarkdown children={item.description}/>}
+                        <div className={s.itemsCount}>{t("itemsCount")}: {item.itemsCount}</div>
                     </List.Item>
+
                 )}
             />
         </Card>

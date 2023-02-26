@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {getItemTC} from "../../store/reducers/itemsReducer";
 import {BackTo} from "../../components/backTo/BackTo";
 import Item from "./item/Item";
-import s from "./ItemPage.module.css"
+import s from "./ItemPage.module.scss"
 import {CommentsCreator} from "./commentsCreator/CommentsCreator";
 import {Comments} from "./comments/Comments";
 
