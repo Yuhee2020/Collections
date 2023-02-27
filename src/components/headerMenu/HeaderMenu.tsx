@@ -54,7 +54,7 @@ export const HeaderMenu = () => {
         <Dropdown
             menu={{items}}
             trigger={['click']}>
-            <Button icon={<MenuUnfoldOutlined className={s.icon}/>} type="text"/>
+            <Button size="large" icon={<MenuUnfoldOutlined  className={s.icon}/>} type="text"/>
         </Dropdown>
     )
 };

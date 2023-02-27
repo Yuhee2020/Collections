@@ -29,7 +29,7 @@ export const ItemsSearch = () => {
                 {tags.map(tag => {
                     return (
                         <Tag key={tag._id}
-                             color="cyan"
+                             color="#023431"
                              className={s.tag}
                              style={{cursor: "pointer"}}
                              onClick={() => handleTagClick(tag.title)}>

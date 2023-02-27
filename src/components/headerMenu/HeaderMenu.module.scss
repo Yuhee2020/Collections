@@ -1,7 +1,12 @@
+@import "./src/App";
 
+.icon{
+    font-size: 30px;
+    color: white;
+}
 
 .activeNavLink{
-    color: #13C2C2 !important;
+    color: $primary-color !important;
     text-decoration: underline !important;
     font-size: 20px;
 }

@@ -76,7 +76,7 @@ export const ItemsList = ({items, searchText, isLoading}: PropsType) => {
                             description={
                                 <div className={s.tagsBox}>
                                     {item.tags?.map(tag =>
-                                        <Tag key={tag} color="cyan">
+                                        <Tag key={tag} color="#023431">
                                             <Highlight search={searchText}>
                                                 {tag}
                                             </Highlight>

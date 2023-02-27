@@ -1,5 +1,5 @@
 .activeNavLink{
-    color: #13C2C2 !important;
+    color: #ffffff !important;
     text-decoration: underline !important;
     font-size: 16px;
     font-weight: bold;
@@ -8,4 +8,8 @@
 .navLink{
     font-size: 16px;
     font-weight: bold;
+    color: rgb(190, 190, 190) !important;
+    &:hover{
+        color: white !important;
+    }
 }

@@ -3,17 +3,26 @@ import {ConfigProvider, Layout} from "antd";
 import {useAppSelector} from "../../store/reducers/Store";
 
 const tokenLight={
-    "colorPrimary": "#11a7a7",
-    "colorTextBase": "#000000",
-    "colorBgBase": "#ffffff",
-    "colorBgLayout": "#d9e4e4",
-    "borderRadius": 4
+    "colorPrimary": "#004643",
+    "colorPrimaryBg": "#98b9b2",
+    "colorPrimaryBgHover": "#6bafa2",
+    "colorPrimaryBorder": "#376b63",
+    "colorPrimaryText": "#034c49",
+    "colorPrimaryTextHover": "#14756d",
+    "colorTextBase": "#001e1d",
+    "colorBgLayout": "#ccded9",
+    "colorBgContainer": "#fffffe",
+    "colorText": "#001e1d",
+    "borderRadius": 4,
 }
 
 const tokenDark={
-    "colorPrimary": "#11a7a7",
-    "colorTextBase": "#f7f7f7",
-    "colorBgBase": "#413f3f",
+    "colorPrimary": "#7b948d",
+    "colorPrimaryBg": "#414c4b",
+    "colorTextBase": "#d9d9d9",
+    "colorBgBase": "#202020",
+    "colorBgLayout": "#023431",
+    "colorBgContainer": "#004643",
     "borderRadius": 4
 }
 

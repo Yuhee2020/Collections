@@ -1,12 +1,15 @@
+@import "./src/App";
+
 .headerContainer {
   padding: 0 40px 0 20px;
   margin-bottom: 10px;
   top: 0;
+  background-color: $primary-color;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 70px;
-  box-shadow: 0 4px 10px #17b0b0;
+  box-shadow: 0 4px 6px $primary-color;
   @media (max-width: 800px){
     padding: 0 10px;
   }
