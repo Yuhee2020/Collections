@@ -12,7 +12,7 @@ import {COLLECTION_ITEMS, ITEM} from "../../rotes/Rotes";
 import {dateFormatter} from "../../../utils/dateFormatter";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "react-responsive";
-
+import ReactMarkdown from 'react-markdown'
 
 type PropsType = {
     items: ItemType[]
@@ -86,7 +86,7 @@ export const ItemsList = ({items, searchText, isLoading}: PropsType) => {
                         />
                         <div className={s.descriptionContainer}>
                             <Highlight search={searchText}>
-                                {item.description}
+                                {item.description && <ReactMarkdown>{item.description}</ReactMarkdown>}
                             </Highlight>
                         </div>
                         <div

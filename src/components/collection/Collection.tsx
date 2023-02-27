@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Image} from "antd";
+import {Button, Card, Image} from "antd";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import s from "./Collection.module.scss"
@@ -8,18 +8,21 @@ import {noImage} from "../../constants";
 import {dateFormatter} from "../../utils/dateFormatter";
 import {CollectionType} from "../../api/collectionsApi";
 import {useMediaQuery} from "react-responsive";
+import { DownloadOutlined } from '@ant-design/icons';
+import { CSVLink} from "react-csv";
+import {useAppSelector} from "../../store/reducers/Store";
 
 type PropsType = {
     item: CollectionType
     full?: boolean
 }
 
-
 export const Collection = ({item, full}: PropsType) => {
 
     const navigate = useNavigate()
     const {t} = useTranslation();
     const isBigScreen = useMediaQuery({query: '(min-width: 800px)'})
+    const items=useAppSelector(state => state.items.collectionItems)
 
     return (
         <Card key={item._id}
@@ -34,7 +37,15 @@ export const Collection = ({item, full}: PropsType) => {
                     />
                 </div>
                 <div className={s.fieldsBox}>
-                    <div className={s.title}>{item.title}</div>
+                    <div className={s.title}>{item.title}
+                        {full &&
+                            <CSVLink data={items}>
+                            <Button
+                            type="text"
+                            size={"large"}
+                            icon={<DownloadOutlined/>}/>
+                            </CSVLink>}
+                    </div>
                     <div className={s.field}>{t("theme")}: {item.theme}</div>
                     <div
                         className={s.field}>{t("dateOfCreation")}: {dateFormatter(item.creationDate)}</div>
@@ -43,7 +54,9 @@ export const Collection = ({item, full}: PropsType) => {
                         && <div className={full ? s.descriptionContainerFull : s.descriptionContainer}>
                         {item.description}
                     </div>}
+
                 </div>
+
             </div>
         </Card>
     );

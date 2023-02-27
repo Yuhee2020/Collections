@@ -126,7 +126,7 @@ export const CollectionModal = ({userId, edit, collection}: PropsType) => {
                             />
                         </Form.Item>
                         <ImageUploader setImageUrl={setImageUrl}/>
-                        <Form.Item>
+                        <Form.Item className={s.transfer}>
                             {t("selectFields")}
                             <TransferFields itemsFields={collection?.itemsFields} setItemsFields={setItemsFields}/>
                         </Form.Item>

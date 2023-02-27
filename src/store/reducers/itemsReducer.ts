@@ -59,7 +59,7 @@ export const getItemsTC = createAsyncThunk("items/getItems",
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
         } finally {
-            dispatch(setItemsIsLoading(false))
+            dispatch(setItemsAreLoading(false))
         }
     })
 
@@ -142,7 +142,7 @@ export const slice = createSlice({
         setSearch(state, action: PayloadAction<string>) {
             state.searchText = action.payload
         },
-        setItemsIsLoading(state, action: PayloadAction<boolean>) {
+        setItemsAreLoading(state, action: PayloadAction<boolean>) {
             state.itemsIsLoading = action.payload
         }
     },
@@ -177,4 +177,4 @@ export const slice = createSlice({
 })
 
 export const itemsReducer = slice.reducer
-export const {setSearch, setItemsIsLoading} = slice.actions
+export const {setSearch, setItemsAreLoading} = slice.actions

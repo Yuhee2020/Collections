@@ -8,7 +8,7 @@ import {Collection} from "../../components/collection/Collection";
 export function BiggestCollections() {
 
     const dispatch = useAppDispatch()
-    const {collections, collectionsIsLoading} = useAppSelector(state => state.collections)
+    const {collections, collectionsAreLoading} = useAppSelector(state => state.collections)
 
     useEffect(() => {
         dispatch(getCollectionsTC())
@@ -17,16 +17,16 @@ export function BiggestCollections() {
     return (
         <div className={s.listContainer}>
             <List
-                loading={collectionsIsLoading}
+                loading={collectionsAreLoading}
                 itemLayout="vertical"
                 size="small"
                 pagination={{pageSize: 10}}
                 dataSource={collections}
                 renderItem={(item) => (
-                    <Collection item={item}/>
+                    <div className={s.collection}><Collection item={item}/></div>
                 )}
-            />
-        </div>)
+            /></div>
+    )
 }
 
 

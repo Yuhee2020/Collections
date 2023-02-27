@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 import {COLLECTION} from "../../rotes/Rotes";
 import {noImage} from "../../../constants";
 import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
-import s from "./UsersCollections.module.scss"
+import s from "./UserCollections.module.scss"
 import {
     deleteCollectionTC,
     getCollectionsTC
@@ -19,12 +19,13 @@ type PropsType = {
     userId?: string
 }
 
-export const UsersCollections = ({userId}: PropsType) => {
+export const UserCollections = ({userId}: PropsType) => {
 
     const dispatch = useAppDispatch()
     const {t} = useTranslation();
     const isMobileScreen = useMediaQuery({query: '(max-width: 530px)'})
     const collections = useAppSelector(state => state.collections.collections)
+    const collectionsAreLoading= useAppSelector(state => state.collections.collectionsAreLoading)
     const deleteCollection = (collectionId: string) => {
         userId && dispatch(deleteCollectionTC({collectionId, userId}))
     }
@@ -38,6 +39,7 @@ export const UsersCollections = ({userId}: PropsType) => {
         <Card className={s.userCollectionsBox}>
             <div className={s.mainTitle}>{t("userCollections")}</div>
             <List
+                loading={collectionsAreLoading}
                 itemLayout="vertical"
                 pagination={{
                     pageSize: 10,

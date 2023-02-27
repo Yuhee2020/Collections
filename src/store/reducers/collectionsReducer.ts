@@ -21,7 +21,7 @@ export const createCollectionTC = createAsyncThunk("collection/createCollection"
 
 export const getCollectionsTC = createAsyncThunk("collections/getUserCollections",
     async (params: string | undefined, {dispatch}) => {
-        dispatch(setCollectionsIsLoading(true))
+        dispatch(setCollectionsAreLoading(true))
         try {
             const res =await collectionsApi.getCollections(params)
            if ( params) {
@@ -32,7 +32,7 @@ export const getCollectionsTC = createAsyncThunk("collections/getUserCollections
         } catch (err: any) {
             dispatch(setAppError(err.response.data.message))
         } finally {
-            dispatch(setCollectionsIsLoading(false))
+            dispatch(setCollectionsAreLoading(false))
         }
     })
 
@@ -94,7 +94,7 @@ export const getCollectionTC = createAsyncThunk("collections/getCollection",
 export const slice = createSlice({
     name: "collections",
     initialState: {
-        collectionsIsLoading:false,
+        collectionsAreLoading:false,
         collectionImageUrl: "",
         collections: [] as CollectionType[],
         collection: {} as CollectionType
@@ -106,8 +106,8 @@ export const slice = createSlice({
         setCollections(state, action: PayloadAction<CollectionType[]>) {
             state.collections = action.payload
         },
-        setCollectionsIsLoading(state, action: PayloadAction<boolean>) {
-            state.collectionsIsLoading = action.payload
+        setCollectionsAreLoading(state, action: PayloadAction<boolean>) {
+            state.collectionsAreLoading = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -124,4 +124,4 @@ export const slice = createSlice({
 })
 
 export const collectionsReducer = slice.reducer
-export const {setCollection, setCollections,setCollectionsIsLoading} = slice.actions
+export const {setCollection, setCollections,setCollectionsAreLoading} = slice.actions

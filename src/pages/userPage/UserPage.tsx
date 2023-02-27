@@ -4,7 +4,7 @@ import s from "./UserPage.module.scss"
 import {useParams} from "react-router-dom";
 import {setUserProfile} from "../../store/reducers/usersReducer";
 import {UserProfile} from "./userProfile/UserProfile";
-import {UsersCollections} from "./userCollections/UsersCollections";
+import {UserCollections} from "./userCollections/UserCollections";
 import {BackTo} from "../../components/backTo/BackTo";
 
 
@@ -22,7 +22,7 @@ export const UserPage = () => {
             <BackTo/>
             <div className={s.userPageContainer}>
                 <UserProfile user={user}/>
-                <UsersCollections userId={user?._id}/>
+                <UserCollections userId={user?._id}/>
             </div>
         </>
     );

@@ -1,11 +1,10 @@
 .collectionContainer {
-  max-width: 980px;
+  width: 75%;
   margin: 0 10px 10px  0 ;
-  height: 300px;
   transition: transform .2s;
   cursor: pointer;
   @media (max-width: 800px) {
-    height: 100%;
+    width: 100%;
     margin: 0 10px 10px  0 ;
   }
 
@@ -32,6 +31,8 @@
         font-size: 25px;
         font-weight: bold;
         margin-bottom: 10px;
+        display: flex;
+        align-items: center;
       }
 
       .field {

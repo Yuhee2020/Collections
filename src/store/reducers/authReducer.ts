@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {setAppError, setAuthInProgress, setLoading, setSuccessMessage} from "./appReducer";
+import {setAppError, setLoading, setSuccessMessage} from "./appReducer";
 import {authApi, AuthDataType, UserType} from "../../api/authApi";
 
 
@@ -34,7 +34,7 @@ export const loginTC = createAsyncThunk("auth/login", async (params: AuthDataTyp
 export const logoutTC = createAsyncThunk("auth/logout", async (params, {dispatch}) => {
     dispatch(setLoading(true))
     try {
-        const res=await authApi.logout()
+        await authApi.logout()
         localStorage.removeItem("token")
         dispatch(setIsLogin(false))
         dispatch(setUser(null))
@@ -47,7 +47,6 @@ export const logoutTC = createAsyncThunk("auth/logout", async (params, {dispatch
 
 export const authTC = createAsyncThunk("auth/auth", async (params, {dispatch}) => {
     dispatch(setLoading(true))
-    dispatch(setAuthInProgress(true))
     try {
         const res= await authApi.auth()
         localStorage.setItem("token", res.data.loggedUser.accessToken)
@@ -56,7 +55,6 @@ export const authTC = createAsyncThunk("auth/auth", async (params, {dispatch}) =
     } catch (err: any) {
     } finally {
         dispatch(setLoading(false))
-        dispatch(setAuthInProgress(false))
     }
 })
 

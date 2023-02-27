@@ -1,5 +1,11 @@
 import React from 'react';
-import {MenuUnfoldOutlined} from '@ant-design/icons';
+import {
+    MenuUnfoldOutlined,
+    ProfileOutlined,
+    ScheduleOutlined,
+    UserOutlined,
+    ReconciliationOutlined
+} from '@ant-design/icons';
 import type {MenuProps} from 'antd';
 import {Button, Dropdown} from 'antd';
 import {ADMIN_PAGE, BIGGEST_COLLECTIONS, ROOT, USER_PAGE} from "../../pages/rotes/Rotes";
@@ -15,37 +21,34 @@ export const HeaderMenu = () => {
     const isLoggedIn = useAppSelector(state => state.auth.isLogin)
     const isAdmin = useAppSelector(state => state.auth.isAdmin)
 
-    const changeClassname=({isActive}:{isActive: boolean}) =>
+    const changeClassname = ({isActive}: { isActive: boolean }) =>
         isActive ? s.activeNavLink : s.navLink
 
     const items: MenuProps['items'] = [
         {
-            label: <NavLink  className={changeClassname} to={ROOT}>{t("lastAdded")}</NavLink>,
+            label: <NavLink className={changeClassname}
+                            to={ROOT}><ScheduleOutlined/> {t("lastAdded")}</NavLink>,
             key: '0',
         },
         {
-            type: 'divider',
-        },
-        {
-            label: <NavLink className={changeClassname} to={BIGGEST_COLLECTIONS}>{t("largestCollection")}</NavLink>,
+            label: <NavLink className={changeClassname}
+                            to={BIGGEST_COLLECTIONS}><ProfileOutlined/> {t("largestCollection")}
+            </NavLink>,
             key: '1',
         },
         {
-            type: 'divider',
-        },
-        {
-            label: isLoggedIn && <NavLink className={changeClassname} to={USER_PAGE}>{t("userPage")}</NavLink>,
+            label: isLoggedIn && <NavLink className={changeClassname}
+                                          to={USER_PAGE}><UserOutlined/> {t("userPage")}
+            </NavLink>,
             key: '3',
         },
         {
-            type: 'divider',
-        },
-        {
             label: isAdmin && isLoggedIn &&
-                <NavLink className={changeClassname} to={ADMIN_PAGE}>{t("adminPage")}</NavLink>,
-        key: '4',
-},
-];
+                <NavLink className={changeClassname}
+                         to={ADMIN_PAGE}><ReconciliationOutlined /> {t("adminPage")}</NavLink>,
+            key: '4',
+        },
+    ];
 
     return (
         <Dropdown

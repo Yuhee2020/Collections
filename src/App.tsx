@@ -9,32 +9,30 @@ import {getLanguageTC, getThemeTC} from "./store/reducers/appReducer";
 import {AppMessagesBar} from "./components/appMessagesBar/AppMessagesBar";
 import {AppSearch} from "./components/appSearch/AppSearch";
 import {useMediaQuery} from "react-responsive";
+import {Spin} from "antd";
 
 
 function App() {
 
     const dispatch = useAppDispatch()
-
-    const authInProgress = useAppSelector(state => state.app.authInProgress)
     const isBigScreen = useMediaQuery({ query: '(min-width: 800px)' })
-
+    const isLoading=useAppSelector(state => state.app.isLoading)
     useEffect(() => {
         dispatch(getThemeTC())
         dispatch(getLanguageTC())
         localStorage.getItem('token') && dispatch(authTC())
     }, [])
 
-    if (authInProgress) {
-        return <div>Loading</div>
-    }
     return (
         <ThemeProvider>
             <AppHeader/>
+            <Spin wrapperClassName="spin" spinning={isLoading} size={"large"}>
             {!isBigScreen && <div className="search"><AppSearch/></div>}
             <div className="rotes">
                 <Routing/>
             </div>
             <AppMessagesBar/>
+            </Spin>
         </ThemeProvider>
     );
 }

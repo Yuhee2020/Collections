@@ -8,6 +8,7 @@ import {dateFormatter} from "../../../utils/dateFormatter";
 import {LikeOutlined} from "@ant-design/icons";
 import {useAppSelector} from "../../../store/reducers/Store";
 import {useTranslation} from "react-i18next";
+import ReactMarkdown from "react-markdown";
 
 const Item = () => {
     const {t} = useTranslation();
@@ -44,7 +45,7 @@ const Item = () => {
                     src={image ? image : noImage}/>
                 <div>
                     <Meta
-                        title={title}
+                        title={<div className={s.title}>{title}</div>}
                         description={tags?.map(tag => <Tag key={tag}>{tag}</Tag>)}
                     />
                     <ItemField fieldTitle={t("dateOfCreation")}>{dateFormatter(itemCreationDate)}</ItemField>
@@ -75,10 +76,10 @@ const Item = () => {
                         ? <Badge status="success" text="YES"/>
                         : <Badge status="error" text="NO"/>}</ItemField>}
             </div>
-            {description && <ItemField fieldTitle={t("descriptions")}>{description}</ItemField>}
-            {historyOfCreation && <ItemField fieldTitle={t("historyOfCreation")}>{historyOfCreation}</ItemField>}
+            {description && <ItemField fieldTitle={t("descriptions")}><ReactMarkdown>{description}</ReactMarkdown></ItemField>}
+            {historyOfCreation && <ItemField fieldTitle={t("historyOfCreation")}><ReactMarkdown>{historyOfCreation}</ReactMarkdown></ItemField>}
             {uniqueCharacteristics &&
-                <ItemField fieldTitle={t("uniqueCharacteristics")}>{uniqueCharacteristics}</ItemField>}
+                <ItemField fieldTitle={t("uniqueCharacteristics")}><ReactMarkdown>{uniqueCharacteristics}</ReactMarkdown></ItemField>}
         </Card>
     );
 };
