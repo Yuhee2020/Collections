@@ -6,7 +6,7 @@ import {ADMIN_PAGE, BIGGEST_COLLECTIONS, ROOT, USER_PAGE} from "../../pages/rote
 import {NavLink} from "react-router-dom";
 import {useAppSelector} from "../../store/reducers/Store";
 import {useTranslation} from "react-i18next";
-import s from "./HeaderMenu.module.css"
+import s from "./HeaderMenu.module.scss"
 
 
 export const HeaderMenu = () => {
@@ -51,7 +51,7 @@ export const HeaderMenu = () => {
         <Dropdown
             menu={{items}}
             trigger={['click']}>
-            <Button icon={<MenuUnfoldOutlined className={s.icon}/>}type="text"/>
+            <Button icon={<MenuUnfoldOutlined className={s.icon}/>} type="text"/>
         </Dropdown>
     )
 };

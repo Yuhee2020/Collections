@@ -1,5 +1,5 @@
 import React from 'react';
-import s from "./ItemField.module.css"
+import s from "./ItemField.module.scss"
 
 type PropsType={
     fieldTitle?:string | null

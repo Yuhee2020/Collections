@@ -2,10 +2,9 @@ import React from "react";
 import {useFormik} from 'formik';
 import {Button, Card, Form, Input} from "antd";
 import {LockOutlined, UserOutlined} from '@ant-design/icons';
-import s from "./Registration.module.css"
+import s from "./Registration.module.scss"
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../store/reducers/Store";
-
 import {registerTC} from "../../store/reducers/authReducer";
 import {LOGIN} from "../rotes/Rotes";
 import {validate} from "../../utils/validation";

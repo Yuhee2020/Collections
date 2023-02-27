@@ -14,7 +14,7 @@ export const CollectionItems = () => {
     const {collectionId} = useParams()
 
     const items = useAppSelector(state => state.items.collectionItems)
-    const collection=useAppSelector(state => state.collections.collection)
+    const collection = useAppSelector(state => state.collections.collection)
 
     useEffect(() => {
         if (collectionId) {
@@ -27,7 +27,10 @@ export const CollectionItems = () => {
             <BackTo/>
             <div className={s.container}>
                 <Collection item={collection} full/>
-                <ItemsList searchText={''} items={items} isLoading={false}/>
+                    <ItemsList
+                        searchText={''}
+                        items={items}
+                        isLoading={false}/>
             </div>
         </>
     );

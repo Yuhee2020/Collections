@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import s from "../ItemModal.module.css"
+import s from "../ItemModal.module.scss"
 import {Button, Checkbox, DatePicker, Form, Input, InputNumber, Select} from "antd";
 import MDEditor from "@uiw/react-md-editor";
 import {ImageUploader} from "../../imageUploader/ImageUploader";

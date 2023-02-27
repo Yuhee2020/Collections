@@ -7,7 +7,7 @@ import {
     LockOutlined,
     UserOutlined
 } from '@ant-design/icons';
-import s from "./Login.module.css"
+import s from "./Login.module.scss"
 import {Navigate, useLocation, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {validate} from "../../utils/validation";
@@ -44,8 +44,6 @@ export const Login = () => {
     if (isLoggedIn) {
         return <Navigate to={ROOT}/>
     }
-
-
 
     return (
         <div className={s.loginContainer}>

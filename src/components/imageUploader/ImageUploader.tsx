@@ -3,7 +3,7 @@ import {storage} from "../../firebase";
 import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {FileUploader} from "react-drag-drop-files";
 import {Progress} from "antd";
-import s from "./imageUploader.module.css"
+import s from "./imageUploader.module.scss"
 
 
 type PropsType={

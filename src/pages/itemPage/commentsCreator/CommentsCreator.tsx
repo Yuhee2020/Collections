@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Button, Card} from "antd";
 import TextArea from "antd/es/input/TextArea";
-import s from "./CommentsCreator.module.css"
+import s from "./CommentsCreator.module.scss"
 import {COMMENT_AREA_ROWS, MAX_COMMENT_LENGTH} from "../../../constants";
 import {CommentOutlined} from "@ant-design/icons";
 import {useAppDispatch} from "../../../store/reducers/Store";

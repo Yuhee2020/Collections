@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Form, Input, Modal, Select} from "antd";
 import {AppstoreAddOutlined, EditOutlined} from "@ant-design/icons";
 import {useFormik} from "formik";
-import s from "./CollectionModal.module.css"
+import s from "./CollectionModal.module.scss"
 import MDEditor from "@uiw/react-md-editor";
 import {useAppDispatch} from "../../store/reducers/Store";
 import {validateAddCollectionForm} from "../../utils/addCollectionFormValidation";
@@ -131,8 +131,7 @@ export const CollectionModal = ({userId, edit, collection}: PropsType) => {
                             <TransferFields itemsFields={collection?.itemsFields} setItemsFields={setItemsFields}/>
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit"
-                                    className={s.loginFormButton}>
+                            <Button type="primary" htmlType="submit">
                                 {edit? t("editCollection") : t("createCollection")}
                             </Button>
                         </Form.Item>

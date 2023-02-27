@@ -1,6 +1,6 @@
 import { Alert } from 'antd';
 import React from 'react';
-import s from "./AppMessagesBar.module.css"
+import s from "./AppMessagesBar.module.scss"
 import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {setAppError} from "../../store/reducers/appReducer";
 
