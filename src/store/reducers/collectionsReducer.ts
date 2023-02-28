@@ -92,12 +92,12 @@ export const editCollectionTC = createAsyncThunk(
           ),
         ),
       )
-      if (params.oldImage && params.oldImage !== params.collection.image) {
-        const storage = getStorage()
-        const desertRef = ref(storage, params.oldImage)
-
-        await deleteObject(desertRef)
-      }
+      // if (params.oldImage && params.oldImage !== params.collection.image) {
+      //   const storage = getStorage()
+      //   const desertRef = ref(storage, params.oldImage)
+      //
+      //   await deleteObject(desertRef)
+      // }
     } catch (err: any) {
       dispatch(setAppError(err.response.data.message))
     } finally {

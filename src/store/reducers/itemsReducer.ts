@@ -115,12 +115,12 @@ export const editItemTC = createAsyncThunk(
 
       params.newItem.tags && dispatch(createTagsTC(params.newItem.tags))
       dispatch(getCollectionItemsTC(params.newItem.collectionId))
-      if (params.oldImage && params.oldImage !== params.newItem.image) {
-        const storage = await getStorage()
-        const desertRef = await ref(storage, params.oldImage)
-
-        await deleteObject(desertRef)
-      }
+      // if (params.oldImage && params.oldImage !== params.newItem.image) {
+      //   const storage = await getStorage()
+      //   const desertRef = await ref(storage, params.oldImage)
+      //
+      //   await deleteObject(desertRef)
+      // }
 
       return res.data.updatedItem
     } catch (err: any) {
