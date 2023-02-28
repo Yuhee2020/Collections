@@ -31,7 +31,7 @@
 - App support export collection to CSV-file.
 
 
-### Used front-end technologies and libraries:
+#### Used front-end technologies and libraries:
 
 - React js
 - Typescript
@@ -46,14 +46,14 @@
 - React-markdown
 
 
-### Used [back-end](https://github.com/Yuhee2020/course-project-back) technologies:
+#### Used [back-end](https://github.com/Yuhee2020/course-project-back) technologies:
 
 - nodejs
 - express
 - mongoose
 - jsonwebtoken
 
-### For readable code used
+#### For readable code used
 
 - prettier
 - esLint
