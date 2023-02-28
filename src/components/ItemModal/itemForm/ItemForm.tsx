@@ -242,7 +242,7 @@ export const ItemForm = ({ showModal, collection, edit, item }: PropsType) => {
           />
         </Form.Item>
       )}
-      <ImageUploader setImageUrl={setImageUrl} />
+      <ImageUploader setImageUrl={setImageUrl} id={formik.values._id} />
       <Form.Item>
         <Button type="primary" htmlType="submit" className={s.loginFormButton}>
           {edit ? t('editItem') : t('addItem')}

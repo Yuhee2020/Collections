@@ -150,7 +150,7 @@ export const CollectionModal = ({ userId, edit, collection }: PropsType) => {
                 placeholder="description"
               />
             </Form.Item>
-            <ImageUploader setImageUrl={setImageUrl} />
+            <ImageUploader setImageUrl={setImageUrl} id={formik.values.title} />
             <Form.Item className={s.transfer}>
               {t('selectFields')}
               <TransferFields

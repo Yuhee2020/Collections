@@ -80,12 +80,6 @@ export const editCollectionTC = createAsyncThunk(
       const state = getState() as StateType
       const { collections } = state.collections
 
-      if (params.oldImage && params.oldImage !== params.collection.image) {
-        const storage = getStorage()
-        const desertRef = ref(storage, params.oldImage)
-
-        await deleteObject(desertRef)
-      }
       const res = await collectionsApi.editUserCollections(params.collection)
 
       dispatch(setCollection(res.data.updatedCollection))
@@ -98,6 +92,12 @@ export const editCollectionTC = createAsyncThunk(
           ),
         ),
       )
+      if (params.oldImage && params.oldImage !== params.collection.image) {
+        const storage = getStorage()
+        const desertRef = ref(storage, params.oldImage)
+
+        await deleteObject(desertRef)
+      }
     } catch (err: any) {
       dispatch(setAppError(err.response.data.message))
     } finally {

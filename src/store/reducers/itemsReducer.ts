@@ -113,10 +113,11 @@ export const editItemTC = createAsyncThunk(
     try {
       const res = await itemsApi.editItem(params.newItem)
 
+      params.newItem.tags && dispatch(createTagsTC(params.newItem.tags))
       dispatch(getCollectionItemsTC(params.newItem.collectionId))
       if (params.oldImage && params.oldImage !== params.newItem.image) {
-        const storage = getStorage()
-        const desertRef = ref(storage, params.oldImage)
+        const storage = await getStorage()
+        const desertRef = await ref(storage, params.oldImage)
 
         await deleteObject(desertRef)
       }

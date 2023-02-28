@@ -15,6 +15,7 @@ export const createTagsTC = createAsyncThunk(
       const uniqueTags = params.filter(tag => tags.indexOf(tag) < 0)
       const uniqueTagsForBack = uniqueTags.map(tag => ({ title: tag }))
 
+      console.log(uniqueTagsForBack)
       if (uniqueTagsForBack.length) {
         const res = await tagsApi.createTags(uniqueTagsForBack)
 

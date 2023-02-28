@@ -11,14 +11,15 @@ import s from './imageUploader.module.scss'
 
 type PropsType = {
   setImageUrl: (url: string) => void
+  id?: string
 }
 
-export const ImageUploader = ({ setImageUrl }: PropsType) => {
+export const ImageUploader = ({ setImageUrl, id }: PropsType) => {
   const fileTypes = ['JPG', 'PNG', 'GIF', 'JPEG']
   const [percent, setPercent] = useState(0)
 
   const handleUpload = (file: File) => {
-    const storageRef = ref(storage, `/files/${file?.name}`)
+    const storageRef = ref(storage, `/files/${id}${file?.name}`)
     const uploadTask = uploadBytesResumable(storageRef, file)
 
     uploadTask.on(

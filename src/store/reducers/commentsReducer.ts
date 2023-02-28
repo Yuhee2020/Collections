@@ -4,11 +4,12 @@ import { CommentType } from '../../api/commentsApi'
 import { commentsApi } from '../../api/commentsApi/commentsApi'
 import { StateType } from '../../hooks'
 
-import { setAppError } from './appReducer'
+import { setAppError, setLoading } from './appReducer'
 
 export const addCommentTC = createAsyncThunk(
   'comments/addComment',
   async (params: { text: string; itemId: string }, { dispatch, getState }) => {
+    dispatch(setLoading(true))
     try {
       const state = getState() as StateType
 
@@ -25,6 +26,8 @@ export const addCommentTC = createAsyncThunk(
       }
     } catch (err: any) {
       dispatch(setAppError(err.response.data.message))
+    } finally {
+      dispatch(setLoading(false))
     }
   },
 )

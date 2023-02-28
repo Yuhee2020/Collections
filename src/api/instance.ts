@@ -5,7 +5,8 @@ import { unauthorized } from '../constants'
 import { authApi } from './authApi/authApi'
 
 export const instance = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  // baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: 'http://localhost:7000',
   withCredentials: true,
 })
 
