@@ -35,7 +35,7 @@ export const UserCollections = ({ userId }: PropsType) => {
 
   useEffect(() => {
     dispatch(getCollectionsTC(userId))
-  }, [])
+  }, [userId])
 
   return (
     <Card className={s.userCollectionsBox}>

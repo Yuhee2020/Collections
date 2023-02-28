@@ -31,7 +31,7 @@ export const AdminPage = () => {
 
   useEffect(() => {
     dispatch(getUsersTC())
-  }, [dispatch])
+  }, [])
 
   if (!isLoggedIn) {
     return <Navigate to={ROOT} />
