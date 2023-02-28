@@ -4,13 +4,13 @@ import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import s from "./Collection.module.scss"
 import {COLLECTION_ITEMS} from "../../pages/rotes/Rotes";
-import {noImage} from "../../constants";
 import {dateFormatter} from "../../utils/dateFormatter";
-import {CollectionType} from "../../api/collectionsApi";
 import {useMediaQuery} from "react-responsive";
 import { DownloadOutlined } from '@ant-design/icons';
 import { CSVLink} from "react-csv";
-import {useAppSelector} from "../../store/reducers/Store";
+import {useAppSelector} from "../../hooks";
+import {CollectionType} from "../../api/collectionsApi";
+import {noImage} from "../../images/noImage";
 
 type PropsType = {
     item: CollectionType

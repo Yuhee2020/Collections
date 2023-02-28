@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import './App.scss';
-import {useAppDispatch, useAppSelector} from "./store/reducers/Store";
 import {ThemeProvider} from "./components/themeProvider/ThemeProvider";
 import {AppHeader} from "./components/appHeader/AppHeader";
 import {authTC} from "./store/reducers/authReducer";
@@ -10,6 +9,7 @@ import {AppMessagesBar} from "./components/appMessagesBar/AppMessagesBar";
 import {AppSearch} from "./components/appSearch/AppSearch";
 import {useMediaQuery} from "react-responsive";
 import {Spin} from "antd";
+import {useAppDispatch, useAppSelector} from "./hooks";
 
 
 function App() {

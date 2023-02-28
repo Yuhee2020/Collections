@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {getUsersTC} from "../../store/reducers/usersReducer";
 import {Card, Checkbox, List} from "antd";
 import {Navigate, NavLink} from "react-router-dom";
@@ -8,6 +7,7 @@ import s from "./AdminPage.module.scss"
 import {Toolbar} from "./toolbar/Toolbar";
 import {ItemField} from "../../components/itemField/ItemField";
 import {useTranslation} from "react-i18next";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 
 
 export const AdminPage = () => {

@@ -4,11 +4,11 @@ import {Button, Card, Form, Input} from "antd";
 import {LockOutlined, UserOutlined} from '@ant-design/icons';
 import s from "./Registration.module.scss"
 import {useNavigate} from "react-router-dom";
-import {useAppDispatch} from "../../store/reducers/Store";
 import {registerTC} from "../../store/reducers/authReducer";
 import {LOGIN} from "../rotes/Rotes";
-import {validate} from "../../utils/validation";
 import {useTranslation} from "react-i18next";
+import {useAppDispatch} from "../../hooks";
+import {validate} from "../../utils/authValidation";
 
 
 export const Registration = () => {
@@ -33,7 +33,6 @@ export const Registration = () => {
 
         },
     });
-
 
     return (
         <div className={s.registrationContainer}>

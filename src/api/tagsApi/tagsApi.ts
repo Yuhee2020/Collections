@@ -1,5 +1,6 @@
-import {instance} from "./instance";
+import {instance} from "../instance";
 import {AxiosResponse} from "axios";
+import {getTagsResponseType, TagType} from "./index";
 
 
 export const tagsApi = {
@@ -13,12 +14,3 @@ export const tagsApi = {
 }
 
 
-export type TagType = {
-    title: string
-    _id?: string
-}
-
-type getTagsResponseType={
-    message:string
-    tags:TagType[]
-}

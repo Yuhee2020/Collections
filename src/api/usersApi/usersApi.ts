@@ -1,6 +1,7 @@
-import {instance} from "./instance";
-import {UserType} from "./authApi";
+import {instance} from "../instance";
 import {AxiosResponse} from "axios";
+import {UserType} from "../authApi";
+import {UpdatedUserType, UserResponseType} from "./index";
 
 
 export const usersApi = {
@@ -16,15 +17,4 @@ export const usersApi = {
 }
 
 
-
-export  type UpdatedUserType={
-    id:string
-    isBlocked?:boolean
-    role?:string
-}
-
-type UserResponseType = {
-    message: string
-    users: UserType[]
-}
 

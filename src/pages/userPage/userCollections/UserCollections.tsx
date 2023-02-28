@@ -3,8 +3,6 @@ import {Avatar, Button, Card, Image, List, Popconfirm} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import {NavLink} from "react-router-dom";
 import {COLLECTION} from "../../rotes/Rotes";
-import {noImage} from "../../../constants";
-import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
 import s from "./UserCollections.module.scss"
 import {
     deleteCollectionTC,
@@ -13,6 +11,8 @@ import {
 import {useTranslation} from "react-i18next";
 import {CollectionModal} from "../../../components/collectionModal/CollectionModal";
 import {useMediaQuery} from "react-responsive";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
+import {noImage} from "../../../images/noImage";
 
 
 type PropsType = {

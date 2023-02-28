@@ -4,9 +4,9 @@ import TextArea from "antd/es/input/TextArea";
 import s from "./CommentsCreator.module.scss"
 import {COMMENT_AREA_ROWS, MAX_COMMENT_LENGTH} from "../../../constants";
 import {CommentOutlined} from "@ant-design/icons";
-import {useAppDispatch} from "../../../store/reducers/Store";
 import {addCommentTC} from "../../../store/reducers/commentsReducer";
 import {useTranslation} from "react-i18next";
+import {useAppDispatch} from "../../../hooks";
 
 type PropType = {
     itemId?: string

@@ -1,8 +1,9 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {setAppError, setLoading, setSuccessMessage} from "./appReducer";
-import {collectionsApi, CollectionType} from "../../api/collectionsApi";
+import {collectionsApi} from "../../api/collectionsApi/collectionsApi";
 import {deleteObject, getStorage, ref} from "firebase/storage";
-import {StateType} from "./Store";
+import {StateType} from "../../hooks";
+import {CollectionType} from "../../api/collectionsApi";
 
 
 export const createCollectionTC = createAsyncThunk("collection/createCollection",

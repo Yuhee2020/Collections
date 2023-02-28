@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {getItemTC} from "../../store/reducers/itemsReducer";
 import {BackTo} from "../../components/backTo/BackTo";
 import Item from "./item/Item";
 import s from "./ItemPage.module.scss"
 import {CommentsCreator} from "./commentsCreator/CommentsCreator";
 import {Comments} from "./comments/Comments";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 
 export const ItemPage = () => {
     const dispatch = useAppDispatch()

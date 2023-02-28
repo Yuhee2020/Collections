@@ -1,10 +1,10 @@
 import React, {ChangeEvent, useEffect} from 'react';
 import Search from "antd/es/input/Search";
 import {setItemsAreLoading, setSearch} from "../../store/reducers/itemsReducer";
-import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {useLocation, useNavigate} from "react-router-dom";
 import {ROOT} from "../../pages/rotes/Rotes";
 import {useTranslation} from "react-i18next";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 
 export const AppSearch = () => {
     const {pathname}=useLocation()

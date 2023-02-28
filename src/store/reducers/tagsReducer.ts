@@ -1,7 +1,8 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {setAppError} from "./appReducer";
-import {tagsApi, TagType} from "../../api/tagsApi";
-import {StateType} from "./Store";
+import {tagsApi} from "../../api/tagsApi/tagsApi";
+import {StateType} from "../../hooks";
+import {TagType} from "../../api/tagsApi";
 
 
 export const createTagsTC = createAsyncThunk("tags/createTags",
@@ -49,4 +50,3 @@ export const slice = createSlice({
 })
 
 export const tagsReducer = slice.reducer
-export const {} = slice.actions

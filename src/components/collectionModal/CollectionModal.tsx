@@ -4,7 +4,6 @@ import {AppstoreAddOutlined, EditOutlined} from "@ant-design/icons";
 import {useFormik} from "formik";
 import s from "./CollectionModal.module.scss"
 import MDEditor from "@uiw/react-md-editor";
-import {useAppDispatch} from "../../store/reducers/Store";
 import {validateAddCollectionForm} from "../../utils/addCollectionFormValidation";
 import {COLLECTIONS_THEMES} from "../../constants";
 import {
@@ -13,8 +12,9 @@ import {
 } from "../../store/reducers/collectionsReducer";
 import {ImageUploader} from "../imageUploader/ImageUploader";
 import {TransferFields} from "../transferFields/TransferFields";
-import {CollectionType} from "../../api/collectionsApi";
 import {useTranslation} from "react-i18next";
+import {useAppDispatch} from "../../hooks";
+import {CollectionType} from "../../api/collectionsApi";
 
 
 type PropsType = {

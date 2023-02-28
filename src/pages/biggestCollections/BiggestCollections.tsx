@@ -1,9 +1,9 @@
 import React, {useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {getCollectionsTC} from "../../store/reducers/collectionsReducer";
 import {List} from "antd";
 import s from "./BiggestCollections.module.scss"
 import {Collection} from "../../components/collection/Collection";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 
 export function BiggestCollections() {
 

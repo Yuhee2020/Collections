@@ -1,14 +1,14 @@
 import React from 'react';
 import s from "./Item.module.scss";
 import {Badge, Card, Image, Tag} from "antd";
-import {noImage} from "../../../constants";
 import Meta from "antd/es/card/Meta";
 import {ItemField} from "../../../components/itemField/ItemField";
 import {dateFormatter} from "../../../utils/dateFormatter";
 import {LikeOutlined} from "@ant-design/icons";
-import {useAppSelector} from "../../../store/reducers/Store";
 import {useTranslation} from "react-i18next";
 import ReactMarkdown from "react-markdown";
+import {useAppSelector} from "../../../hooks";
+import {noImage} from "../../../images/noImage";
 
 const Item = () => {
     const {t} = useTranslation();

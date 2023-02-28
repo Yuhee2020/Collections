@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import CollectionCard from "./collectionCard/CollectionCard";
 import {getCollectionTC} from "../../store/reducers/collectionsReducer";
 import {ItemsTable} from "./itemsTable/ItemsTable";
 import {BackTo} from "../../components/backTo/BackTo";
 import s from "./CollectionPage.module.scss"
+import {useAppDispatch, useAppSelector} from "../../hooks";
 
 
 export const CollectionPage = () => {

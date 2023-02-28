@@ -1,18 +1,18 @@
 import React from 'react';
 import {LikeOutlined, MessageOutlined} from '@ant-design/icons';
 import {Button, Card, Image, List, Tag} from 'antd';
-import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
 import {likeItemTC} from "../../../store/reducers/itemsReducer";
-import {noImage} from "../../../constants";
 import s from "./ItemsList.module.scss"
 import Highlight from 'react-highlighter';
-import {ItemType} from "../../../api/itemsApi";
 import {NavLink} from "react-router-dom";
 import {COLLECTION_ITEMS, ITEM} from "../../rotes/Rotes";
 import {dateFormatter} from "../../../utils/dateFormatter";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "react-responsive";
 import ReactMarkdown from 'react-markdown'
+import {useAppDispatch, useAppSelector} from "../../../hooks";
+import {ItemType} from "../../../api/itemsApi";
+import {noImage} from "../../../images/noImage";
 
 type PropsType = {
     items: ItemType[]

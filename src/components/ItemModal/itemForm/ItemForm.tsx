@@ -4,14 +4,14 @@ import {Button, Checkbox, DatePicker, Form, Input, InputNumber, Select} from "an
 import MDEditor from "@uiw/react-md-editor";
 import {ImageUploader} from "../../imageUploader/ImageUploader";
 import {useFormik} from "formik";
-import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
 import dayjs, {Dayjs} from "dayjs";
 import {getTagsTC} from "../../../store/reducers/tagsReducer";
 import {createItemTC, editItemTC} from "../../../store/reducers/itemsReducer";
-import {CollectionType} from "../../../api/collectionsApi";
 import {validateAddItemForm} from "../../../utils/addItemFormValidation";
-import {ItemType} from "../../../api/itemsApi";
 import {useTranslation} from "react-i18next";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
+import {CollectionType} from "../../../api/collectionsApi";
+import {ItemType} from "../../../api/itemsApi";
 
 type PropsType = {
     showModal: () => void

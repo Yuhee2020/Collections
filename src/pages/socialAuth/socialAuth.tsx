@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {authTC} from "../../store/reducers/authReducer";
-import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {ROOT} from "../rotes/Rotes";
 import {Navigate} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 
 export const SocialAuth = () => {
     const dispatch =useAppDispatch()

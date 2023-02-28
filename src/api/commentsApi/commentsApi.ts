@@ -1,5 +1,6 @@
-import {instance} from "./instance";
+import {instance} from "../instance";
 import {AxiosResponse} from "axios";
+import {CommentType, getCommentsResponseType} from "./index";
 
 
 export const commentsApi = {
@@ -13,16 +14,3 @@ export const commentsApi = {
 }
 
 
-export  type CommentType={
-    _id?:string,
-    itemId: string,
-    text:string,
-    userId: string,
-    userName:string,
-    creationDate?:Date,
-}
-
-type getCommentsResponseType={
-    message:string
-    comments:CommentType[]
-}

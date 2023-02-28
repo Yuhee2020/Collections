@@ -10,9 +10,9 @@ import type {MenuProps} from 'antd';
 import {Button, Dropdown} from 'antd';
 import {ADMIN_PAGE, BIGGEST_COLLECTIONS, ROOT, USER_PAGE} from "../../pages/rotes/Rotes";
 import {NavLink} from "react-router-dom";
-import {useAppSelector} from "../../store/reducers/Store";
 import {useTranslation} from "react-i18next";
 import s from "./HeaderMenu.module.scss"
+import {useAppSelector} from "../../hooks";
 
 
 export const HeaderMenu = () => {

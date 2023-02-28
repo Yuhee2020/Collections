@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
 import {Provider} from "react-redux";
-import {store} from "./store/reducers/Store";
+import {store} from "./store/Store";
 import {BrowserRouter} from "react-router-dom";
 import './i18n';
 
@@ -20,3 +20,4 @@ root.render(
 );
 
 
+export {noImage} from "./images/noImage";

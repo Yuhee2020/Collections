@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {setAppError, setLoading, setSuccessMessage} from "./appReducer";
-import {authApi, AuthDataType, UserType} from "../../api/authApi";
+import {authApi} from "../../api/authApi/authApi";
+import {AuthDataType, UserType} from "../../api/authApi";
 
 
 export const registerTC = createAsyncThunk("auth/register", async (params: AuthDataType, {dispatch}) => {

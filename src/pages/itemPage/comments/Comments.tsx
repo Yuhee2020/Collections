@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {getCommentsTC} from "../../../store/reducers/commentsReducer";
-import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
 import {Comment} from "../../../components/comment/Comment";
 import s from "./Comments.module.scss"
+import {useAppDispatch, useAppSelector} from "../../../hooks";
 
 type PropsType = {
     itemId?: string

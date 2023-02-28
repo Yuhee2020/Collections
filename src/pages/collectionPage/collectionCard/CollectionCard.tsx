@@ -1,9 +1,7 @@
 import React from 'react';
 import {Avatar, Button, Card, Collapse, Image, List, Popconfirm} from "antd";
-import {CollectionType} from "../../../api/collectionsApi";
 import s from "./CollectionCard.module.scss"
 import {DeleteOutlined} from "@ant-design/icons";
-import {useAppDispatch} from "../../../store/reducers/Store";
 import {useNavigate} from "react-router-dom";
 import {USER_PAGE} from "../../rotes/Rotes";
 import dayjs from "dayjs";
@@ -13,6 +11,8 @@ import {useTranslation} from "react-i18next";
 import {CollectionModal} from "../../../components/collectionModal/CollectionModal";
 import {ItemModal} from "../../../components/ItemModal/ItemModal";
 import {useMediaQuery} from "react-responsive";
+import {useAppDispatch} from "../../../hooks";
+import {CollectionType} from "../../../api/collectionsApi";
 
 
 type PropsType = {

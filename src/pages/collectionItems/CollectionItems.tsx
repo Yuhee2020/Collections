@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import {ItemsList} from "../lastAddedItemsPage/ItemsList/ItemsList";
 import {useParams} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {getCollectionItemsTC} from "../../store/reducers/itemsReducer";
 import {BackTo} from "../../components/backTo/BackTo";
 import s from "./CollectionItems.module.scss"
 import {Collection} from "../../components/collection/Collection";
 import {getCollectionTC} from "../../store/reducers/collectionsReducer";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 
 export const CollectionItems = () => {
 

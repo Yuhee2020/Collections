@@ -3,7 +3,6 @@ import {Button, Select, Switch} from "antd";
 import s from "./AppHeader.module.scss"
 import {Moon} from "./icons/Moon";
 import {Sun} from "./icons/Sun";
-import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
 import {LanguageType, setLanguageTC, setThemeTC} from "../../store/reducers/appReducer";
 import {useNavigate} from "react-router-dom";
 import {LOGIN} from "../../pages/rotes/Rotes";
@@ -12,6 +11,7 @@ import {BreadCrumbs} from "../breadCrumbs/BreadCrumbs";
 import {AppSearch} from "../appSearch/AppSearch";
 import {useMediaQuery} from "react-responsive";
 import {HeaderMenu} from "../headerMenu/HeaderMenu";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 
 
 export const AppHeader = () => {

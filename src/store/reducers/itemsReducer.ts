@@ -1,11 +1,12 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {setAppError, setLoading, setSuccessMessage} from "./appReducer";
-import {itemsApi, ItemType} from "../../api/itemsApi";
+import {itemsApi} from "../../api/itemsApi/itemsApi";
 import {createTagsTC} from "./tagsReducer";
 import {DataType} from "../../pages/collectionPage/itemsTable/ItemsTable";
 import {deleteObject, getStorage, ref} from "firebase/storage";
-import {StateType} from "./Store";
 import {FormikValuesType} from "../../utils/addItemFormValidation";
+import {StateType} from "../../hooks";
+import {ItemType} from "../../api/itemsApi";
 
 
 export const createItemTC = createAsyncThunk("items/createItem",

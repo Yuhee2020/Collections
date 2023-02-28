@@ -3,8 +3,8 @@ import {Breadcrumb} from "antd";
 import {NavLink} from "react-router-dom";
 import {ADMIN_PAGE, BIGGEST_COLLECTIONS, ROOT, USER_PAGE} from "../../pages/rotes/Rotes";
 import s from "./BreadCrumbs.module.scss"
-import {useAppSelector} from "../../store/reducers/Store";
 import {useTranslation} from "react-i18next";
+import {useAppSelector} from "../../hooks";
 
 
 export const BreadCrumbs = () => {

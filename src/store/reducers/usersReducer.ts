@@ -1,8 +1,9 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {setAppError, setLoading, setSuccessMessage} from "./appReducer";
+import {usersApi} from "../../api/usersApi/usersApi";
+import {StateType} from "../../hooks";
 import {UserType} from "../../api/authApi";
-import {UpdatedUserType, usersApi} from "../../api/usersApi";
-import {StateType} from "./Store";
+import {UpdatedUserType} from "../../api/usersApi";
 
 
 const mainAdminMail=process.env.REACT_APP_MAIN_ADMIN_MAIL

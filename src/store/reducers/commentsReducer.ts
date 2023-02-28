@@ -1,7 +1,8 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {setAppError} from "./appReducer";
-import {StateType} from "./Store";
-import {commentsApi, CommentType} from "../../api/commentsApi";
+import {commentsApi} from "../../api/commentsApi/commentsApi";
+import {StateType} from "../../hooks";
+import {CommentType} from "../../api/commentsApi";
 
 
 export const addCommentTC = createAsyncThunk("comments/addComment",
@@ -50,4 +51,3 @@ export const slice = createSlice({
 })
 
 export const commentsReducer = slice.reducer
-export const {} = slice.actions

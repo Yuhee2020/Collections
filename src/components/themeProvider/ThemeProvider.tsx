@@ -1,6 +1,6 @@
 import React from 'react';
 import {ConfigProvider, Layout} from "antd";
-import {useAppSelector} from "../../store/reducers/Store";
+import {useAppSelector} from "../../hooks";
 
 const tokenLight={
     "colorPrimary": "#004643",

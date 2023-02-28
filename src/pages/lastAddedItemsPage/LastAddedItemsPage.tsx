@@ -2,8 +2,7 @@ import React, {useEffect} from 'react';
 import {ItemsSearch} from "./itemsSearch/ItemsSearch";
 import s from "./LastAddedItemsPage.module.scss"
 import {getItemsTC} from "../../store/reducers/itemsReducer";
-import {useAppDebounce} from "../../hooks";
-import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
+import {useAppDebounce, useAppDispatch, useAppSelector} from "../../hooks";
 import {ItemsList} from "./ItemsList/ItemsList";
 import {useMediaQuery} from "react-responsive";
 

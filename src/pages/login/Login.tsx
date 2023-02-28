@@ -9,13 +9,13 @@ import {
 } from '@ant-design/icons';
 import s from "./Login.module.scss"
 import {Navigate, useLocation, useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../store/reducers/Store";
-import {validate} from "../../utils/validation";
 import {loginTC} from "../../store/reducers/authReducer";
 import {REGISTRATION, ROOT} from "../rotes/Rotes";
 import {getGoogleUrl} from "../../utils/getGoogleUrl";
 import {getGitHubUrl} from "../../utils/getGithubUrl";
 import {useTranslation} from "react-i18next";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {validate} from "../../utils/authValidation";
 
 
 export const Login = () => {

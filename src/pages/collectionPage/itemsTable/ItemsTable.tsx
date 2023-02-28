@@ -3,9 +3,7 @@ import {Button, Card, Table} from 'antd';
 import type {ColumnsType} from 'antd/es/table';
 import {NavLink} from "react-router-dom";
 import {ITEM} from "../../rotes/Rotes";
-import {useAppDispatch, useAppSelector} from "../../../store/reducers/Store";
 import {deleteItemsTC, getCollectionItemsTC} from "../../../store/reducers/itemsReducer";
-import {CollectionType} from "../../../api/collectionsApi";
 import dayjs from "dayjs";
 import {getTagsTC} from "../../../store/reducers/tagsReducer";
 import s from "./ItemsTable.module.scss";
@@ -13,6 +11,8 @@ import {DeleteOutlined} from "@ant-design/icons";
 import {dateFormatter} from "../../../utils/dateFormatter";
 import {useTranslation} from "react-i18next";
 import {ItemModal} from "../../../components/ItemModal/ItemModal";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
+import {CollectionType} from "../../../api/collectionsApi";
 
 export interface DataType {
     key: React.Key;

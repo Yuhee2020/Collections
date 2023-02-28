@@ -11,10 +11,10 @@ import {
     deleteUsersTC,
     updateUsersTC
 } from "../../../store/reducers/usersReducer";
-import {useAppDispatch} from "../../../store/reducers/Store";
 import s from "./Toolbar.module.scss"
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "react-responsive";
+import {useAppDispatch} from "../../../hooks";
 
 type PropsType = {
     usersId: string[]

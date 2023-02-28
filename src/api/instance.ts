@@ -1,11 +1,8 @@
 import axios from "axios";
-import {authApi} from "./authApi";
+import {authApi} from "./authApi/authApi";
 
 export const instance = axios.create({
-    // baseURL: "http://localhost:7000" ,
-    baseURL: "https://course-project-back.vercel.app",
-    // baseURL: "https://course-project-back.vercel.app",
-    // baseURL: "https://course-project-back.onrender.com",
+    baseURL: process.env.REACT_APP_BASE_URL,
     withCredentials: true
 })
 
@@ -19,7 +16,7 @@ instance.interceptors.response.use((config) => {
     },
     async (error) => {
         const originalRequest = error.config
-        if (error.response.status == 401 && error.config && !error.config._isRetry) {
+        if (error.response.status === 401 && error.config && !error.config._isRetry) {
             originalRequest._isRetry= true
             try {
                 const response = await authApi.auth()
