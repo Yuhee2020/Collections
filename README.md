@@ -2,7 +2,7 @@
 
 [see project](https://course-project-front-rouge.vercel.app/)
 
-###Full-stack App for personal collections managements (books, stamps, coins, cars, etc.)
+### Full-stack App for personal collections managements (books, stamps, coins, cars, etc.)
 
 - App supports registration and authentication(also authentication via Google, GitHub).
 - Unauthenticated users have read-only access (they can use search, but cannot create
