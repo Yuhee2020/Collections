@@ -23,11 +23,8 @@ export const ItemPage = () => {
             <div className={s.pageContainer}>
                 <div className={s.pageBox}>
                     <Item/>
-                    {isLogin &&
-                        <>
-                            <CommentsCreator itemId={itemId}/>
-                            <Comments itemId={itemId}/>
-                        </>}
+                    {isLogin && <CommentsCreator itemId={itemId}/>}
+                    <Comments itemId={itemId}/>
                 </div>
             </div>
         </>
