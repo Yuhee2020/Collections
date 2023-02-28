@@ -19,7 +19,7 @@ export const UserPage = () => {
 
   useEffect(() => {
     userId && dispatch(setUserProfile(userId))
-  }, [dispatch, userId])
+  }, [])
 
   return (
     <>

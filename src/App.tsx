@@ -22,7 +22,7 @@ const App = () => {
     dispatch(getThemeTC())
     dispatch(getLanguageTC())
     localStorage.getItem('token') && dispatch(authTC())
-  }, [dispatch])
+  }, [])
 
   return (
     <ThemeProvider>

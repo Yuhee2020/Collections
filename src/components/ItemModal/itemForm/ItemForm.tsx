@@ -78,7 +78,7 @@ export const ItemForm = ({ showModal, collection, edit, item }: PropsType) => {
   useEffect(() => {
     dispatch(getTagsTC())
     if (edit && item) formik.setValues(item)
-  }, [item, edit, formik, dispatch])
+  }, [])
 
   return (
     <Form

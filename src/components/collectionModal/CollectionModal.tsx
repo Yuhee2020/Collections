@@ -73,7 +73,7 @@ export const CollectionModal = ({ userId, edit, collection }: PropsType) => {
 
   useEffect(() => {
     if (edit && collection) formik.setValues(collection)
-  }, [collection, edit, formik])
+  }, [])
 
   return (
     <>

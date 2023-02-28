@@ -94,7 +94,7 @@ export const ItemsTable = ({ collection }: PropsType) => {
   useEffect(() => {
     collection._id && dispatch(getCollectionItemsTC(collection._id))
     dispatch(getTagsTC())
-  }, [collection._id, dispatch])
+  }, [])
 
   return (
     <div>
