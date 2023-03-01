@@ -67,6 +67,8 @@ export const getItemsTC = createAsyncThunk(
     try {
       const state = getState() as StateType
       const { searchText } = state.items
+
+      !searchText && dispatch(setLoading(true))
       const res = await itemsApi.getItems(searchText)
 
       return res.data.items
@@ -74,6 +76,7 @@ export const getItemsTC = createAsyncThunk(
       dispatch(setAppError(err.response.data.message))
     } finally {
       dispatch(setItemsAreLoading(false))
+      dispatch(setLoading(false))
     }
   },
 )
