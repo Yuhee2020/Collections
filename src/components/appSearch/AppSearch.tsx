@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect } from 'react'
 
-import Search from 'antd/es/input/Search'
+import { SearchOutlined } from '@ant-design/icons'
+import { Input } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -13,7 +14,7 @@ export const AppSearch = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
-  const { searchText, itemsIsLoading } = useAppSelector(state => state.items)
+  const { searchText } = useAppSelector(state => state.items)
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearch(e.currentTarget.value))
     dispatch(setItemsAreLoading(true))
@@ -24,9 +25,9 @@ export const AppSearch = () => {
   }, [searchText, pathname, navigate])
 
   return (
-    <Search
+    <Input
       size="large"
-      loading={itemsIsLoading}
+      prefix={<SearchOutlined />}
       // @ts-ignore
       placeholder={t('itemsSearch')}
       value={searchText}

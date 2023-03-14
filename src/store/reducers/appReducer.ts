@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+import { StateType } from '../../hooks'
 import i18n from '../../i18n'
 
 export const setThemeTC = createAsyncThunk(
@@ -18,11 +19,14 @@ export const getThemeTC = createAsyncThunk('app/getTheme', (params, { dispatch }
 
 export const getLanguageTC = createAsyncThunk(
   'app/getLanguage',
-  async (params, { dispatch }) => {
+  async (params, { dispatch, getState }) => {
     const language = localStorage.getItem('language') as LanguageType
 
     language && dispatch(setLanguage(language))
-    await i18n.changeLanguage(language)
+    const state = getState() as StateType
+    const lang = state.app.language
+
+    await i18n.changeLanguage(lang)
   },
 )
 
