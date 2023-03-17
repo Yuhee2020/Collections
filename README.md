@@ -1,6 +1,6 @@
 # Collections
 
-[see project](https://course-project-front-rouge.vercel.app/)
+[see project](https://collections-three.vercel.app)
 
 ### Full-stack App for personal collections managements (books, stamps, coins, cars, etc.)
 
@@ -46,7 +46,7 @@
 - React-markdown
 
 
-#### Used [back-end](https://github.com/Yuhee2020/course-project-back) technologies:
+#### Used [back-end](https://github.com/Yuhee2020/Collections-back) technologies:
 
 - nodejs
 - express
